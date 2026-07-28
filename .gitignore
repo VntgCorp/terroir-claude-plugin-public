@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# 로컬 작업 로그 (사내 맥락 포함 — 커밋 금지)
+log/
