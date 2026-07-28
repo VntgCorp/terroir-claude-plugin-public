@@ -31,8 +31,10 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 
 ```
 /plugin marketplace update terroir-claude-plugin-public
-/plugin update terroir-onboarding-dev
+/plugin update terroir-onboarding-dev@terroir-claude-plugin-public
 ```
+
+갱신 후에는 Claude Code를 다시 시작해야 반영된다. `update`에는 `플러그인@마켓플레이스` 전체 이름을 써야 한다 — 플러그인 이름만 쓰면 찾지 못한다.
 
 ## 사용
 
