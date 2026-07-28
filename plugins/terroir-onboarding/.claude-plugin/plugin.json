@@ -1,7 +1,7 @@
 {
   "name": "terroir-onboarding",
   "description": "Terroir 온보딩 진입점 — 처음 시작하는 사람이 GitHub 인증이나 조직 가입 없이도 설치해 환경 셋업 안내와 제공 기능 소개를 받는다.",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "author": {
     "name": "VntgCorp R&D"
   },
