@@ -83,10 +83,11 @@ gh api /user/memberships/orgs/VntgCorp --jq .state
 
 private 마켓플레이스까지 연결한 사용자는 프로덕트 직군이므로 기본 개발 환경(Node.js + pnpm)을 셋업한다. AskUserQuestion으로 진행/건너뛰기를 먼저 묻는다 — 당장 개발 환경이 필요 없는 직군(기획·디자인 등)은 건너뛴다.
 
-1. **Node.js 확인**: `node --version`이 v22 이상이면 통과. 없거나 낮으면 자동 설치하지 않는다(관리자 권한·sudo가 필요할 수 있다) — OS별 설치를 안내하고 턴을 끝내고 기다린다.
-   - macOS: `brew install node@22` 또는 nvm
-   - Windows: winget 또는 https://nodejs.org/ 에서 LTS 설치
-   - Linux: nvm 또는 배포판 패키지
+1. **Node.js 확인·자동 설치**: `node --version`이 v22 이상이면 통과. 없거나 낮으면 Claude가 직접 설치한다 — 우선순위:
+   1. 기존 버전 매니저 탐지(nvm/volta/asdf/brew) → 있으면 그걸로 Node 22 설치 (PATH 충돌 방지)
+   2. 없으면 macOS/Linux: nvm을 새로 설치(홈 디렉터리 설치라 sudo 불필요) 후 Node 22 설치 — 같은 명령에서 `. "$HOME/.nvm/nvm.sh"`로 로드해 실행한다
+   3. Windows: `winget install OpenJS.NodeJS.LTS` 실행 후 "UAC 승인 창이 뜨면 예를 눌러주세요"를 안내한다. 설치 후 PATH 반영에 Claude Code 재시작이 필요하다 (§1과 동일)
+   자동 설치가 실패하면 OS별 수동 설치(brew/nvm/winget/https://nodejs.org/)를 안내하고 턴을 끝내고 기다린다.
 2. **pnpm 자동 설치**: Node 확인 후 Claude가 직접 실행한다 — `corepack enable && corepack prepare pnpm@10.14.0 --activate`. 이미 요구 버전 이상이면 건너뛴다.
 3. `pnpm --version`으로 확인하고 결과를 한 줄로 보여준 뒤 §6으로 간다.
 
