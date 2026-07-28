@@ -19,7 +19,8 @@ VNTG 조직 GitHub 계정 보유자의 해피패스. 기존 `setup-git-gh.sh` �
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.
 
 - macOS: `brew install git gh`
-- Windows(WSL)/Linux: `sudo apt update && sudo apt install -y git gh`
+- Windows: `winget install --id Git.Git`, `winget install --id GitHub.cli` — git 설치 전에는 Bash 도구가 없어 PowerShell로 실행되므로 `apt`를 안내하지 않는다. 설치 후 Bash 도구가 붙으려면 Claude Code 재시작이 필요하다.
+- WSL/Linux: `sudo apt update && sudo apt install -y git gh`
 
 ### 2. GitHub 계정 연결
 
@@ -56,7 +57,17 @@ gh repo view VntgCorp/terroir-claude-plugin --json name
 ```
 
 - **성공** → §5로.
-- **실패(404/권한 오류)** → 조직 미가입 또는 권한 미부여 상태다. `org-access-request` 스킬로 분기해 접근 요청을 진행한다. 이 스킬은 여기서 종료.
+- **실패(404/권한 오류)** → 바로 분기하지 말고 조직 멤버십 상태를 먼저 확인한다.
+
+```
+gh api /user/memberships/orgs/VntgCorp --jq .state
+```
+
+- `pending` → 초대를 아직 수락하지 않은 상태다. **본인이 수락하면 끝나므로 `org-access-request`로 보내지 않는다** (담당자는 이미 초대를 보냈다). https://github.com/orgs/VntgCorp/invitation 에서 수락하도록 안내하고, 수락 후 §4를 재시도한다.
+- `active` → 조직 가입은 됐고 레포 권한만 없다. `org-access-request`로 분기하되, "조직 가입은 완료됐고 레포 접근 권한만 필요하다"는 점을 사용자에게 알려 담당자에게 그대로 전달하게 한다.
+- 그 외(조회 실패 등) → 조직 미가입. `org-access-request`로 분기한다.
+
+`pending`을 제외하면 이 스킬은 여기서 종료.
 
 ### 5. private 플러그인 설치
 
@@ -67,6 +78,17 @@ gh repo view VntgCorp/terroir-claude-plugin --json name
 3. 설치 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을 안내한 뒤 **턴을 끝내고 기다린다** — 내장 명령이라 사용자만 입력할 수 있다.
 
 설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `claude plugin enable <플러그인>@terroir-claude-plugin` 실행 후 `/reload-plugins` 재안내.
+
+### 5.5 개발 런타임 셋업 (선택)
+
+private 마켓플레이스까지 연결한 사용자는 프로덕트 직군이므로 기본 개발 환경(Node.js + pnpm)을 셋업한다. AskUserQuestion으로 진행/건너뛰기를 먼저 묻는다 — 당장 개발 환경이 필요 없는 직군(기획·디자인 등)은 건너뛴다.
+
+1. **Node.js 확인**: `node --version`이 v22 이상이면 통과. 없거나 낮으면 자동 설치하지 않는다(관리자 권한·sudo가 필요할 수 있다) — OS별 설치를 안내하고 턴을 끝내고 기다린다.
+   - macOS: `brew install node@22` 또는 nvm
+   - Windows: winget 또는 https://nodejs.org/ 에서 LTS 설치
+   - Linux: nvm 또는 배포판 패키지
+2. **pnpm 자동 설치**: Node 확인 후 Claude가 직접 실행한다 — `corepack enable && corepack prepare pnpm@10.14.0 --activate`. 이미 요구 버전 이상이면 건너뛴다.
+3. `pnpm --version`으로 확인하고 결과를 한 줄로 보여준 뒤 §6으로 간다.
 
 ### 6. 완료
 
@@ -80,5 +102,5 @@ gh repo view VntgCorp/terroir-claude-plugin --json name
 
 - 재개 시작 시 "승인이 실제 반영됐는지 확인부터 진행하겠다"고 말하고 시작한다. 승인 완료로 단정하는 표현은 §4 접근 확인 성공 후에만 쓴다.
 - 재개 시에도 §1부터 순서대로 진행한다. 각 단계가 상태를 확인하고 완료된 것은 건너뛰므로, 자연스럽게 중단 지점(대개 §2 계정 연결)부터 이어진다.
-- 승인 직후이므로 §4 접근 확인은 성공해야 정상이다. 실패하면 승인 반영 지연일 수 있으니 몇 분 후 재시도를 안내하고, 계속 실패하면 플랫폼개발팀 확인을 안내한다.
+- 승인 직후이므로 §4 접근 확인은 성공해야 정상이다. 실패하면 §4의 멤버십 상태 확인 분기를 따른다 — 초대를 수락하지 않았으면 `pending`으로 잡힌다. `active`인데도 실패하면 반영 지연일 수 있으니 몇 분 후 재시도를 안내하고, 계속 실패하면 플랫폼개발팀 확인을 안내한다.
 - 이후 §5 설치 → §6 공통 종료 출력까지 완주한다.
