@@ -12,6 +12,8 @@ VNTG 조직 GitHub 계정 보유자의 해피패스. 기존 `setup-git-gh.sh` �
 
 각 단계는 먼저 상태를 확인하고, 이미 완료된 단계는 건너뛴다.
 
+사용자에게 제시하는 모든 명령은 bash 문법으로 쓴다 — `!` 실행은 Windows에서도 bash(Git Bash)로 동작하므로 PowerShell 문법(`&`, 백슬래시 경로)을 쓰지 않고, Windows 경로는 슬래시(`C:/Program Files/...`)로 쓴다.
+
 ### 1. git·gh 설치 확인
 
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.
@@ -21,13 +23,24 @@ VNTG 조직 GitHub 계정 보유자의 해피패스. 기존 `setup-git-gh.sh` �
 
 ### 2. GitHub 계정 연결
 
-`gh auth status`로 인증 상태를 확인한다. 미인증이면 실행한다.
+`gh auth status`로 인증 상태를 확인한다. 미인증이면 사용자에게 명령을 시키지 말고, Claude가 직접 Bash 백그라운드로 실행한다 (플래그로 대화형 질문을 전부 선점한다).
 
 ```
-gh auth login --scopes "repo,workflow,read:org"
+gh auth login --hostname github.com --git-protocol https --web --scopes "repo,workflow,read:org"
 ```
 
-디바이스 플로우로 진행된다: 터미널에 표시된 8자리 코드를 복사 → Enter를 누르면 브라우저가 열림 → 코드 입력 → 본인 GitHub 계정(VNTG 조직에 초대된 계정)으로 승인. 완료 후 `gh auth status`로 재확인한다.
+실행 직후 백그라운드 출력에서 8자리 디바이스 코드를 읽어, 사용자에게는 아래 형식만 보여준다.
+
+> **지금 바로 하실 일**
+> 1. 브라우저에서 열기 → https://github.com/login/device
+> 2. 코드 입력 → `XXXX-XXXX`
+> 3. VNTG 조직에 초대된 본인 GitHub 계정으로 로그인 → 권한 승인
+>
+> ⏱️ 코드는 몇 분 후 만료됩니다. 만료되면 다시 발급해 드릴게요.
+
+승인되면 백그라운드 프로세스가 스스로 완료된다. `gh auth status`로 재확인한 뒤 다음 단계로 간다.
+
+폴백: gh가 비대화형 실행을 거부하면 같은 명령을 사용자가 `!`로 직접 실행하게 안내한다. 이때 120초 후 타임아웃 → 백그라운드 이동은 **정상 동작**이다 — 즉시 출력 파일을 Read해 디바이스 코드를 추출하고 위 형식으로 안내한다.
 
 ### 3. Git 연결
 

@@ -14,8 +14,8 @@ Terroir 온보딩의 진입점. 이 문서가 온보딩 전체 흐름의 source 
    직무 확인 질문
         ↓
    ├─ 프로덕트 관련 직군 (개발·기획·디자인·PM 등)
-   │    ├─ VNTG 조직 GitHub 계정 있음 → github-connect
-   │    └─ 계정 없음               → org-access-request
+   │    ├─ GitHub 계정 있음 → github-connect (조직 접근 확인, 불가면 org-access-request로 분기)
+   │    └─ 계정 없음       → org-access-request
    └─ 비 프로덕트 직군 → §3 일반 업무 활용 안내
         ↓
    §4 공통 종료 출력 (제공 기능 안내 + "무엇을 도와드릴까요")
@@ -44,9 +44,9 @@ Terroir 온보딩의 진입점. 이 문서가 온보딩 전체 흐름의 source 
 > 1. 프로덕트 관련 직군 — 개발, 기획, 디자인, PM 등 프로덕트를 만드는 일
 > 2. 비 프로덕트 직군 — 그 외 (경영지원, 영업, 인사 등)
 
-- **프로덕트 관련 직군** → VNTG 조직 GitHub 계정 보유 여부를 묻는다. 질문에 조직 페이지 https://github.com/VntgCorp 를 함께 안내한다 (접속해 소속 여부를 확인할 수 있다).
-  - 계정 있음 → `github-connect` 스킬 실행 (계정 연결 → Git 연결 → private 플러그인 접근 확인·설치)
-  - 계정 없음 / 모름 → `org-access-request` 스킬 실행 (가입 지원·접근 요청)
+- **프로덕트 관련 직군** → GitHub 계정(개인 계정) 보유 여부를 묻는다. VNTG 조직 소속 여부는 사용자에게 묻지 않는다 — github-connect의 접근 확인이 판별한다.
+  - 계정 있음 (조직 소속 여부는 몰라도 됨) → `github-connect` 스킬 실행 (계정 연결 → Git 연결 → private 플러그인 접근 확인·설치, 접근 불가면 org-access-request로 자동 분기)
+  - GitHub 계정 없음 → `org-access-request` 스킬 실행 (가입 지원·접근 요청)
 - **비 프로덕트 직군** → §3으로.
 
 ### 3. 비 프로덕트 직군 경로 (End point 정의)
