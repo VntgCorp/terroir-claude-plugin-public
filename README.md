@@ -41,7 +41,16 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 
 갱신 후에는 Claude Code를 다시 시작해야 반영된다. `update`에는 `플러그인@마켓플레이스` 전체 이름을 써야 한다 — 플러그인 이름만 쓰면 찾지 못한다.
 
-채널을 바꿀 때는 마켓플레이스를 다시 등록(`add`가 덮어쓴다)한 뒤 위 두 명령을 실행하면 된다. 브랜치가 다르면 커밋도 다르므로 갱신이 감지되어, 플러그인을 지웠다 다시 설치할 필요가 없다.
+채널을 바꿀 때는 마켓플레이스를 **지우고 다시 등록**한다. 이미 등록된 이름에 `add`를 다시 실행하면 기존 ref가 남는 경우가 있어, `remove`를 먼저 해야 확실하다.
+
+```
+/plugin uninstall terroir-onboarding
+/plugin marketplace remove terroir-claude-plugin-public
+/plugin marketplace add VntgCorp/terroir-claude-plugin-public@develop
+/plugin install terroir-onboarding@terroir-claude-plugin-public
+```
+
+설치 후에는 `/plugin`에서 **skill 개수**로 어느 채널인지 확인할 수 있다. 설치가 잘못돼도 오류 없이 skill 0개로 깔리는 경우가 있으므로 개수 확인을 권한다.
 
 ## 사용
 
