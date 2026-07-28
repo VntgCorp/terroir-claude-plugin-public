@@ -60,17 +60,17 @@ gh repo view VntgCorp/terroir-claude-plugin --json name
 
 ### 5. private 플러그인 설치
 
-Claude Code 안에서 사용자에게 아래를 순서대로 실행하도록 안내한다. (§3의 `gh auth setup-git` 덕분에 private 레포도 clone된다)
+사용자에게 명령을 시키지 말고 Claude가 직접 Bash로 실행한다. (§3의 `gh auth setup-git` 덕분에 private 레포도 clone된다)
 
-```
-/plugin marketplace add VntgCorp/terroir-claude-plugin
-```
+1. 마켓플레이스 추가: `claude plugin marketplace add VntgCorp/terroir-claude-plugin`
+2. 마켓플레이스의 플러그인 목록을 확인하고(마켓플레이스 레포의 `.claude-plugin/marketplace.json`), **전체 플러그인**을 각각 설치한다: `claude plugin install <플러그인>@terroir-claude-plugin --scope user`
+3. 설치 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을 안내한 뒤 **턴을 끝내고 기다린다** — 내장 명령이라 사용자만 입력할 수 있다.
 
-이후 `/plugin` 메뉴 → 방금 추가된 마켓플레이스에서 필요한 플러그인을 선택해 설치하고 `/reload-plugins`로 반영한다. 어떤 플러그인이 있는지는 메뉴에 표시되는 각 플러그인의 설명을 보고 고르면 된다.
-
-설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `/plugin enable <플러그인>@<마켓플레이스>` 실행 후 `/reload-plugins`로 반영한다.
+설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `claude plugin enable <플러그인>@terroir-claude-plugin` 실행 후 `/reload-plugins` 재안내.
 
 ### 6. 완료
+
+`/reload-plugins` 실행(또는 사용자의 완료 확인)을 확인한 뒤에만 실행한다 — §5 안내와 같은 턴에서 완료를 선언하지 않는다.
 
 `onboarding-start` 스킬의 "공통 종료 출력" 섹션(제공 기능 안내 + "무엇을 도와드릴까요")을 실행하고 온보딩을 마친다.
 
@@ -78,6 +78,7 @@ Claude Code 안에서 사용자에게 아래를 순서대로 실행하도록 안
 
 조직 계정 승인 후 사용자가 **"테루아 Github 승인이 완료됐음"** 이라고 입력하면 이 스킬이 실행된다 (`org-access-request` 스킬 §3에서 안내한 재개 문구).
 
+- 재개 시작 시 "승인이 실제 반영됐는지 확인부터 진행하겠다"고 말하고 시작한다. 승인 완료로 단정하는 표현은 §4 접근 확인 성공 후에만 쓴다.
 - 재개 시에도 §1부터 순서대로 진행한다. 각 단계가 상태를 확인하고 완료된 것은 건너뛰므로, 자연스럽게 중단 지점(대개 §2 계정 연결)부터 이어진다.
 - 승인 직후이므로 §4 접근 확인은 성공해야 정상이다. 실패하면 승인 반영 지연일 수 있으니 몇 분 후 재시도를 안내하고, 계속 실패하면 플랫폼개발팀 확인을 안내한다.
 - 이후 §5 설치 → §6 공통 종료 출력까지 완주한다.
