@@ -13,7 +13,6 @@
     {
       "name": "terroir-onboarding",
       "source": "./plugins/terroir-onboarding",
-      "version": "0.1.0",
       "description": "Terroir 온보딩 — 처음 시작하는 사람이 인증 없이 설치해 환경 셋업과 제공 기능 안내를 받는 진입점",
       "category": "onboarding",
       "author": {
@@ -23,27 +22,6 @@
         "onboarding",
         "getting-started",
         "setup",
-        "terroir",
-        "vntgcorp"
-      ]
-    },
-    {
-      "name": "terroir-onboarding-dev",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/VntgCorp/terroir-claude-plugin-public.git",
-        "path": "plugins/terroir-onboarding",
-        "ref": "develop"
-      },
-      "description": "[검증용] 온보딩 플러그인의 develop 채널 — 배포 전 검증에만 사용한다. 일반 사용자는 terroir-onboarding을 설치할 것",
-      "category": "onboarding",
-      "author": {
-        "name": "VntgCorp R&D"
-      },
-      "keywords": [
-        "onboarding",
-        "development",
-        "preview",
         "terroir",
         "vntgcorp"
       ]

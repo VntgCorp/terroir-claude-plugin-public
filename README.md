@@ -22,19 +22,26 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 | 플러그인 | 설명 |
 | --- | --- |
 | [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내 |
-| `terroir-onboarding-dev` | 위 플러그인의 검증용 채널. 배포 전 확인에만 쓴다 — 일반 사용자는 설치하지 않는다 |
 
-### 채널 구분
+### 검증 채널
 
-`terroir-onboarding`은 `main` 브랜치의 코드를, `terroir-onboarding-dev`는 `develop` 브랜치의 코드를 설치한다.
-검증 채널은 커밋마다 새 버전으로 인식되므로, `develop`에 반영된 변경을 아래 두 명령으로 받을 수 있다.
+플러그인은 하나이며, **마켓플레이스를 어느 브랜치에서 등록했는지**에 따라 설치되는 코드가 달라진다.
+
+| 등록 명령 | 설치되는 코드 |
+| --- | --- |
+| `add VntgCorp/terroir-claude-plugin-public` | `main` — 배포 버전 |
+| `add VntgCorp/terroir-claude-plugin-public@develop` | `develop` — 검증 버전 |
+
+버전을 명시하지 않으므로 커밋마다 새 버전으로 인식된다. 개발 브랜치에 반영된 변경은 아래 두 명령으로 받는다.
 
 ```
 /plugin marketplace update terroir-claude-plugin-public
-/plugin update terroir-onboarding-dev@terroir-claude-plugin-public
+/plugin update terroir-onboarding@terroir-claude-plugin-public
 ```
 
 갱신 후에는 Claude Code를 다시 시작해야 반영된다. `update`에는 `플러그인@마켓플레이스` 전체 이름을 써야 한다 — 플러그인 이름만 쓰면 찾지 못한다.
+
+채널을 바꿀 때는 마켓플레이스를 다시 등록(`add`가 덮어쓴다)한 뒤 위 두 명령을 실행하면 된다. 브랜치가 다르면 커밋도 다르므로 갱신이 감지되어, 플러그인을 지웠다 다시 설치할 필요가 없다.
 
 ## 사용
 
