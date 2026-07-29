@@ -1,12 +1,12 @@
 ---
 name: github-connect
-description: GitHub 개인 계정 보유자를 위한 온보딩 경로. GitHub 계정 연결 → Git 연결 → private 플러그인 접근 확인 → 설치까지 진행하고, 접근 불가면 org-access-request로 분기한다. 조직 소속 여부는 묻지 않고 접근 확인으로 판별한다.
-when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 개인 계정 있음"으로 분기됐을 때. 사용자가 직접 "GitHub 연결", "gh 인증", "/github-connect"를 요청할 때도 단독 실행할 수 있다. 또한 조직 계정 승인 후 사용자가 "테루아 Github 승인이 완료됐음"(및 유사 표현 — 조직 계정·GitHub 승인이 끝났다는 취지)이라고 말했을 때 이어받기 진입점으로 실행된다.
+description: GitHub 계정 보유자를 위한 온보딩 경로. GitHub 계정 연결 → Git 연결 → private 플러그인 접근 확인 → 설치까지 진행하고, 접근 불가면 org-access-request로 분기한다. 조직 소속 여부는 묻지 않고 접근 확인으로 판별한다.
+when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 계정 있음"으로 분기됐을 때. 사용자가 직접 "GitHub 연결", "gh 인증", "/github-connect"를 요청할 때도 단독 실행할 수 있다. 또한 조직 계정 승인 후 사용자가 "테루아 Github 승인이 완료됐음"(및 유사 표현 — 조직 계정·GitHub 승인이 끝났다는 취지)이라고 말했을 때 이어받기 진입점으로 실행된다.
 ---
 
 # github-connect
 
-GitHub 개인 계정 보유자의 해피패스. git·gh 설치부터 gh 인증, git 사용자 설정, private 플러그인 설치까지 이 스킬이 진행한다.
+GitHub 계정 보유자의 해피패스. git·gh 설치부터 gh 인증, git 사용자 설정, private 플러그인 설치까지 이 스킬이 진행한다.
 
 ## 절차
 

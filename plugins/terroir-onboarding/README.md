@@ -39,7 +39,7 @@ flowchart TD
     Q2{"업무 도구 연결을<br/>지금 진행할까요?<br/>(화법은 직무에 맞춤)"}
     ENV["env-setup<br/>지라·컨플루언스 / 메일·캘린더·드라이브"]
     BR{"§1의 답으로 분기<br/>(다시 묻지 않음)"}
-    Q3{"GitHub 개인 계정 보유?"}
+    Q3{"GitHub 계정 보유?"}
 
     GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치 → 개발 런타임"]
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
