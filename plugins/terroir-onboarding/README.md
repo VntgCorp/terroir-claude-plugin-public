@@ -41,7 +41,7 @@ flowchart TD
     BR{"§1의 답으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
-    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치 → 개발 런타임"]
+    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치<br/>→ 개발 런타임 셋팅 위임(private 스킬)"]
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
     WAIT(["플랫폼개발팀 승인 대기"])
     NP["일반 업무 활용 안내<br/>문서·메일·일정·자료·지라"]
