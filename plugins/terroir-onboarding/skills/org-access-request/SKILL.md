@@ -1,7 +1,7 @@
 ---
 name: org-access-request
 description: VNTG 조직 GitHub 계정이 없는(또는 접근 권한이 없는) 프로덕트 관련자를 위한 경로. GitHub 가입·조직 등록을 안내하고, 접근 요청 폼 링크를 안내한 뒤 대기 안내를 출력한다.
-when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 개인 계정 없음"으로 분기됐을 때, 또는 github-connect의 접근 확인이 실패했을 때. 사용자가 직접 "조직 계정 요청", "/org-access-request"를 요청할 때도 실행할 수 있다.
+when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 계정 없음"으로 분기됐을 때, 또는 github-connect의 접근 확인이 실패했을 때. 사용자가 직접 "조직 계정 요청", "/org-access-request"를 요청할 때도 실행할 수 있다.
 ---
 
 # org-access-request
@@ -15,10 +15,10 @@ when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 개인 
 사용자에게 안내한다.
 
 > VNTG 조직 GitHub 접근을 위해 다음이 필요합니다.
-> 1. 개인 GitHub 계정 — 없다면 github.com 에서 가입해 주세요 (회사 이메일 연결 권장)
+> 1. GitHub 계정 — 없다면 github.com 에서 가입해 주세요 (회사 이메일 연결 권장)
 > 2. VNTG 조직 등록 — 플랫폼개발팀 승인이 필요합니다. 아래 폼으로 요청해 주세요.
 
-이미 개인 계정이 있으면 1은 건너뛴다.
+이미 GitHub 계정이 있으면 1은 건너뛴다.
 
 ### 2. 접근 요청 폼 안내
 
@@ -33,7 +33,7 @@ https://docs.google.com/forms/d/e/1FAIpQLSchBxQtBTRcoPJw-eWYrbjfZGMwBXnOoYkj5O8N
 폼 안내 직후 사용자에게 출력한다.
 
 > 폼을 제출하시면 플랫폼개발팀이 확인합니다.
-> 📌 **중요:** 승인이 완료되면 Claude Code에 **"테루아 Github 승인이 완료됐음"** 이라고 꼭 입력해 주세요. 남은 온보딩(GitHub 연결 → 플러그인 설치)이 이어서 진행됩니다.
+> 📌 **중요:** 승인되면 GitHub에서 **VNTG 조직 초대 메일**이 옵니다. 초대를 수락한 뒤 Claude Code에 **"VNTG 조직 초대를 수락했음"** 이라고 꼭 입력해 주세요. 남은 온보딩(GitHub 연결 → 플러그인 설치)이 이어서 진행됩니다.
 > 하루가 지나도 연락이 없으면 플랫폼개발팀 채널에 문의해 주세요.
 > 그동안 지라·컨플루언스·메일 등 이미 연결된 도구는 바로 사용할 수 있습니다.
 
