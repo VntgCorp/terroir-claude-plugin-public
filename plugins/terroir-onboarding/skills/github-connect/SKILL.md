@@ -75,13 +75,13 @@ gh api /user/memberships/orgs/VntgCorp --jq .state
 
 1. 마켓플레이스 추가: `claude plugin marketplace add VntgCorp/terroir-claude-plugin`
 2. 마켓플레이스의 플러그인 목록을 확인하고(마켓플레이스 레포의 `.claude-plugin/marketplace.json`), **전체 플러그인**을 각각 설치한다: `claude plugin install <플러그인>@terroir-claude-plugin --scope user`
-3. 설치 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을 안내한 뒤 **턴을 끝내고 기다린다** — 내장 명령이라 사용자만 입력할 수 있다.
+3. 설치 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을 안내한다. 이때 **"리로드가 끝나면 '리로드 완료'라고 입력해 주세요"를 반드시 함께 안내**하고 턴을 끝내고 기다린다 — `/reload-plugins`는 내장 명령이라 실행돼도 Claude에게 턴이 오지 않으므로, 사용자의 완료 입력이 유일한 재개 신호다.
 
 설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `claude plugin enable <플러그인>@terroir-claude-plugin` 실행 후 `/reload-plugins` 재안내.
 
 ### 6. 개발 런타임 셋팅 위임·완료
 
-`/reload-plugins` 실행(또는 사용자의 완료 확인)을 확인한 뒤에만 실행한다 — §5 안내와 같은 턴에서 완료를 선언하지 않는다.
+사용자의 "리로드 완료" 입력(또는 그에 준하는 완료 확인)을 받은 뒤에만 실행한다 — §5 안내와 같은 턴에서 완료를 선언하지 않는다. `/reload-plugins` 실행 자체는 Claude에게 관측되지 않는다.
 
 개발 런타임(Node.js·pnpm) 셋팅은 §5에서 설치된 private 플러그인의 개발 환경 셋팅 스킬이 담당한다 — 리로드 후 스킬 목록에서 해당 스킬을 찾아 실행해 이어간다 (진행/건너뛰기는 그 스킬이 묻는다). 스킬이 보이지 않으면 셋팅 없이 진행하고, 필요해지면 나중에 실행할 수 있음을 한 줄 안내한다.
 
