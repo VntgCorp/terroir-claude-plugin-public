@@ -14,8 +14,8 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
 | 그룹 | 도구 | 연결 수단 |
 | --- | --- | --- |
-| Atlassian | 지라, 컨플루언스 | Claude Code `/mcp` — Atlassian 커넥터 |
-| Google | Gmail(이메일), 캘린더, 드라이브 | Claude Code `/mcp` — 각 Google 커넥터 |
+| Atlassian | 지라, 컨플루언스 | Claude가 `claude mcp add`로 등록 → 사용자는 `/mcp` 인증만 |
+| Google | Gmail(이메일), 캘린더, 드라이브 | claude.ai 웹 Settings → Connectors에서 연결 (Claude Code로 자동 동기화) |
 
 ## 절차
 
@@ -28,10 +28,19 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
 ### 2. 미연결 항목 안내
 
-미연결 항목만 골라, 항목별로 아래를 안내하고 사용자가 완료할 때까지 하나씩 진행한다.
+미연결 항목만 골라, 항목별로 아래를 안내하고 사용자가 완료할 때까지 하나씩 진행한다. 신규 환경의 `/mcp` 목록은 비어 있는 게 정상이다 — "목록에서 골라라"로 안내하지 않는다.
 
-- **지라·컨플루언스**: `/mcp` 실행 → Atlassian 커넥터 선택 → 브라우저에서 회사 Atlassian 계정으로 로그인·허용
-- **Gmail / 캘린더 / 드라이브**: `/mcp` 실행 → 해당 Google 커넥터 선택 → 회사 Google 계정으로 로그인·허용
+- **지라·컨플루언스 (Atlassian)**: 사용자에게 명령을 시키지 말고 Claude가 직접 등록한다 (`claude mcp list`에 `atlassian`이 이미 있으면 건너뛴다):
+
+  ```
+  claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp/authv2 --scope user
+  ```
+
+  등록 후 사용자에게 `/mcp` 실행 → `atlassian` 선택 → 브라우저에서 회사 Atlassian 계정으로 로그인·허용을 안내한다. `/mcp` 목록에 안 보이면 Claude Code 재시작 후 재시도를 안내한다. (구 엔드포인트 `/v1/sse`는 2026-06 폐기 — 쓰지 않는다)
+
+- **Gmail / 캘린더 / 드라이브 (Google)**: **Claude Code에서는 인증할 수 없다** — Google이 claude.ai가 등록한 리다이렉트 URL만 허용한다. claude.ai 웹 → Settings → **Connectors**에서 Gmail·Google Calendar·Google Drive를 각각 Connect 하도록 안내한다. 연결하면 Claude Code에 자동 반영된다 (재시작 불필요, 다음 `/mcp`에서 확인).
+
+주의: claude.ai 커넥터 동기화는 Claude Code가 **claude.ai 구독 로그인**일 때만 동작한다. Google 항목이 연결 후에도 안 보이면 `/status`에서 로그인 방식을 확인하게 한다 (`ANTHROPIC_API_KEY` 등 다른 인증이 활성화돼 있으면 커넥터가 로드되지 않는다).
 
 완료 확인은 AskUserQuestion을 쓰지 말고 일반 출력으로 턴을 끝낸다 (사용자가 `/mcp`를 입력해야 하므로 입력창을 막지 않는다). 안내 끝에 "연결을 마치면 알려주세요. 건너뛰려면 '건너뛰기'라고 답해주세요." 한 줄을 붙인다.
 
