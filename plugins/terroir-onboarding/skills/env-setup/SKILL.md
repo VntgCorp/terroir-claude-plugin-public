@@ -38,7 +38,13 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
   등록 후 사용자에게 `/mcp` 실행 → `atlassian` 선택 → 브라우저에서 회사 Atlassian 계정으로 로그인·허용을 안내한다. `/mcp` 목록에 안 보이면 Claude Code 재시작 후 재시도를 안내한다. (구 엔드포인트 `/v1/sse`는 2026-06 폐기 — 쓰지 않는다)
 
-- **Gmail / 캘린더 / 드라이브 (Google)**: **Claude Code에서는 인증할 수 없다** — Google이 claude.ai가 등록한 리다이렉트 URL만 허용한다. claude.ai 웹 → Settings → **Connectors**에서 Gmail·Google Calendar·Google Drive를 각각 Connect 하도록 안내한다. 연결하면 Claude Code에 자동 반영된다 (재시작 불필요, 다음 `/mcp`에서 확인).
+- **Gmail / 캘린더 / 드라이브 (Google)**: **Claude Code에서는 인증할 수 없다** — Google이 claude.ai가 등록한 리다이렉트 URL만 허용한다. 대신 사용자가 설정 메뉴를 찾아 헤매지 않도록 **Claude가 커넥터 설정 페이지를 브라우저로 직접 연다**:
+
+  - macOS: `open "https://claude.ai/settings/connectors"`
+  - Windows: `cmd.exe /c start "" "https://claude.ai/settings/connectors"`
+  - WSL: 브라우저 자동 실행이 불안정하므로 열지 말고 URL을 출력해 Windows 브라우저에서 직접 열도록 안내
+
+  열린 페이지에서 Gmail·Google Calendar·Google Drive를 각각 **Connect** → 회사 Google 계정으로 허용하도록 안내한다. 연결하면 Claude Code에 자동 반영된다 (재시작 불필요, 다음 `/mcp`에서 확인).
 
 주의: claude.ai 커넥터 동기화는 Claude Code가 **claude.ai 구독 로그인**일 때만 동작한다. Google 항목이 연결 후에도 안 보이면 `/status`에서 로그인 방식을 확인하게 한다 (`ANTHROPIC_API_KEY` 등 다른 인증이 활성화돼 있으면 커넥터가 로드되지 않는다).
 
