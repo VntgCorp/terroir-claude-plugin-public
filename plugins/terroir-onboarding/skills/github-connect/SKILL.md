@@ -34,8 +34,9 @@ gh auth login --hostname github.com --git-protocol https --web --scopes "repo,wo
 
 > **지금 바로 하실 일**
 > 1. 브라우저에서 열기 → https://github.com/login/device
-> 2. 코드 입력 → `XXXX-XXXX`
-> 3. VNTG 조직에 초대된 본인 GitHub 계정으로 로그인 → 권한 승인
+> 2. **VNTG 조직에 초대된 본인 GitHub 계정**으로 GitHub 로그인 (2단계 인증까지) — 이미 로그인돼 있으면 이 화면은 안 뜹니다. 단, **다른 계정으로 로그인돼 있으면 계정을 바꾸세요.**
+> 3. Authorize your device 화면에서 코드 입력 → `XXXX-XXXX`
+> 4. 권한 승인
 >
 > ⏱️ 코드는 몇 분 후 만료됩니다. 만료되면 다시 발급해 드릴게요.
 
