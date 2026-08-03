@@ -17,7 +17,7 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 | Atlassian | 지라, 컨플루언스 | claude.ai Connectors에서 연결 (Claude Code로 자동 동기화) |
 | Google | Gmail(이메일), 캘린더, 드라이브 | claude.ai Connectors에서 연결 (Claude Code로 자동 동기화) |
 
-연결·해제·재연결 관리는 전부 한 곳 — `https://claude.ai/settings/connectors` — 에서 한다. Atlassian은 `claude mcp add`(CLI 등록)로도 붙일 수 있지만 **쓰지 않는다**: 연결 경로를 한 곳으로 통일하기 위해서고, CLI 등록은 Claude Code 전용인 데다 claude.ai 커넥터와 `/mcp` 목록에 중복 노출된다.
+연결·해제·재연결 관리는 전부 한 곳 — `https://claude.ai/customize/connectors` — 에서 한다. Atlassian은 `claude mcp add`(CLI 등록)로도 붙일 수 있지만 **쓰지 않는다**: 연결 경로를 한 곳으로 통일하기 위해서고, CLI 등록은 Claude Code 전용인 데다 claude.ai 커넥터와 `/mcp` 목록에 중복 노출된다.
 
 ## 절차
 
@@ -28,15 +28,19 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 - 도구가 보이고 호출이 성공하면 **연결됨** — 해당 항목은 건너뛴다.
 - 도구가 없거나 인증 오류가 나면 **미연결** — §2에서 안내한다.
 
+**전 항목이 이미 연결돼 있으면 §2를 건너뛰고 §3으로 간다.** 이때는 연결 안내를 일절 하지 않고, 현황 요약과 다음 단계(온보딩 흐름이면 직무별 분기 질문)를 **한 응답에 이어서** 출력한다 — 확인만 하고 사용자를 기다리게 만들지 않는다.
+
 ### 2. 미연결 항목 안내
 
 미연결 항목이 하나라도 있으면, 사용자가 설정 메뉴를 찾아 헤매지 않도록 **Claude가 커넥터 설정 페이지를 브라우저로 직접 연다**. 신규 환경의 `/mcp` 목록은 비어 있는 게 정상이다 — `/mcp`에서 등록·인증을 시키지 않는다 (Google 등은 제공자가 claude.ai 리다이렉트만 허용해 CLI 인증이 불가능하다).
 
-- macOS: `open "https://claude.ai/settings/connectors"`
-- Windows: `cmd.exe /c start "" "https://claude.ai/settings/connectors"`
+- macOS: `open "https://claude.ai/customize/connectors"`
+- Windows: `cmd.exe /c start "" "https://claude.ai/customize/connectors"`
 - WSL: 브라우저 자동 실행이 불안정하므로 열지 말고 URL을 출력해 Windows 브라우저에서 직접 열도록 안내
 
 열린 페이지에서 **미연결 항목만** Connect 하도록 안내한다 — **Atlassian**(지라·컨플루언스는 커넥터 하나다), **Gmail**, **Google Calendar**, **Google Drive**. 각각 Connect → 회사 계정으로 로그인·허용. 연결 해제·재연결 등 이후 관리도 같은 페이지에서 한다는 것을 함께 알려준다.
+
+**목록에 커넥터가 아예 없을 때**(신규 계정은 목록이 비어 있을 수 있다): 페이지 우측 상단 **추가** → **커넥터 둘러보기** → 검색창에 이름(Atlassian · Gmail · Google Calendar · Google Drive)을 검색해 추가하도록 안내한다. Team·Enterprise 플랜은 관리자만 커넥터를 추가할 수 있으므로, 추가가 막히면 플랫폼개발팀에 조직 커넥터 등록을 요청하도록 안내한다.
 
 주의: claude.ai 커넥터 동기화는 Claude Code가 **claude.ai 구독 로그인**일 때만 동작한다. 연결 후에도 항목이 안 보이면 `/status`에서 로그인 방식을 확인하게 한다 (`ANTHROPIC_API_KEY` 등 다른 인증이 활성화돼 있으면 커넥터가 로드되지 않는다).
 
@@ -44,7 +48,7 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
 ### 3. 재확인 및 종료
 
-연결을 마친 항목은 §1 방식으로 재확인한다. 재확인이 실패하면(연결했다는데 도구가 안 보임) 진행 중 세션에 아직 동기화되지 않은 것일 수 있다 — Claude Code 재시작 후 온보딩을 이어가도록 안내한다.
+연결을 마친 항목은 §1 방식으로 재확인한다. 커넥터 목록은 **세션 시작 시점에 로드**되므로, 진행 중 세션에서는 방금 연결한 항목이 보이지 않을 수 있다 — 재확인이 실패하면 Claude Code를 재시작한 뒤 "온보딩 이어서"라고 입력하도록 안내한다. 재시작으로 대화가 끊겨도 §1이 상태를 다시 확인해 연결된 항목은 건너뛰므로, 사용자가 진행 상황을 설명할 필요는 없다.
 
 전 항목이 연결(또는 사용자가 명시적으로 건너뜀)되면 결과를 한 줄 요약으로 보여주고 모듈을 종료한다.
 
