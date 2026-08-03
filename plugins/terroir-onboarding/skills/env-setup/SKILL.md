@@ -14,8 +14,10 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
 | 그룹 | 도구 | 연결 수단 |
 | --- | --- | --- |
-| Atlassian | 지라, 컨플루언스 | Claude가 `claude mcp add`로 등록 → 사용자는 `/mcp` 인증만 |
-| Google | Gmail(이메일), 캘린더, 드라이브 | claude.ai 웹 Settings → Connectors에서 연결 (Claude Code로 자동 동기화) |
+| Atlassian | 지라, 컨플루언스 | claude.ai Connectors에서 연결 (Claude Code로 자동 동기화) |
+| Google | Gmail(이메일), 캘린더, 드라이브 | claude.ai Connectors에서 연결 (Claude Code로 자동 동기화) |
+
+연결·해제·재연결 관리는 전부 한 곳 — `https://claude.ai/settings/connectors` — 에서 한다. Atlassian은 `claude mcp add`(CLI 등록)로도 붙일 수 있지만 **쓰지 않는다**: 연결 경로를 한 곳으로 통일하기 위해서고, CLI 등록은 Claude Code 전용인 데다 claude.ai 커넥터와 `/mcp` 목록에 중복 노출된다.
 
 ## 절차
 
@@ -28,31 +30,23 @@ when_to_use: 온보딩 진입점(onboarding-start)이 직무 확인 직후, 직�
 
 ### 2. 미연결 항목 안내
 
-미연결 항목만 골라, 항목별로 아래를 안내하고 사용자가 완료할 때까지 하나씩 진행한다. 신규 환경의 `/mcp` 목록은 비어 있는 게 정상이다 — "목록에서 골라라"로 안내하지 않는다.
+미연결 항목이 하나라도 있으면, 사용자가 설정 메뉴를 찾아 헤매지 않도록 **Claude가 커넥터 설정 페이지를 브라우저로 직접 연다**. 신규 환경의 `/mcp` 목록은 비어 있는 게 정상이다 — `/mcp`에서 등록·인증을 시키지 않는다 (Google 등은 제공자가 claude.ai 리다이렉트만 허용해 CLI 인증이 불가능하다).
 
-- **지라·컨플루언스 (Atlassian)**: 사용자에게 명령을 시키지 말고 Claude가 직접 등록한다 (`claude mcp list`에 `atlassian`이 이미 있으면 건너뛴다):
+- macOS: `open "https://claude.ai/settings/connectors"`
+- Windows: `cmd.exe /c start "" "https://claude.ai/settings/connectors"`
+- WSL: 브라우저 자동 실행이 불안정하므로 열지 말고 URL을 출력해 Windows 브라우저에서 직접 열도록 안내
 
-  ```
-  claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp/authv2 --scope user
-  ```
+열린 페이지에서 **미연결 항목만** Connect 하도록 안내한다 — **Atlassian**(지라·컨플루언스는 커넥터 하나다), **Gmail**, **Google Calendar**, **Google Drive**. 각각 Connect → 회사 계정으로 로그인·허용. 연결 해제·재연결 등 이후 관리도 같은 페이지에서 한다는 것을 함께 알려준다.
 
-  등록 후 사용자에게 `/mcp` 실행 → `atlassian` 선택 → 브라우저에서 회사 Atlassian 계정으로 로그인·허용을 안내한다. `/mcp` 목록에 안 보이면 Claude Code 재시작 후 재시도를 안내한다. (구 엔드포인트 `/v1/sse`는 2026-06 폐기 — 쓰지 않는다)
+주의: claude.ai 커넥터 동기화는 Claude Code가 **claude.ai 구독 로그인**일 때만 동작한다. 연결 후에도 항목이 안 보이면 `/status`에서 로그인 방식을 확인하게 한다 (`ANTHROPIC_API_KEY` 등 다른 인증이 활성화돼 있으면 커넥터가 로드되지 않는다).
 
-- **Gmail / 캘린더 / 드라이브 (Google)**: **Claude Code에서는 인증할 수 없다** — Google이 claude.ai가 등록한 리다이렉트 URL만 허용한다. 대신 사용자가 설정 메뉴를 찾아 헤매지 않도록 **Claude가 커넥터 설정 페이지를 브라우저로 직접 연다**:
-
-  - macOS: `open "https://claude.ai/settings/connectors"`
-  - Windows: `cmd.exe /c start "" "https://claude.ai/settings/connectors"`
-  - WSL: 브라우저 자동 실행이 불안정하므로 열지 말고 URL을 출력해 Windows 브라우저에서 직접 열도록 안내
-
-  열린 페이지에서 Gmail·Google Calendar·Google Drive를 각각 **Connect** → 회사 Google 계정으로 허용하도록 안내한다. 연결하면 Claude Code에 자동 반영된다 (재시작 불필요, 다음 `/mcp`에서 확인).
-
-주의: claude.ai 커넥터 동기화는 Claude Code가 **claude.ai 구독 로그인**일 때만 동작한다. Google 항목이 연결 후에도 안 보이면 `/status`에서 로그인 방식을 확인하게 한다 (`ANTHROPIC_API_KEY` 등 다른 인증이 활성화돼 있으면 커넥터가 로드되지 않는다).
-
-완료 확인은 AskUserQuestion을 쓰지 말고 일반 출력으로 턴을 끝낸다 (사용자가 `/mcp`를 입력해야 하므로 입력창을 막지 않는다). 안내 끝에 "연결을 마치면 알려주세요. 건너뛰려면 '건너뛰기'라고 답해주세요." 한 줄을 붙인다.
+완료 확인은 AskUserQuestion을 쓰지 말고 일반 출력으로 턴을 끝낸다 (사용자가 브라우저에서 작업해야 하므로 입력창을 막지 않는다). 안내 끝에 "연결을 마치면 알려주세요. 건너뛰려면 '건너뛰기'라고 답해주세요." 한 줄을 붙인다.
 
 ### 3. 재확인 및 종료
 
-연결을 마친 항목은 §1 방식으로 재확인한다. 전 항목이 연결(또는 사용자가 명시적으로 건너뜀)되면 결과를 한 줄 요약으로 보여주고 모듈을 종료한다.
+연결을 마친 항목은 §1 방식으로 재확인한다. 재확인이 실패하면(연결했다는데 도구가 안 보임) 진행 중 세션에 아직 동기화되지 않은 것일 수 있다 — Claude Code 재시작 후 온보딩을 이어가도록 안내한다.
+
+전 항목이 연결(또는 사용자가 명시적으로 건너뜀)되면 결과를 한 줄 요약으로 보여주고 모듈을 종료한다.
 
 > 환경 셋팅 결과 — 지라·컨플루언스 ✅ / 메일 ✅ / 캘린더 ✅ / 드라이브 ✅
 
