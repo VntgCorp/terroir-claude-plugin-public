@@ -12,6 +12,8 @@ VNTG 조직 GitHub 계정 보유자의 해피패스. 기존 `setup-git-gh.sh` �
 
 각 단계는 먼저 상태를 확인하고, 이미 완료된 단계는 건너뛴다.
 
+진행 중 사용자가 GitHub 관련 내용을 모르거나 막혀 하면, 사내 GitHub 가이드 문서를 안내한다: https://vntg.atlassian.net/wiki/external/NWEwMzYzYzQ1M2JhNDI1ODk1ZTEzN2IwYWI4NjNlOWI
+
 ### 1. git·gh 설치 확인
 
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.

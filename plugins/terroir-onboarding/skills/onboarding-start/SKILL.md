@@ -44,7 +44,7 @@ Terroir 온보딩의 진입점. 이 문서가 온보딩 전체 흐름의 source 
 > 1. 프로덕트 관련 직군 — 개발, 기획, 디자인, PM 등 프로덕트를 만드는 일
 > 2. 비 프로덕트 직군 — 그 외 (경영지원, 영업, 인사 등)
 
-- **프로덕트 관련 직군** → VNTG 조직 GitHub 계정 보유 여부를 묻는다. 질문에 조직 페이지 https://github.com/VntgCorp 를 함께 안내한다 (접속해 소속 여부를 확인할 수 있다).
+- **프로덕트 관련 직군** → VNTG 조직 GitHub 계정 보유 여부를 묻는다. 질문에 조직 페이지 https://github.com/VntgCorp 를 함께 안내한다 (접속해 소속 여부를 확인할 수 있다). GitHub 관련 내용이 익숙하지 않은 사용자를 위해 사내 GitHub 가이드 문서도 함께 안내한다: https://vntg.atlassian.net/wiki/external/NWEwMzYzYzQ1M2JhNDI1ODk1ZTEzN2IwYWI4NjNlOWI
   - 계정 있음 → `github-connect` 스킬 실행 (계정 연결 → Git 연결 → private 플러그인 접근 확인·설치)
   - 계정 없음 / 모름 → `org-access-request` 스킬 실행 (가입 지원·접근 요청)
 - **비 프로덕트 직군** → §3으로.
