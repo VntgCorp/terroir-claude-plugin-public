@@ -14,6 +14,8 @@ GitHub 계정 보유자의 해피패스. git·gh 설치부터 gh 인증, git 사
 
 사용자에게 제시하는 모든 명령은 bash 문법으로 쓴다 — `!` 실행은 Windows에서도 bash(Git Bash)로 동작하므로 PowerShell 문법(`&`, 백슬래시 경로)을 쓰지 않고, Windows 경로는 슬래시(`C:/Program Files/...`)로 쓴다.
 
+진행 중 사용자가 GitHub 관련 내용을 모르거나 막혀 하면, 사내 GitHub 가이드 문서를 안내한다: https://vntg.atlassian.net/wiki/external/NWEwMzYzYzQ1M2JhNDI1ODk1ZTEzN2IwYWI4NjNlOWI
+
 ### 1. git·gh 설치 확인
 
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.
