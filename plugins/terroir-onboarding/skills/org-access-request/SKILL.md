@@ -20,6 +20,8 @@ when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 계정 
 
 이미 GitHub 계정이 있으면 1은 건너뛴다.
 
+GitHub이 익숙하지 않은 사용자를 위해 사내 GitHub 가이드 문서를 함께 안내한다: https://vntg.atlassian.net/wiki/external/NWEwMzYzYzQ1M2JhNDI1ODk1ZTEzN2IwYWI4NjNlOWI
+
 ### 2. 접근 요청 폼 안내
 
 아래 폼 링크를 안내하고, 사용자가 직접 작성·제출하게 한다. **요청 정보는 Claude가 수집하거나 대신 제출하지 않는다** — 본인이 폼에 직접 입력한다.
