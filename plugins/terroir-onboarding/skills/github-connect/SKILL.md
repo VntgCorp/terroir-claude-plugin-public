@@ -21,7 +21,7 @@ GitHub 계정 보유자의 해피패스. git·gh 설치부터 gh 인증, git 사
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.
 
 - macOS: `brew install git gh`
-- Windows: `winget install --id Git.Git`, `winget install --id GitHub.cli` — git 설치 전에는 Bash 도구가 없어 PowerShell로 실행되므로 `apt`를 안내하지 않는다. 설치 후 Bash 도구가 붙으려면 Claude Code 재시작이 필요하다.
+- Windows: `winget install --id Git.Git`, `winget install --id GitHub.cli` — git 설치 전에는 Bash 도구가 없어 PowerShell로 실행되므로 `apt`를 안내하지 않는다. 설치 후 Bash 도구가 붙으려면 Claude Code 재시작이 필요하다. 재시작을 안내할 때는 재시작 뒤 **"git 설치하고 재시작했음"** 이라고 입력하도록 함께 알린다 (`onboarding-start`의 재시작 후 이어받기 진입점이 받아 이 스킬 §1로 돌려보낸다).
 - WSL/Linux: `sudo apt update && sudo apt install -y git gh`
 
 ### 2. GitHub 계정 연결
@@ -66,7 +66,7 @@ gh repo view VntgCorp/terroir-claude-plugin --json name
 gh api /user/memberships/orgs/VntgCorp --jq .state
 ```
 
-- `pending` → 초대를 아직 수락하지 않은 상태다. **본인이 수락하면 끝나므로 `org-access-request`로 보내지 않는다** (담당자는 이미 초대를 보냈다). https://github.com/orgs/VntgCorp/invitation 에서 수락하도록 안내하고, 수락 후 §4를 재시도한다.
+- `pending` → 초대를 아직 수락하지 않은 상태다. **본인이 수락하면 끝나므로 `org-access-request`로 보내지 않는다** (담당자는 이미 초대를 보냈다). https://github.com/orgs/VntgCorp/invitation 에서 수락하도록 안내하되, **"수락하면 '초대 수락했음'이라고 입력해 주세요"를 반드시 함께 안내하고 턴을 끝내고 기다린다** — 사용자가 브라우저에서 수락하는 동안 재시도를 반복하지 않는다. 완료 입력을 받으면 §4를 재시도한다.
 - `active` → 조직 가입은 됐고 레포 권한만 없다. `org-access-request`로 분기하되, "조직 가입은 완료됐고 레포 접근 권한만 필요하다"는 점을 사용자에게 알려 담당자에게 그대로 전달하게 한다.
 - 그 외(조회 실패 등) → 조직 미가입. `org-access-request`로 분기한다.
 
