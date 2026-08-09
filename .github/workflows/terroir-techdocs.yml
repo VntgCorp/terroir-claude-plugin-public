@@ -1,0 +1,74 @@
+name: Terroir TechDocs
+
+# Managed by VntgCorp/gh-terroir-byor. Do not edit by hand.
+# 문서 검증(PR)·생성·발행(머지) — terroir-reusable-workflow 호출 (RDDP-1353).
+#
+# Backstage TechDocs 는 문서를 직접 빌드하지 않는다(app-config `techdocs.builder: external`).
+# 이 워크플로가 mkdocs.yml + docs/ 를 정적 사이트로 만들어 GCS 에 올리고, Backstage 는
+# 카탈로그 엔티티(catalog-info.yaml)의 Docs 탭에서 그 결과를 읽기만 한다.
+#
+# 잡이 둘인 이유:
+#   - validate(PR)  : `mkdocs build --strict` 로 문서가 깨졌는지 머지 전에 잡는다.
+#     mkdocs.yml 과 docs/ 는 프로젝트 자산이라 사람과 AI 가 직접 고치는데, 잘못 건드리면
+#     문서 페이지가 아예 안 뜨거나(nav·설정 손상) 페이지는 떠도 링크가 깨진다.
+#     발행은 빌드만 되면 올려버리므로 후자는 발행 뒤에야 발견된다. 그래서 PR 에서 먼저 막는다.
+#   - publish(머지·수동): 검증을 통과한 문서를 실제로 발행한다.
+#
+# 트리거가 셋인 이유:
+#   - pull_request : 위 validate. 모든 PR 에서 돈다.
+#   - push         : 평상시 갱신 경로. 기본 브랜치로 들어온 push 에서만 발행된다.
+#   - dispatch     : 최초 발행, 엔티티 개명 후 재발행, 복구용.
+# 셋 다 경로 필터를 걸지 않는다(아래 on: 주석 참조).
+#
+# ★ 발행 브랜치는 그 레포의 기본 브랜치 하나다. 저장 경로가 엔티티 triplet(namespace/kind/name)
+#   하나뿐이라 여러 브랜치에서 발행하면 서로 덮어쓴다. 어느 브랜치가 기본인지는 reusable 이
+#   레포 정보에서 읽어 판단하므로, 이 파일을 레포마다 고쳐 쓸 필요가 없다.
+#   기본 브랜치가 아래 branches 목록에 없는 레포라면 그 이름을 목록에 더한다.
+#
+# mkdocs.yml 이 없으면 두 잡 모두 건너뛴다(실패가 아니라 skip). BYOR 로 들어온 기존 레포가
+# 아직 문서를 쓰지 않았어도 CI 가 붉어지지 않는다.
+
+# 경로 필터(paths)를 쓰지 않는 이유. 돌 필요가 있는지는 이 파일이 아니라 reusable 이
+# 판단한다. 경로 필터는 판단을 GitHub 트리거 계층에 두는 것이고, 그 계층에는 우리가
+# 통제할 수 없는 함정이 둘 있다.
+#   - 레포의 최초 커밋은 부모가 없어 GitHub 이 diff 를 만들 수 없고, 그때 경로 필터는
+#     "변경된 파일 없음" 으로 평가돼 워크플로가 아예 실행되지 않는다(공식 문서: 새 브랜치는
+#     "가장 깊은 커밋의 조상의 부모" 기준 2-dot diff, 변경 파일이 없으면 미실행).
+#     그 결과 스캐폴드 직후 첫 발행이 통째로 누락된다 — 2026-07-29 sabper-0729 에서 실측.
+#   - 경로 필터로 건너뛴 워크플로는 체크 자체를 보고하지 않는다. 그 체크를 나중에 required
+#     status check 로 지정하면 PR 이 영원히 pending 으로 막힌다(공식 문서).
+# 대신 mkdocs.yml 이 없으면 reusable 이 건너뛰고, 발행은 같은 경로에 덮어쓰는 멱등 동작이라
+# 문서와 무관한 이벤트에서 돌아도 안전하다. 비용은 이벤트당 잡 하나이며, 이 비용이 문제가
+# 되면 reusable 안에서 줄인다 — 각 레포의 이 파일은 건드리지 않아도 된다.
+# push 브랜치 목록에 셋을 적는 이유. 발행 대상은 "그 레포의 기본 브랜치" 하나이고 그 판단은
+# reusable 이 한다. 그런데 on: 은 정적이라 레포마다 다른 기본 브랜치 이름을 쓸 수 없다.
+# 그래서 관측된 기본 브랜치 후보를 모두 적어 두고, 실제 발행 여부는 reusable 가드가 정한다.
+# 기본 브랜치가 아닌 브랜치로 들어온 push 는 가드가 조용히 건너뛴다(실패가 아니다).
+#
+# 사내 레포의 기본 브랜치는 main·develop·lab 셋으로 갈려 있어 셋을 모두 적는다. BYOR 로 들어오는
+# 레포는 이 목록에 없는 이름을 기본 브랜치로 쓸 수도 있고, 그때는 그 이름을 목록에 더한다.
+on:
+  pull_request:
+  push:
+    branches: [main, develop, lab]
+  workflow_dispatch:
+
+concurrency:
+  group: techdocs-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write # GCP Workload Identity Federation 인증에 필요 (publish 잡)
+
+jobs:
+  validate:
+    name: validate (strict build)
+    if: github.event_name == 'pull_request'
+    uses: VntgCorp/terroir-reusable-workflow/.github/workflows/techdocs-validate.yml@main
+
+  publish:
+    name: generate + publish
+    if: github.event_name != 'pull_request'
+    uses: VntgCorp/terroir-reusable-workflow/.github/workflows/techdocs-publish.yml@main
+    secrets: inherit # org secret TERROIR_GCP_WIF_PROVIDER · TERROIR_GCP_SA_EMAIL 전파

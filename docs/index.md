@@ -1,0 +1,33 @@
+# 프로젝트 문서
+
+이 문서는 Backstage 의 Docs 탭에서 보입니다. 원본은 이 레포의 `docs/` 아래 마크다운이고,
+`main` 브랜치에 문서 변경이 머지되면 CI 가 사이트를 다시 만들어 발행합니다.
+
+기존에 쓰던 문서가 있다면 이 파일을 지우고 그 문서를 `docs/` 아래로 옮긴 뒤 `mkdocs.yml` 의
+`nav` 에 등록하면 됩니다.
+
+## 문서를 추가하는 방법
+
+1. `docs/` 아래에 마크다운 파일을 만듭니다.
+2. `mkdocs.yml` 의 `nav` 에 그 파일을 추가합니다.
+3. PR 을 올리고 `main` 에 머지하면 자동으로 반영됩니다.
+
+## 무엇을 쓰면 좋은가
+
+정답은 없지만, 코드를 읽어서는 알 수 없는 것부터 쓰는 편이 좋습니다.
+
+- 이 프로젝트가 무엇을 하는 서비스인지, 누가 쓰는지
+- 로컬에서 띄우는 방법과 자주 막히는 지점
+- 외부 시스템과의 연동 관계, 장애 시 확인할 곳
+- 설계 판단의 배경 — 왜 이 구조를 택했고 무엇을 배제했는지
+
+## 로컬에서 미리 보기
+
+```bash
+npx @techdocs/cli serve --no-docker
+```
+
+## 참고
+
+- [MkDocs 문법](https://www.mkdocs.org/user-guide/writing-your-docs/)
+- [Backstage TechDocs](https://backstage.io/docs/features/techdocs/)
