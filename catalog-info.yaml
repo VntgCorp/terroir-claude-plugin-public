@@ -1,0 +1,48 @@
+# 카탈로그 기술서 (RDDP-1442) — 스캐폴더가 생성한 파일이다.
+#
+# 모델 (ADR-045 · ADR-047)
+#   System    = 프로젝트(project)
+#   Component = 애플리케이션(application)
+# workload(be-*/fe-*)는 카탈로그 엔티티로 등록하지 않는다(ADR-045 결정 4 — ArgoCD
+# resource-tree 의 K8s Deployment 수준에서만 식별). DB Resource 는 앱 공용 Cloud SQL
+# 논리 DB 전환(RDDP-1335) 확정 후 추가한다.
+#
+# 이 파일을 손으로 고쳐도 된다. 스캐폴더가 다시 덮지 않는다(once 파일).
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terroir-claude-plugin-public
+  description: >-
+    public 으로 공개 되는 테루아 claude plugin
+  annotations:
+    github.com/project-slug: VntgCorp/terroir-claude-plugin-public
+    backstage.io/techdocs-ref: dir:.
+    # 이 기술서를 만든 템플릿. 공식 About 카드가 이 값으로 "비슷한 것 만들기" 버튼을 띄우고,
+    # 표준을 어느 입구로 따랐는지 추적하는 데도 쓴다.
+    # ★템플릿 이름 규약 = terroir-<종류>. 새 종류를 더할 때 이 규약을 지켜야 값이 맞는다.
+    backstage.io/source-template: template:default/terroir-tool
+    # 카탈로그 메타를 고치는 곳. 공식 설계상 진실 공급원은 이 레포의 파일이고 편집은 평소 git
+    # 워크플로로 한다 — About 카드의 연필 버튼이 이 애노테이션만 읽고, 없으면 비활성이다.
+    backstage.io/edit-url: https://github.com/VntgCorp/terroir-claude-plugin-public/edit/main/catalog-info.yaml
+    # 배포 연결 키 (ADR-045 이음새 B). 이 엔티티가 가리키는 배포관리 project·application.
+    # 종류와 무관하게 항상 심는다(ADR-047 결정 4) — 애노테이션은 조회 키이지 배포 여부
+    # 표시가 아니다. 배포 대상 여부의 진실 공급원은 terroir-manifests 하나다.
+    terroir.vntgcorp.com/project: terroir
+    terroir.vntgcorp.com/application: terroir-claude-plugin-public
+    # ArgoCD Application 조회 — kmm ApplicationSet 이 붙이는 라벨로 찾는다. 이름이 아니라
+    # 라벨을 쓰는 이유는 env 가 늘어도 한 엔티티가 모든 환경을 함께 보여주기 위해서다.
+    argocd/app-selector: terroir.vntgcorp.com/project=terroir,terroir.vntgcorp.com/application=terroir-claude-plugin-public
+    # K8s 리소스 조회 — Deployment·Service 에 이미 붙어 있는 라벨을 그대로 쓴다.
+    # 이 application 에 속한 워크로드 전부가 이 엔티티 아래 묶인다(ADR-045 결정 5).
+    backstage.io/kubernetes-label-selector: terroir.vntgcorp.com/project=terroir,terroir.vntgcorp.com/application=terroir-claude-plugin-public
+spec:
+  # 종류는 불변이다(ADR-047 결정 2). 종류가 바뀌면 엔티티를 교체하고 기존 것은 deprecated 로 둔다.
+  type: tool
+  # 성숙도. 만든 직후는 experimental 이고, 쓸 수 있는 값은 셋뿐이다.
+  #   experimental — 아직 다른 팀이 의존하면 안 되는 상태
+  #   production   — 실서비스에 쓰이며 변경에 하위 호환을 지켜야 하는 상태
+  #   deprecated   — 대체됐거나 접히는 중. 새로 의존하면 안 되는 상태
+  # 올릴 때는 이 파일을 고쳐 기본 브랜치에 머지하면 카탈로그가 다시 읽는다.
+  lifecycle: experimental
+  owner: group:default/r-d
+  system: terroir

@@ -1,0 +1,30 @@
+# MkDocs 설정 — Backstage TechDocs 문서 사이트 (RDDP-1353).
+#
+# 이 파일과 docs/ 의 마크다운이 문서의 단일 출처다. CI(terroir-techdocs.yml)가 이 설정으로
+# 정적 사이트를 만들어 GCS 에 발행하고, Backstage 는 그 결과를 읽어 카탈로그 엔티티의
+# Docs 탭에 보여준다. Backstage 는 문서를 직접 빌드하지 않는다.
+#
+# once 정책(managed-files.yml 미등재) = 이 파일은 처음 한 번만 떨어지고 이후 프로젝트 자산이다.
+# 이미 mkdocs.yml 을 쓰고 있던 레포라면 기존 파일이 그대로 보존된다.
+# site_name·nav 를 프로젝트에 맞게 자유롭게 고쳐도 재실행(upgrade)이 덮어쓰지 않는다.
+#
+# techdocs-core 플러그인은 techdocs-cli 가 빌드 시 주입하므로 여기 명시하지 않아도 된다.
+# 문법: https://www.mkdocs.org/user-guide/configuration/
+
+site_name: 프로젝트 문서
+
+nav:
+  - 홈: index.md
+
+plugins:
+  - techdocs-core
+
+# 링크 검증 수위 (RDDP-1353).
+# 없는 문서를 가리키는 링크는 mkdocs 기본이 warn 이라 `mkdocs build --strict` 에서 잡히지만,
+# 앵커(#제목) 깨짐과 정체불명 링크는 기본이 info 라 조용히 통과한다. 두 값을 warn 으로 올려
+# PR 검증(strict)에서 함께 걸리게 한다.
+# 출처: https://www.mkdocs.org/user-guide/configuration/
+validation:
+  links:
+    anchors: warn
+    unrecognized_links: warn
