@@ -39,6 +39,6 @@ https://docs.google.com/forms/d/e/1FAIpQLSchBxQtBTRcoPJw-eWYrbjfZGMwBXnOoYkj5O8N
 > 하루가 지나도 연락이 없으면 플랫폼개발팀 채널에 문의해 주세요.
 > 그동안 지라·컨플루언스·메일 등 이미 연결된 도구는 바로 사용할 수 있습니다.
 
-이 경로는 여기서 대기 상태로 끝난다. **`onboarding-start`의 "공통 종료 출력"(§4)을 실행하지 않는다** — 아직 접근 권한이 없는 private 플러그인 목록을 안내하게 되고, 온보딩이 끝난 것처럼 읽힌다.
+이 경로는 여기서 대기 상태로 끝난다. **`onboarding-start`의 "공통 종료 출력"을 실행하지 않는다** — 온보딩이 끝난 것처럼 읽힌다.
 
 재개 문구를 받으면 `github-connect` 스킬의 이어받기 진입점이 실행된다.
