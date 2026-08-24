@@ -3,8 +3,7 @@
   "description": "Knowledge mesh storage skill — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage. Logic lives in the skill, data lives in storage.",
   "version": "1.0.0",
   "author": {
-    "name": "VntgCorp R&D",
-    "email": "aadlaar0000@vntgcorp.com"
+    "name": "VntgCorp R&D"
   },
   "repository": "https://github.com/VntgCorp/terroir-claude-plugin-public",
   "keywords": [

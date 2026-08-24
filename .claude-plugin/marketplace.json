@@ -32,8 +32,7 @@
       "description": "Knowledge mesh storage — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage",
       "category": "knowledge",
       "author": {
-        "name": "VntgCorp R&D",
-        "email": "aadlaar0000@vntgcorp.com"
+        "name": "VntgCorp R&D"
       },
       "keywords": [
         "knowledge-base",
