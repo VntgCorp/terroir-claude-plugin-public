@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  mesh drain 무인 실행용 launchd 템플릿 (mac).
+  placeholder 4종을 설치 setup이 등록 시 치환한다 — 번들엔 사용자값·개인경로 0.
+    __MESH_SKILL__   harness-mesh 스킬 폴더 절대경로 (drain.sh·로직이 사는 곳)
+    __HARNESS_MESH_STORAGE__   storage 절대경로 (데이터·로그)
+    __RUNNER__       러너(agy|claude|codex|gemini)
+    __INTERVAL_SEC__ 실행 간격(초). 예: 3600=매시 / 86400=매일
+  설치 위치: ~/Library/LaunchAgents/com.harness-mesh.drain.plist  →  launchctl load
+  비밀값은 여기 두지 않는다. 외부 알림은 storage 밖(~/.config/harness-mesh/notify.sh 등)에서 drain.sh가 참조.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.harness-mesh.drain</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>__MESH_SKILL__/scripts/drain.sh</string>
+    <string>--runner</string>
+    <string>__RUNNER__</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>__HARNESS_MESH_STORAGE__</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HARNESS_MESH_STORAGE</key>
+    <string>__HARNESS_MESH_STORAGE__</string>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+  <key>StartInterval</key>
+  <integer>__INTERVAL_SEC__</integer>
+  <key>StandardOutPath</key>
+  <string>__HARNESS_MESH_STORAGE__/.harness-mesh/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HARNESS_MESH_STORAGE__/.harness-mesh/launchd.err.log</string>
+</dict>
+</plist>
