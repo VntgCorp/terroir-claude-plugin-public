@@ -24,10 +24,6 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 | [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내 |
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
 
-여기 있는 것은 **테루아 맵의 단계에 속하지 않는** 플러그인이다. 맵 0 SETUP · 1 PORTAL ~
-6 OBSERVABILITY 의 단계별 플러그인은 사내 마켓플레이스 `terroir-claude-plugin` 에 있다
-(온보딩은 인증 없이 시작할 수 있어야 하므로 예외로 여기 둔다).
-
 ### 검증 채널
 
 **마켓플레이스를 어느 브랜치에서 등록했는지**에 따라 설치되는 코드가 달라진다.
