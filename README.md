@@ -17,6 +17,12 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 
 설치 후 `/plugin` 메뉴에서 `terroir-onboarding`이 보이면 정상이다.
 
+## 이름 변경 안내 (2026-08-26)
+
+온보딩 진입 스킬 이름이 `/onboarding-start` 에서 **`/onboarding`** 으로 바뀌었다. 플러그인 이름은
+그대로라 재설치 없이 업데이트(`/plugin` → Installed → Update → `/reload-plugins`)로 반영된다.
+규칙은 [ADR-001](docs/adr/001-ADR-Adopt%20the%20naming%20convention%20of%20the%20private%20marketplace.md).
+
 ## 제공 플러그인
 
 | 플러그인 | 설명 |
