@@ -1,12 +1,12 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "terroir-claude-plugin-public",
-  "description": "Terroir 공개 Claude Code 플러그인 마켓플레이스 — 인증 없이 설치할 수 있는 온보딩 플러그인을 제공한다",
+  "description": "Terroir 공개 Claude Code 플러그인 마켓플레이스 — 인증 없이 설치할 수 있는 온보딩 플러그인과 단계 무관 부가 기능을 제공한다",
   "owner": {
     "name": "VntgCorp R&D"
   },
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "pluginRoot": "./plugins"
   },
   "plugins": [
@@ -23,6 +23,21 @@
         "getting-started",
         "setup",
         "terroir",
+        "vntgcorp"
+      ]
+    },
+    {
+      "name": "terroir-harness-mesh",
+      "source": "./plugins/terroir-harness-mesh",
+      "description": "Knowledge mesh storage — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage",
+      "category": "knowledge",
+      "author": {
+        "name": "VntgCorp R&D"
+      },
+      "keywords": [
+        "knowledge-base",
+        "knowledge-management",
+        "mesh",
         "vntgcorp"
       ]
     }

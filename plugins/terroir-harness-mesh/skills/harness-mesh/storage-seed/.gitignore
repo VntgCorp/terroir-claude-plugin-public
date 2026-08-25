@@ -1,0 +1,6 @@
+.obsidian/
+.DS_Store
+Thumbs.db
+Desktop.ini
+.harness-mesh/
+__pycache__/
