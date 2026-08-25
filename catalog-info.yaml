@@ -13,7 +13,7 @@ kind: Component
 metadata:
   name: terroir-claude-plugin-public
   description: >-
-    public 으로 공개 되는 테루아 claude plugin
+    public 으로 공개 되는 떼루아 claude plugin
   annotations:
     github.com/project-slug: VntgCorp/terroir-claude-plugin-public
     backstage.io/techdocs-ref: dir:.
