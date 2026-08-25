@@ -1,6 +1,6 @@
 {
   "name": "terroir-harness-mesh",
-  "description": "Knowledge mesh storage skill — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage. Logic lives in the skill, data lives in storage.",
+  "description": "Knowledge mesh storage — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage",
   "version": "1.0.0",
   "author": {
     "name": "VntgCorp R&D"

@@ -1,7 +1,7 @@
 ---
 name: github-connect
 description: GitHub 계정 보유자를 위한 온보딩 경로. GitHub 계정 연결 → Git 연결 → private 플러그인 접근 확인 → 설치까지 진행하고, 접근 불가면 org-access-request로 분기한다. 조직 소속 여부는 묻지 않고 접근 확인으로 판별한다.
-when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 계정 있음"으로 분기됐을 때. 사용자가 직접 "GitHub 연결", "gh 인증", "/github-connect"를 요청할 때도 단독 실행할 수 있다. 또한 조직 접근 승인 후 사용자가 "VNTG 조직 초대를 수락했음"(및 유사 표현 — 조직 초대 수락·GitHub 승인이 끝났다는 취지)이라고 말했을 때 이어받기 진입점으로 실행된다.
+when_to_use: onboarding에서 "프로덕트 관련 직군 + GitHub 계정 있음"으로 분기됐을 때. 사용자가 직접 "GitHub 연결", "gh 인증", "/github-connect"를 요청할 때도 단독 실행할 수 있다. 또한 조직 접근 승인 후 사용자가 "VNTG 조직 초대를 수락했음"(및 유사 표현 — 조직 초대 수락·GitHub 승인이 끝났다는 취지)이라고 말했을 때 이어받기 진입점으로 실행된다.
 ---
 
 # github-connect
@@ -21,7 +21,7 @@ GitHub 계정 보유자의 해피패스. git·gh 설치부터 gh 인증, git 사
 `git --version`, `gh --version`을 실행한다. 없는 도구는 OS에 맞게 설치를 안내한다.
 
 - macOS: `brew install git gh`
-- Windows: `winget install --id Git.Git`, `winget install --id GitHub.cli` — git 설치 전에는 Bash 도구가 없어 PowerShell로 실행되므로 `apt`를 안내하지 않는다. 설치 후 Bash 도구가 붙으려면 Claude Code 재시작이 필요하다. 재시작을 안내할 때는 재시작 뒤 **"git 설치하고 재시작했음"** 이라고 입력하도록 함께 알린다 (`onboarding-start`의 재시작 후 이어받기 진입점이 받아 이 스킬 §1로 돌려보낸다).
+- Windows: `winget install --id Git.Git`, `winget install --id GitHub.cli` — git 설치 전에는 Bash 도구가 없어 PowerShell로 실행되므로 `apt`를 안내하지 않는다. 설치 후 Bash 도구가 붙으려면 Claude Code 재시작이 필요하다. 재시작을 안내할 때는 재시작 뒤 **"git 설치하고 재시작했음"** 이라고 입력하도록 함께 알린다 (`onboarding`의 재시작 후 이어받기 진입점이 받아 이 스킬 §1로 돌려보낸다).
 - WSL/Linux: `sudo apt update && sudo apt install -y git gh`
 
 ### 2. GitHub 계정 연결
@@ -88,7 +88,7 @@ gh api /user/memberships/orgs/VntgCorp --jq .state
 
 개발 런타임(Node.js·pnpm) 셋팅은 §5에서 설치된 private 플러그인의 개발 환경 셋팅 스킬이 담당한다 — 리로드 후 스킬 목록에서 해당 스킬을 찾아 실행해 이어간다 (진행/건너뛰기는 그 스킬이 묻는다). 스킬이 보이지 않으면 셋팅 없이 진행하고, 필요해지면 나중에 실행할 수 있음을 한 줄 안내한다.
 
-이후 `onboarding-start` 스킬의 "공통 종료 출력" 섹션(시작 안내 + 커넥터 상태별 "할 수 있는 일")을 실행하고 온보딩을 마친다.
+이후 `onboarding` 스킬의 "공통 종료 출력" 섹션(시작 안내 + 커넥터 상태별 "할 수 있는 일")을 실행하고 온보딩을 마친다.
 
 ## 이어받기 (승인 후 재개)
 
