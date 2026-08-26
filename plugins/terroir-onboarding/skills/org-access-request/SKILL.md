@@ -1,7 +1,7 @@
 ---
 name: org-access-request
 description: VNTG 조직 GitHub 계정이 없는(또는 접근 권한이 없는) 프로덕트 관련자를 위한 경로. GitHub 가입·조직 등록을 안내하고, 접근 요청 폼 링크를 안내한 뒤 대기 안내를 출력한다.
-when_to_use: onboarding-start에서 "프로덕트 관련 직군 + GitHub 계정 없음"으로 분기됐을 때, 또는 github-connect의 접근 확인이 실패했을 때. 사용자가 직접 "조직 계정 요청", "/org-access-request"를 요청할 때도 실행할 수 있다.
+when_to_use: onboarding에서 "프로덕트 관련 직군 + GitHub 계정 없음"으로 분기됐을 때, 또는 github-connect의 접근 확인이 실패했을 때. 사용자가 직접 "조직 계정 요청", "/org-access-request"를 요청할 때도 실행할 수 있다.
 ---
 
 # org-access-request
@@ -39,6 +39,6 @@ https://docs.google.com/forms/d/e/1FAIpQLSchBxQtBTRcoPJw-eWYrbjfZGMwBXnOoYkj5O8N
 > 하루가 지나도 연락이 없으면 플랫폼개발팀 채널에 문의해 주세요.
 > 그동안 지라·컨플루언스·메일 등 이미 연결된 도구는 바로 사용할 수 있습니다.
 
-이 경로는 여기서 대기 상태로 끝난다. **`onboarding-start`의 "공통 종료 출력"을 실행하지 않는다** — 온보딩이 끝난 것처럼 읽힌다.
+이 경로는 여기서 대기 상태로 끝난다. **`onboarding`의 "공통 종료 출력"을 실행하지 않는다** — 온보딩이 끝난 것처럼 읽힌다.
 
 재개 문구를 받으면 `github-connect` 스킬의 이어받기 진입점이 실행된다.
