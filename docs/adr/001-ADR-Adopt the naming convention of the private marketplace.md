@@ -32,7 +32,7 @@
 | N3 묶음 폴더 = 접두어 · N6 에이전트 `-agent` | 그대로 | 묶음 폴더·에이전트가 없어 지금은 해당 없음. 생기면 따른다 |
 | N4 유일성은 플러그인 안 · N4-보조 다른 플러그인 스킬은 `plugin:skill` | 그대로 | 사내 라우터는 `terroir-*-guide:*` 로 부른다(이미 적용) |
 | N5 version 1.0.0 | 그대로 | `terroir-onboarding` 에 빠져 있던 `version` 을 1.0.0 으로 채움. 마켓플레이스 `metadata.version` 도 1.0.0 |
-| N7 description | plugin.json = marketplace.json | 그대로. 서두 `N STAGE —` 는 단계 플러그인용이라 붙이지 않는다 |
+| N7 메타데이터 정본 | plugin.json 하나. 마켓플레이스 엔트리는 `name` + `source` 만 | 그대로. 이 레포 엔트리 2개에서 description 을 제거했다(RDDP-1194). 서두 `N STAGE —` 는 단계 플러그인용이라 붙이지 않는다 |
 
 ### 적용 결과
 
@@ -62,3 +62,4 @@
 ## ✅상태 변경 로그 (Change History)
 
 - 2026-08-26: 결정·적용 (Accepted)
+- 2026-08-26: N7 개정 반영 — marketplace.json 엔트리를 name + source 로 축소 (RDDP-1194)
