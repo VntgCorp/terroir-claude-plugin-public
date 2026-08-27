@@ -17,6 +17,7 @@ nav:
   - 홈: index.md
   - 아키텍처 결정 기록:
       - "001 — 사내 마켓플레이스 이름 규칙 채택": "adr/001-ADR-Adopt the naming convention of the private marketplace.md"
+      - "002 — 사내 마켓플레이스 버전 규칙 채택": "adr/002-ADR-Adopt the versioning rules of the private marketplace.md"
 
 plugins:
   - techdocs-core
