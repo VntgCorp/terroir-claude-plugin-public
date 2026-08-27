@@ -6,40 +6,17 @@
     "name": "VntgCorp R&D"
   },
   "metadata": {
-    "version": "0.2.0",
+    "version": "1.0.0",
     "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "terroir-onboarding",
-      "source": "./plugins/terroir-onboarding",
-      "description": "Terroir 온보딩 — 처음 시작하는 사람이 인증 없이 설치해 환경 셋업과 제공 기능 안내를 받는 진입점",
-      "category": "onboarding",
-      "author": {
-        "name": "VntgCorp R&D"
-      },
-      "keywords": [
-        "onboarding",
-        "getting-started",
-        "setup",
-        "terroir",
-        "vntgcorp"
-      ]
+      "source": "./plugins/terroir-onboarding"
     },
     {
       "name": "terroir-harness-mesh",
-      "source": "./plugins/terroir-harness-mesh",
-      "description": "Knowledge mesh storage — save/ingest/query/lint over a plain-markdown knowledge base at ~/harness-mesh-storage",
-      "category": "knowledge",
-      "author": {
-        "name": "VntgCorp R&D"
-      },
-      "keywords": [
-        "knowledge-base",
-        "knowledge-management",
-        "mesh",
-        "vntgcorp"
-      ]
+      "source": "./plugins/terroir-harness-mesh"
     }
   ]
 }
