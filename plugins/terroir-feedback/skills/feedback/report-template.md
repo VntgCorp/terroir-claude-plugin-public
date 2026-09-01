@@ -60,8 +60,6 @@
   {무엇을 할 수 있게 되기를 바라나 — 1~2문장}
 현재 방식
   {지금은 어떻게 우회하나. 우회할 방법이 없으면 그렇다고 적는다}
-필요한 이유
-  {어떤 상황에서 반복되는 불편인가}
 
 신고 {이메일} · 환경 {collect-env.sh 출력}
 ```
@@ -110,7 +108,7 @@
   "stage": "5 DEPLOYMENT",
 
   "expected": "…", "actual": "…", "repro": ["…", "…"], "cause": "…", "fix": "…",
-  "want": "…", "now": "…", "why": "…",
+  "want": "…", "now": "…",
   "tried": "…", "blocked": "…", "need": "…",
   "content": "…",
 
@@ -124,7 +122,7 @@
 | `category` | 본문 필드 |
 |---|---|
 | `error` | `expected` · `actual` · `repro[]` · `cause` · `fix` |
-| `feature_request` | `want` · `now` · `why` |
+| `feature_request` | `want` · `now` |
 | `access_request` | `tried` · `blocked` · `cause` · `need` |
 | `other` | `content` |
 

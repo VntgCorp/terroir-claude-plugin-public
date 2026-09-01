@@ -9,7 +9,7 @@
 #   skill     관련 스킬 또는 플러그인 (없으면 "")
 #   stage     맵 단계 (예 "5 DEPLOYMENT", 없으면 "")
 #   expected / actual / repro[] / cause / fix   ← error
-#   want / now / why                            ← feature_request
+#   want / now                                  ← feature_request
 #   tried / blocked / cause / need              ← access_request
 #   content                                     ← other
 #   reporter  이메일
@@ -59,8 +59,7 @@ if loc:
     # 잘못된 것은 "발생한 위치", 요청은 "대상" — 기능 요청에 발생한 것은 없다
     body.append(dt("발생한 위치" if cat in ("error", "access_request") else "대상", loc))
 if cat == "feature_request":
-    body += [dt("요청 내용", r.get("want", "")), dt("현재 방식", r.get("now", "")),
-             dt("필요한 이유", r.get("why", ""))]
+    body += [dt("요청 내용", r.get("want", "")), dt("현재 방식", r.get("now", ""))]
 elif cat == "access_request":
     # 추정 원인 — 어느 계층 권한이 빠졌는지. 조치가 초대/팀추가/역할승격으로 갈린다
     body += [dt("시도한 작업", r.get("tried", "")), dt("막힌 화면·문구", r.get("blocked", "")),
