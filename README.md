@@ -10,6 +10,7 @@
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.0.1` | `/onboarding`이 public 마켓플레이스의 자동 업데이트를 활성화하고, private 플러그인 설치 경로에서는 private 마켓플레이스에도 같은 설정을 적용 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-feedback`](plugins/terroir-feedback/CHANGELOG.md) | `1.0.0` | 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송하는 플러그인 추가 | 플러그인 설치 후 Claude Code 재시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
