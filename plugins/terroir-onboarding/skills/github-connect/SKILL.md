@@ -76,9 +76,40 @@ gh api /user/memberships/orgs/VntgCorp --jq .state
 
 사용자에게 명령을 시키지 말고 Claude가 직접 Bash로 실행한다. (§3의 `gh auth setup-git` 덕분에 private 레포도 clone된다)
 
-1. 마켓플레이스 추가: `claude plugin marketplace add VntgCorp/terroir-claude-plugin`
-2. 마켓플레이스의 플러그인 목록을 확인하고(마켓플레이스 레포의 `.claude-plugin/marketplace.json`), **전체 플러그인**을 각각 설치한다: `claude plugin install <플러그인>@terroir-claude-plugin --scope user`
-3. 설치 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을 안내한다. 이때 **"리로드가 끝나면 '리로드 완료'라고 입력해 주세요"를 반드시 함께 안내**하고 턴을 끝내고 기다린다 — `/reload-plugins`는 내장 명령이라 실행돼도 Claude에게 턴이 오지 않으므로, 사용자의 완료 입력이 유일한 재개 신호다.
+1. `claude plugin marketplace list --json`으로 등록 여부를 먼저 확인한다. 없으면
+   `claude plugin marketplace add VntgCorp/terroir-claude-plugin`으로 추가하고, 이미 있으면 기존
+   source와 채널을 유지한다.
+2. 사용자 전역 설정 파일에서 `extraKnownMarketplaces`의
+   `terroir-claude-plugin` 항목에 `"autoUpdate": true`를 병합한다.
+   - `CLAUDE_CONFIG_DIR`가 설정되어 있으면 그 디렉터리의 `settings.json`, 아니면
+     `~/.claude/settings.json`을 사용한다.
+   - 기존 최상위 키와 다른 마켓플레이스 항목은 모두 보존한다.
+   - 기존 항목의 `source`, `ref`, `path`는 바꾸지 않고 `autoUpdate`만 추가하거나 갱신한다.
+   - 항목이 없으면 `claude plugin marketplace list --json`의 평탄화된 목록 행에서 `name`과
+     `installLocation`을 제외한 등록 필드를 settings 형식의 `source` 객체로 변환해 사용한다.
+   - 전체 파일을 고정된 템플릿으로 덮어쓰지 않는다.
+   - 저장 후 JSON 파싱과 `autoUpdate == true`를 다시 확인한다.
+   - 설정에 실패해도 플러그인 설치는 계속한다.
+3. 마켓플레이스의 플러그인 목록을 확인하고(마켓플레이스 레포의
+   `.claude-plugin/marketplace.json`), **전체 플러그인**을 각각 설치한다:
+   `claude plugin install <플러그인>@terroir-claude-plugin --scope user`
+4. 설치 결과와 자동 업데이트 설정 결과를 요약해 보여주고, 사용자에게 `/reload-plugins` 입력을
+   안내한다. 이번 실행에서 값을 `true`로 변경했으면 아래 문구를 포함한다.
+
+   > ✅ `terroir-claude-plugin`의 자동 업데이트를 켰습니다.
+
+   이미 `true`였으면 아래 문구로 현재 상태를 알린다.
+
+   > ℹ️ `terroir-claude-plugin`의 자동 업데이트가 이미 켜져 있습니다.
+
+   설정하지 못했으면 성공으로 보고하지 말고 아래 수동 절차를 포함한다.
+
+   > ⚠️ Private 플러그인 자동 업데이트를 켜지 못했습니다. `/plugin` → `Marketplaces` →
+   > `terroir-claude-plugin`에서 `Enable auto-update`를 선택해 주세요.
+
+   이어서 **"리로드가 끝나면 '리로드 완료'라고 입력해 주세요"를 반드시 함께 안내**하고 턴을
+   끝내고 기다린다 — `/reload-plugins`는 내장 명령이라 실행돼도 Claude에게 턴이 오지 않으므로,
+   사용자의 완료 입력이 유일한 재개 신호다.
 
 설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `claude plugin enable <플러그인>@terroir-claude-plugin` 실행 후 `/reload-plugins` 재안내.
 

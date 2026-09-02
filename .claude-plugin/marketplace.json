@@ -5,8 +5,8 @@
   "owner": {
     "name": "VntgCorp R&D"
   },
+  "version": "1.0.0",
   "metadata": {
-    "version": "1.0.0",
     "pluginRoot": "./plugins"
   },
   "plugins": [
