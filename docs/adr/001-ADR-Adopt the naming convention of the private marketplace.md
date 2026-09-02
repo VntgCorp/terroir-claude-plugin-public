@@ -1,13 +1,5 @@
 # ADR-001 Adopt the naming convention of the private marketplace
 
-## 목차
-
-- [상태 (Status)](#상태-status)
-- [맥락 (Context)](#맥락-context)
-- [결정 (Decision)](#결정-decision)
-- [결과 및 영향 (Consequences)](#결과-및-영향-consequences)
-- [✅상태 변경 로그 (Change History)](#상태-변경-로그-change-history)
-
 ## 상태 (Status)
 
 `Accepted` — 2026-08-26 ([RDDP-1627](https://vntg.atlassian.net/browse/RDDP-1627))

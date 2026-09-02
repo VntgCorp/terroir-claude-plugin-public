@@ -8,16 +8,6 @@
 
 **작업과 관련된 문서를 먼저 읽고 진행하세요.**
 
-## 목차
-
-- [카탈로그 — architecture/](#카탈로그--architecture)
-- [워크플로우 — workflow/](#워크플로우--workflow)
-- [코드 — architecture/](#코드--architecture)
-- [시작하기 — getting-started/](#시작하기--getting-started)
-- [이 종류에서 특히 주의할 것](#이-종류에서-특히-주의할-것)
-- [이 종류에 해당하지 않는 것](#이-종류에-해당하지-않는-것)
-- [도움이 필요할 때](#도움이-필요할-때)
-
 ## 카탈로그 — [architecture/](architecture/)
 
 - [software-types.md](architecture/software-types.md) — 소프트웨어 종류(`spec.type`) 다섯의 정의·판별 기준·예시. **이 레포가 왜 `library` 가 아니라 `tool` 인지가 여기 있습니다**

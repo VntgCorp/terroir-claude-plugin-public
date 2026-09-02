@@ -2,11 +2,6 @@
 
 file-service를 호출하는 BFF SDK(`@vntgcorp/file-sdk-*`).
 
-## 목차
-
-- [설치](#설치)
-- [설치 후](#설치-후)
-
 ## 설치
 
 | 대상 | 명령 |
