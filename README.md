@@ -96,21 +96,30 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 
 ### 자동 업데이트 (권장)
 
-공식 Anthropic 마켓플레이스와 달리 서드파티 마켓플레이스의 자동 업데이트는 기본 OFF다.
-`/onboarding`은 실행 초기에 `terroir-claude-plugin-public`의 사용자 전역 설정을
-`autoUpdate: true`로 바꾸고 결과를 안내한다. private 플러그인 설치 경로에서는
-`terroir-claude-plugin`에도 같은 설정을 적용한다.
+공식 Anthropic 마켓플레이스는 자동 업데이트가 기본 ON이지만, 서드파티 마켓플레이스는 기본
+OFF입니다. `terroir-claude-plugin-public`도 해당되므로 최초 1회 활성화해야 합니다.
 
-Claude Code는 세션 시작 후 최대 10분의 임의 지연을 두고 자동 업데이트를 확인한다. 새 버전은
-백그라운드에서 디스크에 내려받고, 실행 중인 세션에는 `/reload-plugins`를 실행하거나 다음 세션부터
-적용된다.
+`/onboarding`은 실행 초기에 `terroir-claude-plugin-public`의 사용자 전역 설정에서 자동 업데이트를
+켜고 결과를 안내합니다. private 플러그인 설치 경로에서는 `terroir-claude-plugin`에도 같은 설정을
+적용합니다. 기존 사용자처럼 온보딩 자동 설정을 받지 못했다면 아래 UI에서 최초 1회 켭니다.
 
-기존 사용자처럼 온보딩 자동 설정을 받지 못했다면 `/plugin` → `Marketplaces` → 대상 마켓플레이스
-→ `Enable auto-update`에서 최초 1회 켠다.
+자동 업데이트가 활성화된 마켓플레이스는 Claude Code 시작 시 카탈로그와 설치된 플러그인을
+갱신합니다. 업데이트 알림이 뜨면 `/reload-plugins`를 실행하거나 다음 세션부터 새 버전을
+사용합니다.
+
+#### 직접 켜기
+
+1. Claude Code 세션에서 `/plugin` 입력
+2. 상단 탭에서 **Marketplaces** 선택
+3. `terroir-claude-plugin-public` 선택
+4. **Enable auto-update** 옵션 토글
+
+> 💡 자동 업데이트가 켜져 있으면 별도의 수동 업데이트 명령은 필요하지 않습니다. 알림이 뜬
+> 세션에서 `/reload-plugins`를 실행하거나 다음 세션을 시작하면 새 버전이 적용됩니다.
 
 ### 수동 업데이트
 
-자동 확인을 기다리지 않고 즉시 갱신하려면 셸에서 실행한다.
+자동 업데이트를 기다리지 않고 즉시 최신으로 맞추려면 셸에서 실행합니다.
 
 ```bash
 # 마켓플레이스 카탈로그 갱신
@@ -120,7 +129,37 @@ claude plugin marketplace update terroir-claude-plugin-public
 claude plugin update terroir-onboarding@terroir-claude-plugin-public
 ```
 
-완료 후 실행 중인 Claude Code 세션에서 `/reload-plugins`를 실행하거나 Claude Code를 다시 시작한다.
+여러 플러그인을 설치했다면 두 번째 명령을 플러그인별로 실행합니다. 완료 후 실행 중인 Claude Code
+세션에서 `/reload-plugins`를 실행하거나 Claude Code를 다시 시작합니다.
+
+### 업데이트 반영 확인
+
+업데이트 후 버전이 실제 반영됐는지 확인합니다.
+
+**A. `/plugin` UI 에서 버전 필드 확인**
+
+- Installed 탭 → `terroir-onboarding` 선택 → 상세 화면의 version 필드가 최신인지
+
+**B. CLI에서 설치 버전 확인**
+
+```bash
+claude plugin list --json
+```
+
+대상 플러그인의 `version`이 최신인지 확인합니다.
+
+### 자동 업데이트 전체 끄기
+
+Claude Code와 모든 플러그인의 백그라운드 자동 업데이트를 끄려면 사용자 전역 `settings.json`의
+`env`에 추가합니다.
+
+```json
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  }
+}
+```
 
 ## 사용
 
