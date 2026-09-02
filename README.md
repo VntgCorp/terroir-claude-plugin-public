@@ -27,6 +27,7 @@ Major만 올리고 Minor와 Patch는 `0`으로 유지한다. 기존 사용자가
 관리한다. 마켓플레이스 최상위 버전 자체는 설치된 플러그인의 업데이트를 발생시키지 않는다.
 버전 필드의 역할은 [Claude Code 공식 문서](https://code.claude.com/docs/en/plugin-marketplaces)를
 따른다.
+결정 근거와 Major·Minor·Patch 기준은 [ADR-002](docs/adr/002-ADR-Adopt%20the%20versioning%20rules%20of%20the%20private%20marketplace.md).
 
 ## 설치
 
