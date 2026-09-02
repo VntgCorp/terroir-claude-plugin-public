@@ -16,18 +16,10 @@
 
 ## 버전 정책
 
-마켓플레이스 최상위 `version`은 카탈로그의 **호환성 세대**를 나타낸다. `1.0.0` → `2.0.0`처럼
-Major만 올리고 Minor와 Patch는 `0`으로 유지한다. 기존 사용자가 마켓플레이스를 다시 등록하거나
-플러그인을 다시 설치해야 하는 등 별도 마이그레이션이 필요한 비호환 변경에만 올린다. 예를 들면
-마켓플레이스 이름 변경, 자동 이관할 수 없는 플러그인의 대규모 개명·제거, 접근 정책이나 소스 구조의
-근본적인 변경이 해당한다.
+버전 규칙은 [ADR-002](docs/adr/002-ADR-Versioning%20of%20marketplace%20and%20plugins.md)을 따른다. README에는 규칙을 적지 않는다.
 
-플러그인 추가·기능 변경·버그 수정과 README·카탈로그 설명 변경은 마켓플레이스 버전을 올리지
-않는다. 플러그인 변경은 각 `.claude-plugin/plugin.json`의 SemVer와 플러그인별 변경 이력으로
-관리한다. 마켓플레이스 최상위 버전 자체는 설치된 플러그인의 업데이트를 발생시키지 않는다.
-버전 필드의 역할은 [Claude Code 공식 문서](https://code.claude.com/docs/en/plugin-marketplaces)를
-따른다.
-결정 근거와 Major·Minor·Patch 기준은 [ADR-002](docs/adr/002-ADR-Adopt%20the%20versioning%20rules%20of%20the%20private%20marketplace.md).
+- 플러그인 버전과 변경 내용 — 각 플러그인의 `.claude-plugin/plugin.json`과 `CHANGELOG.md`
+- 마켓플레이스 `version`의 뜻과 올리는 시점, Major·Minor·Patch 기준 — ADR-002
 
 ## 설치
 
