@@ -1,0 +1,16 @@
+{
+  "name": "terroir-feedback",
+  "version": "1.0.0",
+  "description": "Terroir 피드백 보내기 — 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 Claude Code 안에서 바로 플랫폼 개발팀 채널로 보낸다",
+  "author": {
+    "name": "VntgCorp R&D"
+  },
+  "repository": "https://github.com/VntgCorp/terroir-claude-plugin-public",
+  "keywords": [
+    "feedback",
+    "bug-report",
+    "feature-request",
+    "terroir",
+    "vntgcorp"
+  ]
+}

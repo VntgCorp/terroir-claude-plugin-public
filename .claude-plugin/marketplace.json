@@ -17,6 +17,10 @@
     {
       "name": "terroir-harness-mesh",
       "source": "./plugins/terroir-harness-mesh"
+    },
+    {
+      "name": "terroir-feedback",
+      "source": "./plugins/terroir-feedback"
     }
   ]
 }
