@@ -54,7 +54,7 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 claude plugin update terroir-onboarding@terroir-claude-plugin-public
 ```
 
-규칙은 [ADR-001](docs/adr/001-ADR-Adopt%20the%20naming%20convention%20of%20the%20private%20marketplace.md).
+규칙은 [ADR-001](docs/adr/001-ADR-Naming%20convention%20for%20plugins%20and%20skills.md).
 
 ## 제공 플러그인
 
