@@ -1,6 +1,6 @@
 {
   "name": "terroir-onboarding",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Terroir 온보딩 — 처음 시작하는 사람이 인증 없이 설치해 환경 셋업과 제공 기능 안내를 받는 진입점",
   "author": {
     "name": "VntgCorp R&D"

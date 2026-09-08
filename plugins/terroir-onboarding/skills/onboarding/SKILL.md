@@ -9,6 +9,8 @@ when_to_use: Terroir를 처음 시작할 때, 온보딩을 진행하고 싶을 �
 Terroir 온보딩의 진입점. 이 문서가 온보딩 전체 흐름의 source of truth다. 각 단계의 세부 절차는 해당 단계 스킬이 소유한다.
 
 ```
+public 마켓플레이스 자동 업데이트 설정·결과 안내
+        ↓
 직무 확인 질문 (답을 기억해 두고, 여기서 분기하지 않음)
         ↓
 공통 환경 셋팅 진행 여부 질문 (연결하기 / 건너뛰기)
@@ -24,6 +26,44 @@ Terroir 온보딩의 진입점. 이 문서가 온보딩 전체 흐름의 source 
 ```
 
 ## 진행 절차
+
+### 0. Public 마켓플레이스 자동 업데이트
+
+이 스킬이 어떤 진입 경로로 실행되든 다른 단계보다 먼저
+`terroir-claude-plugin-public`의 사용자별 자동 업데이트를 활성화한다. 사용자에게 설정 여부를
+미리 묻지 않고 설정 직후 결과를 알린다.
+
+설정 위치는 프로젝트의 `.claude/settings.json`이 아니라 사용자 전역 설정 파일이다.
+`CLAUDE_CONFIG_DIR`가 설정되어 있으면 그 디렉터리의 `settings.json`, 아니면
+`~/.claude/settings.json`을 사용한다. 다음 규칙으로 `extraKnownMarketplaces`의
+`terroir-claude-plugin-public` 항목을 JSON으로 병합한다.
+
+1. `claude plugin marketplace list --json`으로 현재 등록된 마켓플레이스의 source를 확인한다.
+2. 사용자 전역 설정 파일이 없으면 빈 JSON 객체로 새로 만들고, 있으면 전체 JSON을 읽는다.
+3. 기존 최상위 키와 다른 마켓플레이스 항목을 모두 보존한다.
+4. 해당 마켓플레이스 항목이 이미 있으면 `source`와 `ref`를 포함한 하위 값을 바꾸지 않고
+   `"autoUpdate": true`만 추가하거나 갱신한다.
+5. 항목이 없으면 1의 평탄화된 목록 행에서 `name`과 `installLocation`을 제외한 등록 필드를
+   settings 형식의 `source` 객체로 만든 뒤 `"autoUpdate": true`를 추가한다. 예를 들어
+   `{"source":"directory","path":"..."}`는
+   `{"source":{"source":"directory","path":"..."},"autoUpdate":true}`가 된다.
+   등록 정보를 확인하지 못했으면 임의의 source를 만들지 않는다.
+6. 저장한 파일을 다시 읽어 JSON 파싱과 `autoUpdate == true`를 확인한다. 전체 파일을 고정된
+   템플릿으로 덮어쓰거나 기존 main/develop/directory 채널을 바꾸지 않는다.
+
+이번 실행에서 값을 `true`로 변경했으면 아래 한 줄을 출력하고 다음 단계로 바로 진행한다.
+
+> ✅ `terroir-claude-plugin-public`의 자동 업데이트를 켰습니다.
+
+이미 `true`면 아래 한 줄로 현재 상태를 알리고 다음 단계로 진행한다.
+
+> ℹ️ `terroir-claude-plugin-public`의 자동 업데이트가 이미 켜져 있습니다.
+
+파일 권한, 잘못된 기존 JSON, 마켓플레이스 등록 정보 누락 등으로 설정하지 못했으면 성공으로
+보고하지 말고 아래처럼 안내한다. 자동 업데이트 설정 실패는 온보딩을 중단시키지 않는다.
+
+> ⚠️ Public 플러그인 자동 업데이트를 켜지 못했습니다. `/plugin` → `Marketplaces` →
+> `terroir-claude-plugin-public`에서 `Enable auto-update`를 선택해 주세요.
 
 ### 1. 직무 확인
 
