@@ -1,6 +1,6 @@
 ---
 name: org-access-request
-description: VNTG 조직 GitHub 계정이 없는(또는 접근 권한이 없는) 프로덕트 관련자를 위한 경로. GitHub 가입·조직 등록을 안내하고, 접근 요청 폼 링크를 안내한 뒤 대기 안내를 출력한다.
+description: VNTG 조직 GitHub 계정이 없는(또는 접근 권한이 없는) 프로덕트 관련자를 위한 경로. GitHub 가입·2단계 인증(2FA)·조직 등록을 안내하고, 접근 요청 폼 링크를 안내한 뒤 대기 안내를 출력한다.
 when_to_use: onboarding에서 "프로덕트 관련 직군 + GitHub 계정 없음"으로 분기됐을 때, 또는 github-connect의 접근 확인이 실패했을 때. 사용자가 직접 "조직 계정 요청", "/org-access-request"를 요청할 때도 실행할 수 있다.
 ---
 
@@ -16,11 +16,12 @@ when_to_use: onboarding에서 "프로덕트 관련 직군 + GitHub 계정 없음
 
 > VNTG 조직 GitHub 접근을 위해 다음이 필요합니다.
 > 1. GitHub 계정 — 없다면 github.com 에서 가입해 주세요 (회사 이메일 연결 권장)
-> 2. VNTG 조직 등록 — 플랫폼개발팀 승인이 필요합니다. 아래 폼으로 요청해 주세요.
+> 2. 2단계 인증(2FA) — https://github.com/settings/security 에서 **Enable two-factor authentication** 을 켜 주세요
+> 3. VNTG 조직 등록 — 플랫폼개발팀 승인이 필요합니다. 아래 폼으로 요청해 주세요.
 
 이미 GitHub 계정이 있으면 1은 건너뛴다.
 
-GitHub이 익숙하지 않은 사용자를 위해 사내 GitHub 가이드 문서를 함께 안내한다: https://vntg.atlassian.net/wiki/external/NWEwMzYzYzQ1M2JhNDI1ODk1ZTEzN2IwYWI4NjNlOWI
+**2는 건너뛰지 않는다.** 조직이 2FA를 요구하므로 **켜기 전에는 초대를 수락할 수 없고**, 가입 후 해제하면 조직에서 제외된다. 2FA 없이 폼만 제출하면 담당자가 초대를 보내도 §3의 재개 지점에 도달하지 못한다 — 사용자는 초대 메일을 받고도 수락에서 막히고, 그 이유가 화면에 드러나지 않는다. 이미 켜 두었는지는 사용자에게 확인만 받고, 켜는 절차를 대신 해 주지 않는다.
 
 ### 2. 접근 요청 폼 안내
 
