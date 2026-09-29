@@ -5,11 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-09-22
+### 2026-09-28
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.1.0` | 조직 멤버인데 private 레포가 404일 때 SSO 재승인을 먼저 시도하고, 조직 가입 안내에 2단계 인증(2FA)을 추가 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.1.1` | 온보딩 시작 시 설치된 플러그인 3개와 온보딩 skill 4개가 무엇을 하는지 한 번 소개 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
