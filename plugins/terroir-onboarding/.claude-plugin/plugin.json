@@ -1,7 +1,7 @@
 {
   "name": "terroir-onboarding",
-  "version": "1.1.1",
-  "description": "Terroir 온보딩 — 처음 시작하는 사람이 인증 없이 설치해 환경 셋업과 제공 기능 안내를 받는 진입점",
+  "version": "1.2.0",
+  "description": "Terroir 온보딩 — 처음 시작하는 사람이 인증 없이 설치해 환경 셋업과 제공 기능 안내를 받는 진입점. 업무 지도로 자주 쓰는 프로젝트·채널·동료를 세션마다 알려 준다",
   "author": {
     "name": "VntgCorp R&D"
   },
