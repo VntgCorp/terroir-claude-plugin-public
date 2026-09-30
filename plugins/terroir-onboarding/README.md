@@ -25,19 +25,10 @@
 
 또는 `/onboarding`.
 
-## 제공 skill
-
-| skill | 설명 |
-| --- | --- |
-| `onboarding` | 온보딩 진입점. 직무 확인 → 환경 셋팅 → 직무별 경로 안내 → 시작 안내·커넥터 상태 출력 |
-| `env-setup` | 공통 업무 환경 셋팅 — 지라·컨플루언스 / 메일·캘린더·드라이브 연결 점검·안내 |
-| `github-connect` | GitHub 계정 연결 → Git 연결 → 사내 플러그인 접근 확인·설치 (승인 후 이어받기 포함) |
-| `org-access-request` | 조직 계정이 없는 경우 가입 안내와 접근 요청 폼 안내(사용자가 직접 제출), 대기 안내 |
-
 ## 온보딩 플로우
 
 스킬 간 분기 수준의 전체 흐름이다. 각 스킬의 내부 절차는 해당 SKILL.md가 유일한 진실이다.
-Public 자동 업데이트 설정은 모든 분기보다 먼저 실행한다. 온보딩을 완주한 경로의 종착점은
+Public 자동 업데이트 설정은 모든 분기보다 먼저 실행하고, 그 다음 설치된 것 소개를 1회 출력한다. 온보딩을 완주한 경로의 종착점은
 `onboarding`의 공통 종료 출력이다. 조직 접근 승인이 필요한 경로는 종료 출력 없이 대기 상태로
 멈췄다가, 승인 후 재개 문구를 받아 `github-connect`로 이어진다.
 
@@ -47,6 +38,7 @@ Public 자동 업데이트 설정은 모든 분기보다 먼저 실행한다. �
 flowchart TD
     START(["온보딩 시작<br/>&quot;온보딩 시작해줘&quot; · /onboarding"])
     AUTO["public 마켓플레이스<br/>자동 업데이트 설정·결과 안내"]
+    INTRO["설치된 것 소개<br/>플러그인 3개가 하는 일<br/>(1회 · 이어받기에서는 생략)"]
 
     Q1{"직무 확인"}
     Q2{"업무 도구 연결을<br/>지금 진행할까요?<br/>(화법은 직무에 맞춤)"}
@@ -62,7 +54,8 @@ flowchart TD
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
 
     START --> AUTO
-    AUTO --> Q1
+    AUTO --> INTRO
+    INTRO --> Q1
     Q1 --> Q2
     Q2 -->|연결하기| ENV
     Q2 -->|건너뛰기| BR
@@ -85,7 +78,7 @@ flowchart TD
     classDef term fill:#dcfce7,stroke:#16a34a,color:#0a2612
     classDef branch fill:#fef3c7,stroke:#d97706,color:#3a2a05,stroke-dasharray:5 4
     classDef ext fill:#f3f4f6,stroke:#6b7280,color:#1f2937,stroke-dasharray:5 4
-    class AUTO,ENV,GH,OA skill
+    class AUTO,INTRO,ENV,GH,OA skill
     class Q1,Q2,Q3 gate
     class BR branch
     class START,END,WAIT term
