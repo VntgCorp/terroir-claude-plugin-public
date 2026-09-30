@@ -52,7 +52,7 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 
 | 플러그인 | 설명 |
 | --- | --- |
-| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 자주 쓰는 프로젝트·채널·동료를 세션마다 알려 주는 업무 지도 |
+| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도 |
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
 | [`terroir-feedback`](plugins/terroir-feedback) | 피드백 보내기 — 떼루아 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송 |
 
