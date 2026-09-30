@@ -4,7 +4,12 @@
 # 실패해도 세션을 막지 않는다.
 set -u
 
-MAP="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/terroir/work-map.md"
+BASE="${CLAUDE_CONFIG_DIR:-}"
+if [ -z "$BASE" ]; then
+  [ -n "${HOME:-}" ] || exit 0
+  BASE="$HOME/.claude"
+fi
+MAP="$BASE/terroir/work-map.md"
 
 # Windows(Git Bash)에서는 도구가 읽을 수 있는 경로로 바꿔 보여 준다.
 SHOWN="$MAP"
@@ -17,9 +22,9 @@ if [ ! -f "$MAP" ]; then
 # [terroir-onboarding] 업무 지도
 
 이 사용자는 아직 업무 지도가 없다. 사용자가 지라 티켓·채팅 채널·동료·리포·드라이브 문서를
-찾거나 쓰는 일을 요청하면, 그 일을 처리한 뒤 응답 끝에 한 줄로 한 번만 알린다 —
+찾거나 쓰는 일을 요청하면, 그 일을 처리한 뒤 응답 끝에 한 줄로 알린다 —
 "`/work-map` 으로 자주 쓰는 프로젝트·채널·사람을 등록해 두면 다음부터 찾지 않고 바로 씁니다."
-같은 세션에서 다시 알리지 않는다. 그런 요청이 없으면 알리지 않는다.
+이 대화에서 이미 알렸으면 다시 알리지 않는다. 그런 요청이 없으면 알리지 않는다.
 EOF
   exit 0
 fi
@@ -29,18 +34,23 @@ echo
 echo "이 사용자의 업무 지도: \`$SHOWN\`"
 echo "아래 칸에 해당하는 일이면 검색·조회하기 전에 이 파일의 그 칸을 먼저 읽는다."
 echo
+
+# 칸 형식: "## 제목" 바로 다음 줄이 "> 언제 읽나: …". CRLF 파일도 읽는다.
+# "## 조회 대기" 는 목차가 아니라 신호라 목차에서 빼고 종료 코드 3 으로 알린다.
 awk '
-  /^## / {
-    title = substr($0, 4)
-    getline nextline
-    when = ""
-    if (nextline ~ /^> 언제 읽나:/) { when = nextline; sub(/^> 언제 읽나: */, "", when) }
-    if (title == "조회 대기") { pending = 1; next }
-    if (when != "") print "- " title " — " when
+  function flush() {
+    if (title == "") return
+    if (title == "조회 대기") pending = 1
+    else if (when != "") print "- " title " — " when
     else print "- " title
+    title = ""; when = ""
   }
-  END { if (pending) exit 3 }
-' "$MAP"
+  { sub(/\r$/, "") }
+  /^## / { flush(); title = substr($0, 4); want = 1; next }
+  want && /^> 언제 읽나:/ { when = $0; sub(/^> 언제 읽나: */, "", when); want = 0; next }
+  { want = 0 }
+  END { flush(); if (pending) exit 3 }
+' "$MAP" 2>/dev/null
 PENDING=$?
 
 cat <<'EOF'
@@ -54,7 +64,9 @@ EOF
 if [ "$PENDING" -eq 3 ]; then
   cat <<'EOF'
 - 지도에 "조회 대기" 칸이 있다. 지난 세션에 연결한 도구로 지도 후보를 조회할 차례다.
-  이번 세션 첫 응답 끝에 한 번만 "`/work-map` 으로 방금 연결한 도구에서 후보를 찾아 지도를 채울까요?"라고 묻는다.
+  이번 세션 첫 응답 끝에 "`/work-map` 으로 지난번에 연결한 도구에서 후보를 찾아 지도를 채울까요?"라고 묻는다.
+  이 대화에서 이미 물었으면 다시 묻지 않는다.
+  사용자가 동의하면 `work-map` 스킬로 처리하고, 거절하면 지도 파일에서 "## 조회 대기" 칸을 통째로 지운다 — 다음 세션에 같은 질문을 반복하지 않기 위해서다.
 EOF
 fi
 

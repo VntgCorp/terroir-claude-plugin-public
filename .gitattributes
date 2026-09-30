@@ -1,0 +1,2 @@
+# 셸 스크립트는 Windows 에서 받아도 LF 를 유지한다 — CRLF 면 bash 가 `set: -: invalid option` 으로 멈춘다
+*.sh text eol=lf
