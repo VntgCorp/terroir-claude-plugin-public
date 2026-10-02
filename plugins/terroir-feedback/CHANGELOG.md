@@ -2,6 +2,14 @@
 
 실제 배포 버전은 [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)을 따른다.
 
+## 1.0.1 - 2026-09-30
+
+### 변경
+
+- Windows 에서 보낸 피드백의 한글이 채널에서 깨지지 않는다 [RDDP-2010].
+- Windows 에 `python3` 없이 `python`·`py` 만 있어도 전송된다. 쓸 수 있는 python 이 없으면 `report.json 파싱 실패` 대신 그 사실을 알린다 [RDDP-2010].
+- python 이 없어 보낼 수 없을 때도 쓴 리포트를 `~/.terroir/feedback-outbox/` 에 남기고 붙여 넣을 채널을 알려준다. 전에는 그냥 사라졌다 [RDDP-2010].
+
 ## 1.0.0 - 2026-09-02
 
 최초 배포.

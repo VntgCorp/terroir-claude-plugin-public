@@ -17,8 +17,6 @@
 set -u
 FILE="${1:-}"
 [ -z "$FILE" ] || [ ! -f "$FILE" ] && { echo "usage: send.sh <report.json>" >&2; exit 2; }
-command -v python3 >/dev/null 2>&1 || { echo "python3 가 필요합니다" >&2; exit 2; }
-
 ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/../../.." && pwd)}"
 CONFIG="$ROOT/skills/feedback/config.json"
 OUTBOX="${HOME}/.terroir/feedback-outbox"
@@ -29,14 +27,43 @@ elif command -v md5 >/dev/null 2>&1; then hash=$(md5 -q "$FILE" | cut -c1-4)
 else hash=$(printf '%04x' $RANDOM); fi
 ID="${stamp}-${hash}"
 
-read -r url fallback < <(python3 - "$CONFIG" <<'PY'
+save_outbox() {
+  mkdir -p "$OUTBOX"
+  cp "$FILE" "$OUTBOX/${ID}.json"
+  echo "FAIL ${ID} ${OUTBOX}/${ID}.json"
+  [ "$fallback" != "-" ] && echo "채널에 직접 붙여 넣기: ${fallback}"
+  exit 1
+}
+
+# python 실행 검증 — 존재 확인이 아니라 실행으로 판정한다. Windows 의 WindowsApps
+# python3.exe 스텁은 command -v 를 통과하지만 실행하면 Microsoft Store 만 열고 끝난다.
+# Windows 에서 py 런처를 먼저 보는 것도 그 스텁을 건드리지 않고 지나가기 위해서다.
+case "$(uname -s 2>/dev/null)" in
+  MINGW*|MSYS*|CYGWIN*) PYCANDS="py python python3" ;;
+  *)                    PYCANDS="python3 python" ;;
+esac
+PYBIN=""
+for c in $PYCANDS; do
+  "$c" -c 'import sys; sys.exit(0 if sys.version_info[0] >= 3 else 1)' >/dev/null 2>&1 && { PYBIN="$c"; break; }
+done
+if [ -z "$PYBIN" ]; then
+  # 여기서 그냥 끝내면 사용자가 쓴 리포트가 사라진다. outbox 에 남기고 대체 채널을 알린다.
+  # config 를 읽을 python 이 없으므로 대체 채널만 sed 로 꺼낸다.
+  echo "Python 3 이 필요합니다 — 실행 가능한 python 을 찾지 못했습니다" >&2
+  fallback=$(sed -n 's/.*"fallback_channel_url"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$CONFIG" 2>/dev/null | head -1)
+  [ -z "$fallback" ] && fallback="-"
+  save_outbox
+fi
+
+url=""; fallback="-"
+read -r url fallback < <("$PYBIN" - "$CONFIG" <<'PY'
 import json,sys
 c=json.load(open(sys.argv[1],encoding="utf-8"))
 print(c.get("webhook_url",""), c.get("fallback_channel_url","-"))
 PY
 )
 
-payload=$(python3 - "$FILE" "$ID" <<'PY'
+payload=$("$PYBIN" - "$FILE" "$ID" <<'PY'
 import json, sys
 r = json.load(open(sys.argv[1], encoding="utf-8")); ID = sys.argv[2]
 cat = r.get("category", "error")
@@ -85,25 +112,24 @@ sections = [
 card = {"cardsV2": [{"cardId": ID, "card": {
     "header": {"title": title},
     "sections": sections}}]}
-print(json.dumps(card, ensure_ascii=False))
+# stdout 텍스트 계층은 로케일 코드페이지를 쓴다(한국어 Windows = cp949).
+# 카드 본문을 UTF-8 바이트로 직접 써서 그 계층을 건너뛴다.
+sys.stdout.buffer.write(json.dumps(card, ensure_ascii=False).encode("utf-8"))
 PY
-) || { echo "report.json 파싱 실패" >&2; exit 2; }
+) || { echo "카드 생성 실패 — report.json 형식을 확인하세요" >&2; exit 2; }
 
-save_outbox() {
-  mkdir -p "$OUTBOX"
-  cp "$FILE" "$OUTBOX/${ID}.json"
-  echo "FAIL ${ID} ${OUTBOX}/${ID}.json"
-  [ "$fallback" != "-" ] && echo "채널에 직접 붙여 넣기: ${fallback}"
-  exit 1
-}
 
 case "$url" in
   ""|REPLACE_WITH*) echo "webhook_url 이 설정되지 않았습니다: $CONFIG" >&2; save_outbox ;;
 esac
 
+# payload 는 argv 가 아니라 파일로 넘긴다 — MSYS 의 argv 변환과 ARG_MAX 를 피한다
+body="${TMPDIR:-/tmp}/terroir-feedback-${ID}.body.json"
+printf '%s' "$payload" > "$body"
 http=$(curl -sS -o /dev/null -w '%{http_code}' -X POST \
   -H 'Content-Type: application/json; charset=UTF-8' \
-  --data "$payload" "$url" 2>/dev/null)
+  --data-binary "@${body}" "$url" 2>/dev/null)
+rm -f "$body"
 
 case "$http" in
   2??) echo "OK ${ID}"; exit 0 ;;
