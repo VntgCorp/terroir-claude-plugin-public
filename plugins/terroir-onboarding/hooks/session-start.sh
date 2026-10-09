@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart hook — 사용자 업무 지도(work-map.md)의 위치와 목차를 세션 컨텍스트에 넣는다.
+# SessionStart hook — 사용자 업무 지도(work-map.md)의 위치와 목차, 떼루아 레슨 목차를 세션 컨텍스트에 넣는다.
 # stdout 이 그대로 컨텍스트가 되므로 칸 제목과 "언제 읽나" 줄만 넣고 값은 넣지 않는다.
 # 지난 세션에 새로 연결한 도구가 있으면(env-setup 이 남긴 표시 파일) 후보 찾기를 한 번 제안하게 한다.
 # 실패해도 세션을 막지 않는다.
@@ -63,6 +63,23 @@ if [ -f "$PENDING" ]; then
 - 이번 세션 첫 응답 끝에 "지난번에 연결한 도구에서 업무 지도(work-map)에 넣을 후보를 찾아 볼까요?"라고 한 번 묻는다. 첫 응답이 사용자에게 묻는 질문으로 끝나면, 그 답을 처리한 다음 응답 끝에 묻는다. 이 대화에서 이미 물었으면 다시 묻지 않는다.
 - 동의하면 `env-setup` 스킬의 §3-1 만 실행한다. 거절하면 표시 파일을 지운다 — 다음 세션에 같은 질문을 반복하지 않기 위해서다.
 EOF
+fi
+
+# 떼루아 레슨 — 목차와 원본 경로만 넣고 본문은 질문이 오면 읽게 한다.
+LESSONS="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}/lessons"
+if [ -f "$LESSONS/index.md" ]; then
+  SHOWN="$LESSONS"
+  if command -v cygpath >/dev/null 2>&1; then
+    SHOWN="$(cygpath -w "$LESSONS" 2>/dev/null || echo "$LESSONS")"
+  fi
+  echo
+  echo "# [terroir-onboarding] 떼루아 레슨"
+  echo
+  echo "레슨 원본: \`$SHOWN\`"
+  echo "떼루아(Terroir)가 무엇인지, 무엇을 해 주는지, 어떻게 쓰는지 물으면 \`terroir-onboarding:lessons\` 스킬로 답한다."
+  echo "스킬이 아래 목차에서 레슨을 골라 본문을 읽고 출처를 밝힌다. 레슨에 없는 내용은 지어내지 않는다."
+  echo
+  grep '^- ' "$LESSONS/index.md"
 fi
 
 exit 0

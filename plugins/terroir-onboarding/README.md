@@ -39,6 +39,18 @@
 
 지도에는 어디에 무엇이 있는지(주소·ID·사람)만 둔다. 일하는 방식·판단·피드백은 Claude Code 메모리에 남긴다.
 
+## 떼루아 레슨
+
+떼루아가 무엇이고 무엇을 해 주는지 물으면 Claude 가 레슨을 근거로 답한다.
+
+- **새 세션에서:** 레슨 목차와 원본 경로만 올라간다. 본문은 질문이 오면 그 레슨만 읽는다.
+- **직접 부르기:** `/lessons` — 레슨 목록을 보거나 레슨을 근거로 답을 받는다.
+- **갱신:** 원본은 podo 레포 `content/lessons` 다(private). `lessons/` 는 거기서 글만 뽑은 사본이라 직접 고치지 않는다.
+  ```bash
+  python3 plugins/terroir-onboarding/scripts/sync-lessons.py <podo>/content/lessons
+  ```
+  **이 레포는 public 이다** — 새 레슨이 공개해도 되는 내용인지 확인한 뒤 돌린다. 레슨이 바뀌면 `plugin.json` 의 `version` 과 `CHANGELOG.md` 를 함께 올린다.
+
 ## 온보딩 플로우
 
 스킬 간 분기 수준의 전체 흐름이다. 각 스킬의 내부 절차는 해당 SKILL.md가 유일한 진실이다.
