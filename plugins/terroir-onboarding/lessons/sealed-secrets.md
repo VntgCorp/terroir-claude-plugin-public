@@ -93,5 +93,3 @@ git 저장소가 통째로 유출돼도 안전하지만, GCP Secret Manager 와 
 - 이름과 값을 입력하고 Secret을 체크한 뒤 저장합니다. 다음 배포부터 앱이 그 값을 환경변수로 읽을 수 있습니다.
 
 코드, .env 파일, AI 대화창에는 비밀값을 직접 적지 마세요.
-
-근거(플랫폼개발팀 내부 문서) — RND-INFRA ADR-005 「Sealed Secrets 채택」 · terroir-kmm kubeseal.external.ts , workloads.service.ts · RND-IDP deploy-management , seal-secret-key.ts · infra/k8s/*/sealed-secrets/README.md

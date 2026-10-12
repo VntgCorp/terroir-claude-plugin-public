@@ -1,7 +1,5 @@
 # 떼루아 레슨 목차
 
-원본은 podo `content/lessons` 다. `scripts/sync-lessons.py` 로 다시 만든다 — 직접 고치지 않는다.
-
 - [Terroir가 대신 해주는 일](terroir-overview.md) — Terroir는 VNTG의 소프트웨어 개발 플랫폼입니다.
 - [프로젝트를 만들어 첫 배포까지](getting-started.md) — 떼루아에서 새 프로젝트를 만들어 개발 환경에 배포하기까지를 다룹니다.
 - [떼루아에게 질문하기](ask-terroir.md) — 플러그인을 깔고 나면 명령어를 외울 필요가 없습니다.

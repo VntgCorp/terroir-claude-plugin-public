@@ -129,5 +129,3 @@ Grafana — 개발 grafana.dev.terroir.vntgcorp.com · 운영 grafana.terroir.vn
 - Terroir 포털(terroir.vntgcorp.com)에서 내 프로젝트를 열고 Grafana 버튼을 누릅니다. 「워크로드 상세」 대시보드에서 로그와 메트릭을 확인합니다.
 - 트레이스를 켜려면 Claude Code에 Terroir 개발 플러그인 terroir-project-development 를 설치합니다. 그다음 트레이스를 붙일 앱의 소스 저장소에서 "이 서비스에 트레이스 붙여줘"라고 요청하거나 /otel-instrument 를 실행합니다.
 - 팀 알림을 받으려면 Google Chat 스페이스에서 webhook 주소를 발급하고, 포털 프로젝트 화면의 「알림 채널 연결」에 넣어 신청합니다. 플랫폼개발팀이 반영하면 알림이 오기 시작합니다.
-
-근거(플랫폼개발팀 내부 문서) — RND-INFRA ADR-003 「Grafana 생태계 채택」 · ADR-039 · ADR-056 「개발자 알림 채널」 · docs/guide/developer-alert-runbook.md · infra/k8s/*/{alloy,loki,mimir,tempo,grafana} · RND-IDP terroir-connect-alert-channel · terroir-claude-plugin otel-instrument
