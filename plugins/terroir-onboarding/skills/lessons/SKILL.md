@@ -1,7 +1,7 @@
 ---
 name: lessons
-description: 떼루아(Terroir) 레슨을 근거로 떼루아에 대한 질문에 답한다. 떼루아가 무엇인지, 무엇을 대신 해 주는지, 프로젝트 생성·배포·보안·Sealed Secrets·LGTM 모니터링·AI Gateway·alert-bot·code-review-agent·GitHub 사용법을 물을 때.
-when_to_use: 떼루아 자체를 물을 때. 트리거 예 "떼루아가 뭐야", "Terroir 가 뭘 해 줘", "첫 배포까지 어떻게 해", "Sealed Secrets 가 뭐야", "LGTM 어디서 봐", "AI Gateway 왜 거쳐", "레슨 목록", "/lessons", "/terroir-onboarding:lessons".
+description: 떼루아(Terroir)가 무엇이고 무엇을 해 주는지 알려 준다.
+when_to_use: 떼루아나 그 구성 요소가 무엇이고 왜 그렇게 동작하는지 설명을 들으려 할 때. 트리거 예 "떼루아가 대신 해 주는 일 설명해줘", "Terroir 개념 알려줘", "Sealed Secrets 가 뭐야", "LGTM 이 뭐야", "AI Gateway 왜 거쳐", "alert-bot 이 뭐 해", "레슨 목록", "/lessons", "/terroir-onboarding:lessons". 무엇부터 할지 · 지금 할 수 있는 일 · 시작 방법을 물으면 떼루아 시작 안내 스킬(project-guide)이 있을 때 그쪽이 받는다.
 ---
 
 # lessons — 떼루아 레슨으로 답한다
@@ -24,5 +24,6 @@ when_to_use: 떼루아 자체를 물을 때. 트리거 예 "떼루아가 뭐야"
 ## 규칙
 
 - **레슨에 없는 내용은 지어내지 않는다.** 없다고 말하고, 떼루아 팀에 묻고 싶으면 `/terroir-feedback:feedback` 으로 보낼 수 있다고 한 줄 안내한다.
-- 레슨에는 작성 기준 날짜가 있다. 버전·명령처럼 바뀌기 쉬운 값을 답할 때는 그 날짜를 함께 적는다.
+- 레슨에는 작성 기준 날짜가 있다. 버전처럼 바뀌기 쉬운 값을 답할 때는 그 날짜를 함께 적는다.
 - 지금 사용자가 실제로 쓸 수 있는 스킬을 묻는 질문("나 뭐 할 수 있어?")은 이 스킬이 아니라 설치된 떼루아 안내 스킬이 맡는다. 레슨은 떼루아가 무엇인지에 대한 설명이다.
+- 개념만 설명한다. 레슨 안의 설치 · 실행 명령은 답에 옮기지 않는다 — 하는 방법은 이 스킬의 몫이 아니다.

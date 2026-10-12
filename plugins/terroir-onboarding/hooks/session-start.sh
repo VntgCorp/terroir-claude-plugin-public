@@ -76,7 +76,7 @@ if [ -f "$LESSONS/index.md" ]; then
   echo "# [terroir-onboarding] 떼루아 레슨"
   echo
   echo "레슨 원본: \`$SHOWN\`"
-  echo "떼루아(Terroir)가 무엇인지, 무엇을 해 주는지, 어떻게 쓰는지 물으면 \`terroir-onboarding:lessons\` 스킬로 답한다."
+  echo "떼루아(Terroir)나 그 구성 요소가 무엇이고 무엇을 해 주는지 물으면 \`terroir-onboarding:lessons\` 스킬로 답한다. 무엇부터 할지 · 시작 방법은 떼루아 시작 안내 스킬이 있으면 그쪽이 받는다."
   echo "스킬이 아래 목차에서 레슨을 골라 본문을 읽고 출처를 밝힌다. 레슨에 없는 내용은 지어내지 않는다."
   echo
   grep '^- ' "$LESSONS/index.md"
