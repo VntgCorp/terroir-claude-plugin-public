@@ -70,6 +70,7 @@ flowchart TD
 
     END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ &quot;필요한 것이 있으면 입력하세요&quot;"])
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
+    CM["community-market<br/>사내 오픈 마켓 등록·안내<br/>（온보딩이 실행하지 않는다 · 필요할 때 사용자가 부른다）"]
 
     START --> HELLO
     HELLO --> AUTO
@@ -95,6 +96,7 @@ flowchart TD
 
     GH --> END
     END -.->|시작 안내의 지시 실행<br/>（온보딩 범위 밖）| SP
+    END -.->|&quot;사내 오픈 마켓&quot;<br/>（프로덕트 직군에게 존재만 알림）| CM
 
     classDef skill fill:#dbeafe,stroke:#2563eb,color:#0b1b3a
     classDef gate fill:#fef3c7,stroke:#d97706,color:#3a2a05
@@ -105,5 +107,5 @@ flowchart TD
     class Q1,Q2,QM,Q3 gate
     class BR branch
     class START,END,WAIT term
-    class SP ext
+    class SP,CM ext
 ```

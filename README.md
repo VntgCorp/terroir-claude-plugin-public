@@ -5,11 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-01
+### 2026-10-12
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.2.0` | 업무 지도(work-map) — 자주 쓰는 프로젝트·채널·동료를 `/work-map` 으로 등록해 두면 새 세션에서 Claude 가 찾지 않고 바로 씀. 온보딩에서 본인 이름·직무 저장 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.3.0` | 사내 구성원이 직접 올린 스킬을 모아 둔 오픈 마켓을 등록·안내하는 `community-market`. "사내 오픈 마켓" 이라고 말하면 뜸. 온보딩은 존재만 알리고 등록하지 않음 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
