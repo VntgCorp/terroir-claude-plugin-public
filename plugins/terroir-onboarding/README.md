@@ -41,17 +41,11 @@
 
 ## 사용량 표시줄(statusline)
 
-Claude Code 화면 아래에 두 줄짜리 표시줄을 설치한다. 5시간·7일 사용 한도에 얼마나 남았는지 대화 중에 바로 볼 수 있다.
+온보딩 중 사용량 표시줄 플러그인 [`terroir-statusline`](../terroir-statusline) 을 설치할지 한 번 묻는다. 표시 내용과 설치 조건은 그 플러그인의 README 를 따른다.
 
-```
-➜  📁 my-repo │ 🌿 feature/x ✓
-   🤖 Opus │ 🟡 34% ███░░░░░░░ (68.0k / 200k tokens) │ 📊 5h 72% left · 7d 90% left
-```
-
-- **설치:** 온보딩 중 설치 여부를 한 번 묻는다. 건너뛰었으면 `/statusline-setup` 으로 따로 설치한다. 이미 표시줄을 설정해 둔 사람에게는 묻지 않는다.
-- **지원 환경:** Windows · WSL · macOS · 리눅스. Claude Code 가 실행 중인 환경을 확인해 macOS · 리눅스 · WSL 에는 Bash 스크립트(`jq` 필요)를, Windows 에는 PowerShell 스크립트(`jq` 불필요)를 설치한다. 두 스크립트는 같은 입력에 같은 출력을 낸다.
-- **설치 위치:** 사용자 전역 설정(`~/.claude/settings.json` 의 `statusLine`)과 같은 폴더의 스크립트 파일. 다른 설정은 그대로 둔다.
-- **5h·7d 칸:** claude.ai 계정(Pro·Max)으로 로그인했을 때만 나온다.
+- **묻지 않는 경우:** 이미 설치돼 있거나 Claude Code 가 2.1.287 보다 낮으면 묻지 않고 한 줄로 알린다.
+- **예전 표시줄 정리:** 설치한 뒤 `settings.json` 의 `statusLine` 이 예전에 공유한 스크립트(`statusline-command.sh`·`.ps1`)를 가리키면 삭제할지 묻는다. 직접 만든 표시줄은 건드리지 않는다.
+- **건너뛴 경우:** `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 로 따로 설치한다.
 
 ## 온보딩 플로우
 
@@ -75,8 +69,8 @@ flowchart TD
     ENV["env-setup<br/>지라·컨플루언스 / 메일·캘린더·드라이브<br/>연결된 도구에서 지도 후보 찾기"]
     QM{"업무 지도에<br/>등록할까요?"}
     MAP["work-map 스킬<br/>저장할 칸 고르기 → 직접 입력"]
-    QS{"사용량 표시줄을<br/>설치할까요?<br/>(이미 있으면 묻지 않음)"}
-    STL["statusline-setup<br/>환경 확인 → 스크립트·설정 설치"]
+    QS{"사용량 표시줄을<br/>설치할까요?<br/>(설치됐거나 버전이 낮으면 묻지 않음)"}
+    STL["terroir-statusline 플러그인 설치<br/>예전 statusLine 정리 여부 질문"]
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 

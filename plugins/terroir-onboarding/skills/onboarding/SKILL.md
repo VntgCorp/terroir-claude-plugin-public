@@ -23,8 +23,8 @@ public 마켓플레이스 자동 업데이트 설정·결과 안내
         ↓ 연결하기 → env-setup   /   건너뛰기 → 바로 다음 단계
 업무 지도 등록 진행 여부 질문 (등록하기 / 나중에)
         ↓ 등록하기 → work-map   /   나중에 → 바로 다음 단계
-사용량 표시줄 설치 여부 질문 (설치하기 / 건너뛰기, 이미 설치돼 있으면 묻지 않음)
-        ↓ 설치하기 → statusline-setup   /   건너뛰기 → 바로 다음 단계
+사용량 표시줄 설치 여부 질문 (설치하기 / 건너뛰기, 이미 설치됐거나 Claude Code 가 낮으면 묻지 않음)
+        ↓ 설치하기 → terroir-statusline 플러그인 설치 · 예전 표시줄 정리   /   건너뛰기 → 바로 다음 단계
    §1-1 의 직군으로 분기 (직무를 다시 묻지 않음)
    ├─ 프로덕트 관련 직군 (개발·기획·디자인·PM 등)
    │    ├─ GitHub 계정 있음 → github-connect (조직 접근 확인, 불가면 org-access-request로 분기)
@@ -195,17 +195,49 @@ public 마켓플레이스 자동 업데이트 설정·결과 안내
 
 #### 2-2. 사용량 표시줄 설치 (1회만)
 
-§2-1 이 끝나면(등록하기든 나중에든) AskUserQuestion 으로 설치 여부를 묻는다. §2·§2-1 과 같은 모양의 질문이다.
+§2-1 이 끝나면(등록하기든 나중에든) 사용량 표시줄 플러그인 `terroir-statusline` 을 설치할지 묻는다. 이 플러그인은 Claude Code 화면 아래에 5시간·7일 남은 사용량, 컨텍스트 사용률, 모델, git 브랜치를 표시한다. Claude Code mod 로 만들어 Windows · WSL · macOS · 리눅스에서 같은 방식으로 설치된다.
+
+**묻기 전에 두 가지를 확인한다.** `claude plugin list --json` 과 `claude --version` 을 실행해 출력을 읽는다(Windows PowerShell 에도 같은 명령이 있다). 하나라도 걸리면 묻지 않고 한 줄로 알린 뒤 §2-3 으로 간다.
+
+| 결과 | 출력 |
+|---|---|
+| 목록에 `id` 가 `terroir-statusline@terroir-claude-plugin-public` 인 항목이 있음 | > ℹ️ 사용량 표시줄이 이미 설치돼 있습니다. |
+| 버전이 2.1.287 보다 낮음 | > ℹ️ 사용량 표시줄은 Claude Code 2.1.287 이상에서 동작합니다. `claude update` 로 업데이트한 뒤 `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 로 설치할 수 있습니다. |
+
+통과하면 AskUserQuestion 으로 묻는다. §2·§2-1 과 같은 모양의 질문이다.
 
 > Claude Code 화면 아래에 남은 사용량(5시간·7일)을 보여 주는 표시줄을 설치할까요?
-> - **설치하기** — 사용 중인 환경(Windows · WSL · macOS · 리눅스)을 확인해 설치합니다
-> - **건너뛰기** — 지금은 다음 단계로 넘어갑니다. 필요할 때 `/statusline-setup` 으로 설치할 수 있습니다
+> - **설치하기** — 사용량 표시줄 플러그인을 설치합니다
+> - **건너뛰기** — 지금은 다음 단계로 넘어갑니다. 필요할 때 `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 로 설치할 수 있습니다
 
-- **묻기 전에 사용자 전역 설정을 읽는다**(`CLAUDE_CONFIG_DIR` 가 있으면 그 디렉터리의 `settings.json`, 없으면 `~/.claude/settings.json`). `statusLine` 이 이미 있으면 묻지 않고 다음 단계로 간다 — 사용자가 직접 만든 표시줄일 수 있다.
 - **직군과 무관하게 묻는다.** 사용 한도는 모든 직군에 똑같이 적용된다.
-- **설치하기** → `statusline-setup` 스킬을 실행한다. 설치가 끝나도 재시작은 온보딩을 마친 뒤로 미룬다(`statusline-setup` §5).
-- **건너뛰기** → 호출하지 않는다.
-- 설치에 실패해도 온보딩을 멈추지 않는다.
+- **설치하기** → 사용자에게 명령을 시키지 말고 Claude 가 Bash 로 실행한다.
+
+  ```bash
+  claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user
+  ```
+
+  성공하면 아래 한 줄을 출력한다. `/reload-plugins` 를 지금 시키지 않는다 — 리로드는 Claude 에게 턴이 돌아오지 않아 온보딩 흐름이 끊긴다.
+
+  > ✅ 사용량 표시줄을 설치했습니다. 다음에 Claude Code 를 켜거나 `/reload-plugins` 를 입력하면 화면 아래에 표시됩니다.
+
+  이어서 아래 「기존 표시줄 정리」를 확인한다.
+- **건너뛰기** → 설치하지 않는다.
+- 설치에 실패하면 성공으로 보고하지 않는다. 오류를 한 줄로 알리고 위 설치 명령을 안내한 뒤 온보딩을 이어 간다.
+
+**기존 표시줄 정리** — 설치했을 때만 확인한다. 사용자 전역 설정(`CLAUDE_CONFIG_DIR` 가 있으면 그 디렉터리의 `settings.json`, 없으면 `~/.claude/settings.json`)에서 `statusLine` 을 읽는다. 이 플러그인은 `statusLine` 을 쓰지 않으므로 기존 표시줄이 있으면 두 개가 함께 보인다.
+
+- **`statusLine` 이 없음** → 아무것도 하지 않는다.
+- **`statusLine.command` 에 `statusline-command.sh` 나 `statusline-command.ps1` 이 들어 있음** → 예전에 팀에서 공유한 스크립트다. 내용이 같아 두 번 표시되므로 AskUserQuestion 으로 묻는다.
+
+  > 예전에 설치한 사용량 표시줄 스크립트가 설정돼 있어 같은 내용이 두 번 보입니다. 예전 설정을 삭제할까요?
+  > - **삭제하기** — `settings.json` 에서 `statusLine` 항목만 삭제합니다. 다른 설정과 스크립트 파일은 그대로 둡니다
+  > - **그대로 두기** — 두 표시줄이 함께 보입니다
+
+  삭제하기를 고르면 `statusLine` 키만 삭제한다. 다른 최상위 키는 모두 그대로 두고, 저장한 뒤 다시 읽어 JSON 파싱과 `statusLine` 이 없는 것을 확인한다. 실패하면 성공으로 보고하지 않고 `settings.json` 에서 `statusLine` 항목을 직접 삭제하라고 안내한다.
+- **그 밖의 `statusLine`** → 사용자가 직접 만든 표시줄이다. 바꾸지 않고 아래 한 줄만 알린다.
+
+  > ℹ️ 직접 설정한 표시줄(`statusLine`)은 그대로 두었습니다. 사용량 표시줄과 함께 보입니다.
 
 이후 어느 경로로 가든 이 단계를 다시 진행하지 않는다.
 
