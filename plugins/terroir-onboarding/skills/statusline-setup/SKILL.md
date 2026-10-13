@@ -95,12 +95,15 @@ Claude Code 는 Windows 에서 Git Bash 가 설치돼 있으면 Git Bash 로, �
 4. 동작을 확인한다. 아래 명령이 두 줄을 출력하면 정상이다.
    - Git Bash:
      ```bash
-     echo '{"cwd":"C:/","model":{"display_name":"Test"},"context_window":{"used_percentage":30}}' | powershell -NoProfile -ExecutionPolicy Bypass -File "<CONFIG_ABS>/statusline-command.ps1"
+     echo '{"cwd":"C:/Windows","model":{"display_name":"Test"},"context_window":{"used_percentage":30}}' | powershell -NoProfile -ExecutionPolicy Bypass -File "<CONFIG_ABS>/statusline-command.ps1"
      ```
-   - PowerShell:
+   - PowerShell: 입력을 임시 파일에 쓰고 `cmd` 로 넘긴다.
      ```powershell
-     '{"cwd":"C:/","model":{"display_name":"Test"},"context_window":{"used_percentage":30}}' | powershell -NoProfile -ExecutionPolicy Bypass -File "<CONFIG_ABS>/statusline-command.ps1"
+     $t = New-TemporaryFile
+     '{"cwd":"C:/Windows","model":{"display_name":"Test"},"context_window":{"used_percentage":30}}' | Set-Content -NoNewline -Encoding Ascii $t
+     cmd /c "powershell -NoProfile -ExecutionPolicy Bypass -File <CONFIG_ABS>/statusline-command.ps1 < `"$t`""
      ```
+     PowerShell 에서 `... | powershell -File ...` 로 바로 파이프하지 않는다. PowerShell 이 입력을 JSON 이 아닌 CLIXML 로 바꿔 넘겨서 첫 줄만 나오고, 설치가 실패한 것처럼 보인다. Claude Code 가 실제로 실행할 때는 이 변환이 일어나지 않는다.
 
 이모지는 Windows Terminal 에서 정상으로 보인다. 예전 콘솔 창(`conhost.exe`)에서는 네모로 보일 수 있으니 그때는 Windows Terminal 을 쓰라고 안내한다.
 
