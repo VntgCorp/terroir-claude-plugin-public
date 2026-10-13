@@ -5,11 +5,18 @@
 
 ## 최근 릴리즈
 
-### 2026-10-12
+### 2026-10-14
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.3.0` | GitHub 연결 단계에서 **사내 공유 마켓**을 **등록**(설치는 안 함). 구성원이 만든 스킬을 서로 나눠 쓰는 채널. 무엇을 찾고 어떻게 올리는지 안내하는 `community-market` 추가 — "사내 공유 마켓" 이라고 말하면 뜸 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | GitHub 연결 단계에서 **사내 공유 마켓**을 **등록**(설치는 안 함). 구성원이 만든 스킬을 서로 나눠 쓰는 채널. 무엇을 찾고 어떻게 올리는지 안내하는 `community-market` 추가 — "사내 공유 마켓" 이라고 말하면 뜸 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+
+### 2026-10-13
+
+| 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
+|---|---|---|---|
+| [`terroir-statusline`](plugins/terroir-statusline/CHANGELOG.md) | `1.0.0` | 최초 배포. Claude 사용량 표시 — Claude Code 입력창 아래에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시. Windows · WSL · macOS · 리눅스 지원 | Claude Code 2.1.287 이상에서 `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.3.0` | 온보딩 중 Claude 사용량 표시 설치 여부 질문, 예전에 공유한 표시줄 스크립트 정리 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
@@ -54,6 +61,7 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 | --- | --- |
 | [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도(work-map) |
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
+| [`terroir-statusline`](plugins/terroir-statusline) | Claude 사용량 표시 — Claude Code 입력창 아래에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시 (Claude Code mod) |
 | [`terroir-feedback`](plugins/terroir-feedback) | 피드백 보내기 — 떼루아 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송 |
 
 ### 검증 채널
