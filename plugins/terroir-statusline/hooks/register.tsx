@@ -3,7 +3,7 @@ import type { Color, EngineInterface, Register } from 'claude-code'
 
 import type { StatuslineGit, StatuslineSnapshot, StatuslineUsage } from '../types'
 
-// 사용량 표시줄 — 프롬프트 아래 힌트 줄 밑에 두 줄을 그린다.
+// Claude 사용량 표시 — 프롬프트 아래 힌트 줄 밑에 두 줄을 그린다.
 // settings.json 의 statusLine 을 쓰지 않으므로 사용자가 만든 표시줄과 겹치지 않는다.
 
 export type Seg = { text: string; color?: Color; bold?: boolean; dim?: boolean }

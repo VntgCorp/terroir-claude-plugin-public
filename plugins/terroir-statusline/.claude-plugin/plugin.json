@@ -1,7 +1,7 @@
 {
   "name": "terroir-statusline",
   "version": "1.0.0",
-  "description": "Claude Code 화면 아래에 5시간·7일 남은 사용량, 컨텍스트 사용률, 모델, git 브랜치를 한 줄로 표시",
+  "description": "Claude 사용량 표시 — Claude Code 입력창 아래에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시",
   "author": {
     "name": "VntgCorp R&D"
   },
