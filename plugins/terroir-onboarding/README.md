@@ -96,7 +96,7 @@ flowchart TD
 
     GH --> END
     END -.->|시작 안내의 지시 실행<br/>（온보딩 범위 밖）| SP
-    END -.->|&quot;사내 오픈 마켓&quot;<br/>（등록은 끝난 상태 · 안내가 필요할 때）| CM
+    END -.->|&quot;사내 공유 마켓&quot;<br/>（등록은 끝난 상태 · 안내가 필요할 때）| CM
 
     classDef skill fill:#dbeafe,stroke:#2563eb,color:#0b1b3a
     classDef gate fill:#fef3c7,stroke:#d97706,color:#3a2a05
