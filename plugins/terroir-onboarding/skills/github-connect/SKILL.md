@@ -131,6 +131,27 @@ gh auth refresh -h github.com -s repo,workflow,read:org
 
 설치 후에도 스킬이 안 보이면 설치됨+비활성 상태일 수 있다 — `claude plugin enable <플러그인>@terroir-claude-plugin` 실행 후 `/reload-plugins` 재안내.
 
+#### 5-1. 커뮤니티 마켓플레이스 등록 (설치하지 않는다)
+
+`terroir-community-plugin` 은 **구성원이 직접 올리는 사내 마켓**이다. 팀이 검증하는 채널이
+아니라 형식만 검사하고 품질은 올린 사람이 책임진다.
+
+**등록만 한다. 플러그인은 하나도 설치하지 않는다.** 등록은 카탈로그를 받아 두는 것뿐이라
+코드가 들어오지 않고, 무엇을 쓸지는 사용자가 보고 고른다.
+
+1. `claude plugin marketplace list --json` 으로 등록 여부를 확인한다. 없으면
+   `claude plugin marketplace add VntgCorp/terroir-community-plugin` 으로 추가한다.
+2. **자동 업데이트는 켜지 않는다.** 위 `terroir-claude-plugin` 과 다르게 다루는 지점이다 —
+   심사가 없는 채널이라 설치한 코드가 사용자가 모르는 사이 바뀌지 않게 둔다.
+3. 아래를 안내한다.
+
+   > 📦 사내 오픈 마켓 `terroir-community-plugin` 을 등록했습니다. 구성원이 직접 올린 스킬이
+   > 모이는 곳이라 **품질 심사를 거치지 않습니다** — 설치는 각자의 선택입니다.
+   > `/plugin` 의 **Discover** 탭에서 무엇이 있는지 보시고, 필요한 것만 설치하세요.
+   > 설치 전에 상세의 **Will install** 로 무엇이 들어오는지 확인해 주세요.
+
+등록에 실패해도 온보딩을 멈추지 않는다 — 선택 채널이므로 실패 사실만 알리고 다음으로 간다.
+
 ### 6. 개발 런타임 셋팅 위임·완료
 
 사용자의 "리로드 완료" 입력(또는 그에 준하는 완료 확인)을 받은 뒤에만 실행한다 — §5 안내와 같은 턴에서 완료를 선언하지 않는다. `/reload-plugins` 실행 자체는 Claude에게 관측되지 않는다.

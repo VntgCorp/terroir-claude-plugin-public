@@ -64,13 +64,13 @@ flowchart TD
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
-    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치<br/>→ 개발 런타임 셋팅 위임(private 스킬)"]
+    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치<br/>→ 커뮤니티 마켓 <b>등록만</b>(설치 안 함)<br/>→ 개발 런타임 셋팅 위임(private 스킬)"]
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
     WAIT(["플랫폼개발팀 승인 대기"])
 
     END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ &quot;필요한 것이 있으면 입력하세요&quot;"])
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
-    CM["community-market<br/>사내 오픈 마켓 등록·안내<br/>（온보딩이 실행하지 않는다 · 필요할 때 사용자가 부른다）"]
+    CM["community-market<br/>찾아보는 법 안내 · 올리는 길 안내<br/>（온보딩이 실행하지 않는다 · 필요할 때 사용자가 부른다）"]
 
     START --> HELLO
     HELLO --> AUTO
@@ -96,7 +96,7 @@ flowchart TD
 
     GH --> END
     END -.->|시작 안내의 지시 실행<br/>（온보딩 범위 밖）| SP
-    END -.->|&quot;사내 오픈 마켓&quot;<br/>（프로덕트 직군에게 존재만 알림）| CM
+    END -.->|&quot;사내 오픈 마켓&quot;<br/>（등록은 끝난 상태 · 안내가 필요할 때）| CM
 
     classDef skill fill:#dbeafe,stroke:#2563eb,color:#0b1b3a
     classDef gate fill:#fef3c7,stroke:#d97706,color:#3a2a05
