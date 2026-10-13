@@ -1,7 +1,7 @@
 # terroir-onboarding
 
 > Terroir를 처음 시작하는 사람을 위한 **온보딩 진입점 플러그인**.
-> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록까지 안내한다.
+> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록, 사용량 표시줄 설치까지 안내한다.
 > 사전 인증 없이 설치할 수 있다.
 
 ## 설치
@@ -39,6 +39,20 @@
 
 지도에는 어디에 무엇이 있는지(주소·ID·사람)만 둔다. 일하는 방식·판단·피드백은 Claude Code 메모리에 남긴다.
 
+## 사용량 표시줄(statusline)
+
+Claude Code 화면 아래에 두 줄짜리 표시줄을 설치한다. 5시간·7일 사용 한도에 얼마나 남았는지 대화 중에 바로 볼 수 있다.
+
+```
+➜  📁 my-repo │ 🌿 feature/x ✓
+   🤖 Opus │ 🟡 34% ███░░░░░░░ (68.0k / 200k tokens) │ 📊 5h 72% left · 7d 90% left
+```
+
+- **설치:** 온보딩 중 설치 여부를 한 번 묻는다. 건너뛰었으면 `/statusline-setup` 으로 따로 설치한다. 이미 표시줄을 설정해 둔 사람에게는 묻지 않는다.
+- **지원 환경:** Windows · WSL · macOS · 리눅스. Claude Code 가 실행 중인 환경을 확인해 macOS · 리눅스 · WSL 에는 Bash 스크립트(`jq` 필요)를, Windows 에는 PowerShell 스크립트(`jq` 불필요)를 설치한다. 두 스크립트는 같은 입력에 같은 출력을 낸다.
+- **설치 위치:** 사용자 전역 설정(`~/.claude/settings.json` 의 `statusLine`)과 같은 폴더의 스크립트 파일. 다른 설정은 그대로 둔다.
+- **5h·7d 칸:** claude.ai 계정(Pro·Max)으로 로그인했을 때만 나온다.
+
 ## 온보딩 플로우
 
 스킬 간 분기 수준의 전체 흐름이다. 각 스킬의 내부 절차는 해당 SKILL.md가 유일한 진실이다.
@@ -61,6 +75,8 @@ flowchart TD
     ENV["env-setup<br/>지라·컨플루언스 / 메일·캘린더·드라이브<br/>연결된 도구에서 지도 후보 찾기"]
     QM{"업무 지도에<br/>등록할까요?"}
     MAP["work-map 스킬<br/>저장할 칸 고르기 → 직접 입력"]
+    QS{"사용량 표시줄을<br/>설치할까요?<br/>(이미 있으면 묻지 않음)"}
+    STL["statusline-setup<br/>환경 확인 → 스크립트·설정 설치"]
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
@@ -81,8 +97,11 @@ flowchart TD
     Q2 -->|건너뛰기| QM
     ENV --> QM
     QM -->|등록하기| MAP
-    QM -->|나중에| BR
-    MAP --> BR
+    QM -->|나중에| QS
+    MAP --> QS
+    QS -->|설치하기| STL
+    QS -->|건너뛰기| BR
+    STL --> BR
 
     BR -->|프로덕트 관련 직군| Q3
     BR -->|비 프로덕트 직군| END
@@ -101,8 +120,8 @@ flowchart TD
     classDef term fill:#dcfce7,stroke:#16a34a,color:#0a2612
     classDef branch fill:#fef3c7,stroke:#d97706,color:#3a2a05,stroke-dasharray:5 4
     classDef ext fill:#f3f4f6,stroke:#6b7280,color:#1f2937,stroke-dasharray:5 4
-    class HELLO,AUTO,INTRO,PROF,ENV,MAP,GH,OA skill
-    class Q1,Q2,QM,Q3 gate
+    class HELLO,AUTO,INTRO,PROF,ENV,MAP,STL,GH,OA skill
+    class Q1,Q2,QM,QS,Q3 gate
     class BR branch
     class START,END,WAIT term
     class SP ext
