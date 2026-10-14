@@ -1,0 +1,17 @@
+{
+  "name": "terroir-statusline",
+  "version": "1.1.0",
+  "description": "Claude 사용량 표시 — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시",
+  "author": {
+    "name": "VntgCorp R&D"
+  },
+  "repository": "https://github.com/VntgCorp/terroir-claude-plugin-public",
+  "keywords": [
+    "statusline",
+    "usage",
+    "rate-limit",
+    "terroir",
+    "vntgcorp"
+  ],
+  "types": "./types/index.d.ts"
+}

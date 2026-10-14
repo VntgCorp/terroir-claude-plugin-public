@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.2.1` | 온보딩을 마친 세션에서 등록한 포털·Claude Design 연결이 `/reload-plugins` 뒤에도 보이지 않아 설치가 잘못된 줄 알게 되던 문제를 고쳤습니다. 크롬을 연결한 세션의 마무리가 `--chrome` 을 붙여 켜라고 알리지 않아 다시 켠 뒤 크롬이 붙지 않던 문제를 고쳤습니다. 개발 환경 셋팅 도중 Claude Code 를 끄고 돌아오면 온보딩이 이어받지 못하던 문제를 고쳤습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.3` | 온보딩을 마친 세션에서 등록한 포털·Claude Design 연결이 `/reload-plugins` 뒤에도 보이지 않아 설치가 잘못된 줄 알게 되던 문제를 고쳤습니다. 크롬을 연결한 세션의 마무리가 `--chrome` 을 붙여 켜라고 알리지 않아 다시 켠 뒤 크롬이 붙지 않던 문제를 고쳤습니다. 개발 환경 셋팅 도중 Claude Code 를 끄고 돌아오면 온보딩이 이어받지 못하던 문제를 고쳤습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
@@ -52,8 +52,9 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 
 | 플러그인 | 설명 |
 | --- | --- |
-| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도(work-map) |
+| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도(work-map), 떼루아 개념을 물으면 레슨을 근거로 답하는 떼루아 레슨 |
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
+| [`terroir-statusline`](plugins/terroir-statusline) | Claude 사용량 표시 — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시 (Claude Code mod) |
 | [`terroir-feedback`](plugins/terroir-feedback) | 피드백 보내기 — 떼루아 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송 |
 
 ### 검증 채널
