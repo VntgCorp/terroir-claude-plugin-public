@@ -21,6 +21,10 @@
     {
       "name": "terroir-feedback",
       "source": "./plugins/terroir-feedback"
+    },
+    {
+      "name": "terroir-statusline",
+      "source": "./plugins/terroir-statusline"
     }
   ]
 }

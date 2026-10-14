@@ -1,7 +1,7 @@
 # terroir-onboarding
 
 > Terroir를 처음 시작하는 사람을 위한 **온보딩 진입점 플러그인**.
-> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록까지 안내한다.
+> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록, Claude 사용량 표시 설치까지 안내한다.
 > 사전 인증 없이 설치할 수 있다.
 
 ## 설치
@@ -47,6 +47,14 @@
 - **직접 부르기:** `/lessons` — 레슨 목록을 보거나 레슨을 근거로 답을 받는다.
 - **갱신:** **이 레포는 public 이다** — 레슨을 더하거나 고칠 때는 공개해도 되는 내용인지 먼저 확인한다. 레슨이 바뀌면 `plugin.json` 의 `version` 과 `CHANGELOG.md` 를 함께 올린다.
 
+## Claude 사용량 표시(statusline)
+
+온보딩 중 Claude 사용량 표시 플러그인 [`terroir-statusline`](../terroir-statusline) 을 설치할지 한 번 묻는다. 표시 내용과 설치 조건은 그 플러그인의 README 를 따른다.
+
+- **묻지 않는 경우:** 이미 설치돼 있거나 Claude Code 가 2.1.287 보다 낮으면 묻지 않고 한 줄로 알린다.
+- **예전 표시줄 정리:** 설치한 뒤 `settings.json` 의 `statusLine` 이 예전에 공유한 스크립트(`statusline-command.sh`·`.ps1`)를 가리키면 삭제할지 묻는다. 직접 만든 표시줄은 건드리지 않는다.
+- **건너뛴 경우:** `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 로 따로 설치한다.
+
 ## 온보딩 플로우
 
 스킬 간 분기 수준의 전체 흐름이다. 각 스킬의 내부 절차는 해당 SKILL.md가 유일한 진실이다.
@@ -69,6 +77,8 @@ flowchart TD
     ENV["env-setup<br/>지라·컨플루언스 / 메일·캘린더·드라이브<br/>연결된 도구에서 지도 후보 찾기"]
     QM{"업무 지도에<br/>등록할까요?"}
     MAP["work-map 스킬<br/>저장할 칸 고르기 → 직접 입력"]
+    QS{"Claude 사용량 표시를<br/>설치할까요?<br/>(설치됐거나 버전이 낮으면 묻지 않음)"}
+    STL["terroir-statusline 플러그인 설치<br/>예전 statusLine 정리 여부 질문"]
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
@@ -89,8 +99,11 @@ flowchart TD
     Q2 -->|건너뛰기| QM
     ENV --> QM
     QM -->|등록하기| MAP
-    QM -->|나중에| BR
-    MAP --> BR
+    QM -->|나중에| QS
+    MAP --> QS
+    QS -->|설치하기| STL
+    QS -->|건너뛰기| BR
+    STL --> BR
 
     BR -->|프로덕트 관련 직군| Q3
     BR -->|비 프로덕트 직군| END
@@ -109,8 +122,8 @@ flowchart TD
     classDef term fill:#dcfce7,stroke:#16a34a,color:#0a2612
     classDef branch fill:#fef3c7,stroke:#d97706,color:#3a2a05,stroke-dasharray:5 4
     classDef ext fill:#f3f4f6,stroke:#6b7280,color:#1f2937,stroke-dasharray:5 4
-    class HELLO,AUTO,INTRO,PROF,ENV,MAP,GH,OA skill
-    class Q1,Q2,QM,Q3 gate
+    class HELLO,AUTO,INTRO,PROF,ENV,MAP,STL,GH,OA skill
+    class Q1,Q2,QM,QS,Q3 gate
     class BR branch
     class START,END,WAIT term
     class SP ext
