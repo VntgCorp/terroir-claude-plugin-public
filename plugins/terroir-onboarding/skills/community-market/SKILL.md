@@ -1,32 +1,36 @@
 ---
 name: community-market
-description: 구성원이 만든 스킬을 서로 나눠 쓰는 사내 공유 마켓(terroir-community-plugin)에서 동료가 올린 것을 찾아보고, 내가 만든 것을 올리는 길을 안내한다. 품질 심사가 없는 채널이라 설치 전에 무엇을 보고 골라야 하는지도 알린다.
-when_to_use: 사용자가 "동료가 만든 스킬", "사내 공유 마켓", "사내 오픈 마켓", "내 스킬 공유", "스킬 올리고 싶다", "/community-market" 처럼 구성원이 만든 스킬을 찾거나 올리려 할 때. 온보딩이 마켓 등록까지는 해 두므로 이 스킬은 그 다음부터 맡는다.
+description: 구성원이 만든 스킬을 서로 나눠 쓰는 사내 공유 마켓(terroir-community-plugin)을 안내한다. 무엇이 있는지 보는 자리로 보내고, 고를 때 무엇을 봐야 하는지 알리고, 내가 만든 것을 올리는 길로 넘긴다. 등록은 온보딩이 이미 해 두므로 이 스킬은 그다음을 맡는다.
+when_to_use: 사용자가 "동료가 만든 스킬", "사내 공유 마켓", "사내 오픈 마켓", "내 스킬 공유", "스킬 올리고 싶다", "/community-market" 처럼 구성원이 만든 스킬을 찾거나 올리려 할 때.
 ---
 
 # community-market
 
-사내 공유 마켓 `terroir-community-plugin` 에서 **무엇을 찾을지, 어떻게 올릴지**를 안내한다.
+사내 공유 마켓 `terroir-community-plugin` 을 안내한다.
 
-**마켓 등록은 온보딩(`github-connect` 5-1)이 이미 해 둔다.** 이 스킬은 등록이 아니라 그
-다음을 맡는다 — 등록이 안 돼 있으면 1절에서 채운다.
+**조회 기능을 만들지 않는다.** 무엇이 있는지 보여주는 것은 `/plugin` 의 **Discover** 탭이
+이미 한다. 이 스킬이 하는 일은 그 자리로 보내고, **고를 때 무엇을 봐야 하는지** 알리고,
+올리려는 사람을 올리는 길로 넘기는 것이다.
 
 ## 절차
 
-### 1. 등록 여부부터 확인한다
+### 1. 등록 상태를 확인한다
 
 ```bash
 claude plugin marketplace list --json
 ```
 
-`terroir-community-plugin` 이 없으면 추가한다. **자동 업데이트는 켜지 않는다** — 4절 참고.
+**온보딩(§0)이 이미 등록해 둔다.** 있으면 2절로 바로 간다.
+
+없으면 — 온보딩을 거치지 않았거나 등록이 실패한 경우다. 조용히 채운다.
 
 ```bash
 claude plugin marketplace add VntgCorp/terroir-community-plugin
 ```
 
-조직 접근이 없어 실패하면 등록을 다시 시도하지 않고 `org-access-request` 스킬로 넘긴다.
-`gh` 자체가 없으면 `env-setup` 으로 넘긴다.
+공개 레포라 GitHub 계정 없이도 된다. 그리고 `~/.claude/settings.json`(또는
+`CLAUDE_CONFIG_DIR`)의 `extraKnownMarketplaces` 에서 해당 항목에
+`"autoUpdate": true` 를 병합한다 — 켜지 않으면 동료가 새로 올린 스킬이 목록에 안 뜬다.
 
 ### 2. 어떤 채널인지 알린다
 
@@ -49,9 +53,9 @@ claude plugin marketplace add VntgCorp/terroir-community-plugin
 
 #### 3-A. 찾아본다
 
-`/plugin` 의 **Discover** 탭을 열게 안내한다. 목록에서 이름과 한 줄 설명이 보인다.
+`/plugin` 의 **Discover** 탭을 열게 안내한다. 거기가 목록이다.
 
-**무엇을 보고 고르는지 알린다.** 이게 이 채널에서 사용자가 할 유일한 검증이다.
+**무엇을 보고 고르는지 알린다.** 심사가 없는 채널이라 이게 사용자가 할 유일한 검증이다.
 
 | 어디를 | 무엇을 알 수 있나 |
 |---|---|
@@ -60,6 +64,9 @@ claude plugin marketplace add VntgCorp/terroir-community-plugin
 | 레포의 `README` 「아는 한계」 | 무엇이 안 되는가. 만든 사람이 직접 적은 것 |
 | `plugin.json` 의 `metadata.owner` | 누가 만들었나 — 물어볼 사람 |
 
+**「전제 조건」과 「아는 한계」가 비어 있으면 확인하지 않은 것으로 읽게 알린다.** 규약은
+없을 때 「없음」을 적게 하지만 CI 는 그 내용을 검사하지 않는다.
+
 설치 직전에 한 번 더 알린다.
 
 > 설치 전에 `/plugin` 상세의 **Will install** 로 무엇이 들어오는지 확인해 주세요.
@@ -67,9 +74,29 @@ claude plugin marketplace add VntgCorp/terroir-community-plugin
 
 **설치를 대신 고르지 않는다.** 무엇을 깔지는 사용자가 정한다.
 
+목록에 동료가 올렸다는 것이 안 보이면 카탈로그가 낡은 것이다.
+
+```bash
+claude plugin marketplace update terroir-community-plugin
+```
+
 #### 3-B. 올린다
 
-올리는 것을 돕는 스킬이 그 마켓에 있다. 이것만은 설치를 제안한다.
+**여기서 GitHub 계정이 필요해진다.** 찾아 쓰는 데는 필요 없지만 올리려면 있어야 한다.
+
+먼저 확인한다.
+
+```bash
+gh auth status
+```
+
+- **인증돼 있다** → 아래로 진행한다.
+- **`gh` 가 없거나 인증이 안 돼 있다** → `env-setup` 으로 넘긴다.
+- **인증은 됐는데 레포에 쓰기 권한이 없다** → `org-access-request` 로 넘긴다.
+  계정만으로는 올릴 수 없다 — `VntgCorp/vntg_internal` 팀에 있어야 브랜치를 올리고,
+  그래야 `CODEOWNERS` 의 소유자 줄이 유효해진다.
+
+올리는 것을 돕는 스킬이 그 마켓에 있다. **이것만은 설치를 제안한다.**
 
 ```
 /plugin install skill-market@terroir-community-plugin
@@ -79,25 +106,12 @@ claude plugin marketplace add VntgCorp/terroir-community-plugin
 설치 후 세션에 안 보이면 `/reload-plugins` 를 입력하게 안내한다.
 
 > 분류 판정 · 이름 중복 확인 · 뼈대 생성 · PR 까지 대화로 해 줍니다.
-> 처음 올릴 때는 소유자 등록 때문에 플랫폼개발팀 승인을 한 번 거치고, 그다음부터
-> 본인이 바로 머지합니다.
+> 승인을 기다리지 않습니다 — CI 만 통과하면 본인이 머지합니다.
 
 터미널이 없어도 올릴 수 있다는 것을 알린다 — GitHub 웹에서 파일을 만들어 PR 하면 된다.
 절차는 레포의 `docs/authoring.md` 에 있다.
 
-### 4. 자동 업데이트를 켜지 않는 이유
-
-사용자가 물으면 답한다. 먼저 켜라고 권하지 않는다.
-
-> 켜면 동료가 버전을 올릴 때 제 설치본이 **제가 보지 않은 코드로** 바뀌고, 훅이 있으면
-> 다음 세션이 시작될 때 저절로 돕니다. 팀 채널에서는 고친 것이 전원에게 닿게 하는
-> 장치지만, 심사가 없는 이곳에서는 보지 않은 코드가 들어오게 하는 장치가 됩니다.
-> 꺼 두면 설치할 때 확인한 그 코드가 그대로 남습니다.
-
-켜 달라고 하면 켠다. `~/.claude/settings.json`(또는 `CLAUDE_CONFIG_DIR`)의
-`extraKnownMarketplaces` 에서 해당 항목에 `"autoUpdate": true` 를 병합한다.
-
-### 5. 마무리
+### 4. 마무리
 
 > 규약과 올리는 방법은 레포 문서에 있습니다.
 > https://github.com/VntgCorp/terroir-community-plugin
@@ -106,9 +120,11 @@ claude plugin marketplace add VntgCorp/terroir-community-plugin
 
 ## 주의
 
-- **온보딩 흐름에서 자동으로 실행하지 않는다.** 등록은 `github-connect` 5-1 이 하고, 이
-  스킬은 사용자가 부를 때만 돈다.
+- **온보딩 흐름에서 자동으로 실행하지 않는다.** 등록은 온보딩 §0 이 하고, 이 스킬은
+  사용자가 부를 때만 돈다.
+- **조회 기능을 만들지 않는다.** `/plugin` 의 Discover 가 목록을 보여준다. 이 스킬은
+  그 자리로 보내고 고르는 기준을 알린다.
 - **설치를 대신 고르지 않는다.** `skill-market` 만 예외로, 올리겠다고 한 경우에 제안한다.
-- **자동 업데이트를 먼저 권하지 않는다.** 다르게 다루는 이유가 있다(4절).
+- **찾아 쓰는 데 GitHub 계정을 요구하지 않는다.** 공개 레포다. 계정은 올릴 때만 묻는다.
 - **규칙 값을 외워서 답하지 않는다.** 분류·이름 규칙·길이 상한 같은 것은 레포의
   `docs/` 를 읽어서 답한다.

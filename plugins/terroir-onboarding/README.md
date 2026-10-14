@@ -60,7 +60,7 @@
 flowchart TD
     START(["온보딩 시작<br/>&quot;온보딩 시작해줘&quot; · /onboarding"])
     HELLO["시작 인사<br/>(도구 호출 전 · 이어받기에서는 생략)"]
-    AUTO["public 마켓플레이스<br/>자동 업데이트 설정·결과 안내"]
+    AUTO["마켓플레이스 등록·자동 업데이트<br/>public 자동 업데이트 ON<br/>사내 공유 마켓 <b>등록</b>(설치 0개) · 자동 업데이트 ON<br/>（직군 무관 · GitHub 불필요）"]
     INTRO["설치된 것 소개<br/>플러그인 3개가 하는 일<br/>(1회 · 이어받기에서는 생략)"]
 
     PROF["프로필<br/>이메일·자신을 부를 이름"]
@@ -74,13 +74,13 @@ flowchart TD
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
-    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치<br/>→ 커뮤니티 마켓 <b>등록만</b>(설치 안 함)<br/>→ 개발 런타임 셋팅 위임(private 스킬)"]
+    GH["github-connect<br/>계정·Git 연결 → 접근 확인<br/>→ private 플러그인 설치<br/>→ 개발 런타임 셋팅 위임(private 스킬)"]
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
     WAIT(["플랫폼개발팀 승인 대기"])
 
     END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ &quot;필요한 것이 있으면 입력하세요&quot;"])
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
-    CM["community-market<br/>찾아보는 법 안내 · 올리는 길 안내<br/>（온보딩이 실행하지 않는다 · 필요할 때 사용자가 부른다）"]
+    CM["community-market<br/>/plugin Discover 로 안내 · 고르는 기준 알림<br/>올리기는 GitHub 계정 확인 후 분기<br/>（온보딩이 실행하지 않는다 · 사용자가 부를 때만）"]
 
     START --> HELLO
     HELLO --> AUTO
