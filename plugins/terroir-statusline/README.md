@@ -1,6 +1,6 @@
 # terroir-statusline
 
-> **Claude 사용량 표시** — Claude Code 입력창 아래에 Claude 를 얼마나 더 쓸 수 있는지(5시간·주간 한도), 컨텍스트 사용률, 모델, git 브랜치를 표시한다.
+> **Claude 사용량 표시** — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 Claude 를 얼마나 더 쓸 수 있는지(5시간·주간 한도), 컨텍스트 사용률, 모델, git 브랜치를 표시한다.
 > Claude Code mod 로 만들어 Windows · WSL · macOS · 리눅스에서 같은 코드로 동작한다.
 
 ```
@@ -23,10 +23,6 @@ Claude Code **2.1.287 이상**이 필요하다(`claude --version`). 온보딩(`/
 ```
 claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user
 ```
-
-## 표시되는 곳
-
-터미널에서 `claude` 를 실행할 때만 표시된다. 터미널 화면의 입력창 힌트 줄(`PromptHint`)에 두 줄을 덧붙이는 방식이라 입력창을 자체 화면으로 그리는 데스크톱 애플리케이션(Code 탭)과 IDE 확장에는 나오지 않는다. 사용자 범위로 설치하므로 데스크톱에서 설치해도 터미널에서는 그대로 표시된다.
 
 ## 기존 표시줄과의 관계
 
