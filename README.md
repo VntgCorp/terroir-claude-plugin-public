@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | 떼루아 레슨 — 세션 시작 시 레슨 목차가 올라가, 떼루아 개념을 물으면 레슨을 근거로 답함. `/lessons` 추가 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.3` | 온보딩 안내가 스킬 이름(`/env-setup`·`/work-map`·개발 환경 셋팅 스킬)만 말해 무엇을 하는지 알 수 없던 것을, 하는 일과 말로 부르는 문구("업무 도구 연결해줘" 등)로 바꿨습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
