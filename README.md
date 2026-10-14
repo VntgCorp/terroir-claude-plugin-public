@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.3` | 온보딩 안내가 스킬 이름(`/env-setup`·`/work-map`·개발 환경 셋팅 스킬)만 말해 무엇을 하는지 알 수 없던 것을 "업무 도구 연결해줘"·"업무 정보 등록해줘"·"개발 환경 셋팅해줘"라고 말하면 된다는 문구로 고쳤습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.4` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 

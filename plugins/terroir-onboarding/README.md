@@ -86,7 +86,7 @@ flowchart TD
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
     WAIT(["플랫폼개발팀 승인 대기"])
 
-    END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ &quot;필요한 것이 있으면 입력하세요&quot;"])
+    END(["공통 종료 출력<br/>&quot;Terroir 온보딩을 마쳤습니다&quot; 완료 선언<br/>+ 시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내(스타트 포인트 설치 시)<br/>+ &quot;어떤 일을 해볼까요?&quot; 질문"])
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
 
     START --> HELLO
