@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.0` | 온보딩 맨 앞에서 **사내 공유 마켓**을 **등록**(설치는 0개). 공개 레포라 GitHub 계정 없이 되고 **직군을 가리지 않음**. 안내 스킬 `community-market` 추가 — "사내 공유 마켓" 이라고 말하면 뜸 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.0` | 사내 공유 마켓 등록 — 온보딩 맨 앞, 직군 무관. 안내 스킬 `community-market` 추가 — "사내 공유 마켓" 이라고 말하면 뜸 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | 떼루아 레슨 — 세션 시작 시 레슨 목차가 올라가, 떼루아 개념을 물으면 레슨을 근거로 답함. `/lessons` 추가 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
