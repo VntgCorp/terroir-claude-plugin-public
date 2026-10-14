@@ -5,11 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-01
+### 2026-10-14
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.2.0` | 업무 지도(work-map) — 자주 쓰는 프로젝트·채널·동료를 `/work-map` 으로 등록해 두면 새 세션에서 Claude 가 찾지 않고 바로 씀. 온보딩에서 본인 이름·직무 저장 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.2.1` | 온보딩을 마친 세션에서 등록한 포털·Claude Design 연결이 `/reload-plugins` 뒤에도 보이지 않아 설치가 잘못된 줄 알게 되던 문제를 고쳤습니다. 크롬을 연결한 세션의 마무리가 `--chrome` 을 붙여 켜라고 알리지 않아 다시 켠 뒤 크롬이 붙지 않던 문제를 고쳤습니다. 개발 환경 셋팅 도중 Claude Code 를 끄고 돌아오면 온보딩이 이어받지 못하던 문제를 고쳤습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
