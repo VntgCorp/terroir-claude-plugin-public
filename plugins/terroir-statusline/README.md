@@ -1,6 +1,6 @@
 # terroir-statusline
 
-> **Claude 사용량 표시** — Claude Code 입력창 아래에 Claude 를 얼마나 더 쓸 수 있는지(5시간·주간 한도), 컨텍스트 사용률, 모델, git 브랜치를 표시한다.
+> **Claude 사용량 표시** — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 Claude 를 얼마나 더 쓸 수 있는지(5시간·주간 한도), 컨텍스트 사용률, 모델, git 브랜치를 표시한다.
 > Claude Code mod 로 만들어 Windows · WSL · macOS · 리눅스에서 같은 코드로 동작한다.
 
 ```

@@ -3,7 +3,7 @@ import type { Color, EngineInterface, Register } from 'claude-code'
 
 import type { StatuslineGit, StatuslineSnapshot, StatuslineUsage } from '../types'
 
-// Claude 사용량 표시 — 프롬프트 아래 힌트 줄 밑에 두 줄을 그린다.
+// Claude 사용량 표시 — 터미널은 프롬프트 아래 힌트 줄 밑에, 데스크톱은 입력창 위 띠에 두 줄을 그린다.
 // settings.json 의 statusLine 을 쓰지 않으므로 사용자가 만든 표시줄과 겹치지 않는다.
 
 export type Seg = { text: string; color?: Color; bold?: boolean; dim?: boolean }
@@ -176,8 +176,10 @@ export const register: Register = on => {
     return result
   })
 
+  // 터미널은 입력창 아래 힌트 줄(PromptHint)에 붙인다.
   on('ui.render', { component: 'PromptHint' }, async ($, e, next) => {
     const hint = await next(e)
+    if (e.surface !== 'terminal') return hint
     const snap = await read($, snapshot)
     if (!snap) return hint
     const { Box, Text } = $.ui.resolve(e)
@@ -185,6 +187,28 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         {hint}
+        {lines.map((line, i) => (
+          <Text key={`l${i}`} wrap="truncate-end">
+            {line.map((s, j) => (
+              <Text key={`s${j}`} color={s.color} bold={s.bold} dimColor={s.dim}>
+                {s.text}
+              </Text>
+            ))}
+          </Text>
+        ))}
+      </Box>
+    )
+  })
+
+  // 데스크톱 애플리케이션은 PromptHint 를 그리지 않으므로 입력창 위 띠(AbovePrompt)에 그린다.
+  on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
+    if (e.surface === 'terminal' || e.props.hasSurvey) return next(e)
+    const snap = await read($, snapshot)
+    if (!snap) return next(e)
+    const { Box, Text } = $.ui.resolve(e)
+    const lines = buildLines({ ...snap, now: await $.clock.now() })
+    return (
+      <Box flexDirection="column">
         {lines.map((line, i) => (
           <Text key={`l${i}`} wrap="truncate-end">
             {line.map((s, j) => (
