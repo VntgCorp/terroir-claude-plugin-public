@@ -63,15 +63,15 @@ print(c.get("webhook_url",""), c.get("fallback_channel_url","-"))
 PY
 )
 
-payload=$("$PYBIN" - "$FILE" "$ID" <<'PY'
-import json, os, sys
+payload=$("$PYBIN" - "$FILE" "$ID" "$CONFIG" <<'PY'
+import json, sys
 from datetime import date
-from urllib.parse import urlencode, quote_plus
+from urllib.parse import urlencode
 r = json.load(open(sys.argv[1], encoding="utf-8")); ID = sys.argv[2]
-# 접수 버튼이 가리키는 곳 — 바뀌면 여기만 고친다
-JIRA = "https://vntg.atlassian.net/secure/CreateIssueDetails!init.jspa"
-PID, BUG = "11569", "12681"          # RDDP · 버그(분류와 무관하게 고정)
-ROOM = "AAQA3-NtKqg"                 # 피드백 채널 — 티켓에서 원문을 찾아가는 입구
+# ★접수 버튼이 가리키는 곳은 config.json 이 갖는다 — 웹훅 주소가 이미 거기 있다.
+#   코드에 박아 두면 Jira 주소·프로젝트가 바뀔 때 플러그인을 다시 배포해야 한다.
+#   `intake` 가 없거나 값이 모자라면 버튼을 달지 않는다 — 그것이 끄는 방법이다.
+INTAKE = json.load(open(sys.argv[3], encoding="utf-8")).get("intake") or {}
 cat = r.get("category", "error")
 META = {
     "error":           ("🐞", "에러·오동작"),
@@ -128,14 +128,13 @@ sections = [
 #   어느 칸이 살아남을지 내용에 따라 달라진다. 자르는 자리만 정하는 편이 예측 가능하다.
 #
 # ★칸 순서는 ORDER 로 고정한다. 잘릴 때 무엇이 남을지를 이것이 정한다 — 알맹이 먼저.
-INTAKE = os.environ.get("TERROIR_INTAKE", "").strip()
 ORDER = {
     "error":           ["실제 동작", "해결방안", "추정 원인", "기대한 동작", "재현 순서", "발생한 위치"],
     "feature_request": ["요청 내용", "현재 방식", "대상"],
     "access_request":  ["막힌 화면·문구", "요청 권한·대상", "추정 원인", "시도한 작업", "발생한 위치"],
     "other":           ["내용", "대상"],
 }
-if INTAKE:
+if all(INTAKE.get(k) for k in ("jira", "project", "issuetype", "room")):
     # ★900 은 **실측으로 확인된 안전값**이다. 추정식을 쓰지 않는다 —
     #   실제 리포트 카드에서 945 는 떴고 1,400 은 **카드가 통째로 빈 칸**이 됐다.
     #   한계가 정확히 어디인지는 아직 모른다(작은 카드로 재면 1,714 도 통과해서,
@@ -150,12 +149,13 @@ if INTAKE:
     # ★[ID] 는 지우지 않는다 — 티켓에서 원본 Chat 메시지를 되찾는 유일한 열쇠이고,
     #   중복을 찾을 때도 이것으로 건다. 분류는 적지 않는다 — 이슈 타입과 본문으로 드러난다.
     foot = (f"\n\n[신고] {r.get('reporter','')}\n[ID] {ID}"
-            f"\n[원문] https://chat.google.com/room/{ROOM}  — 이 채널에서 위 ID 로 검색")
+            f"\n[원문] https://chat.google.com/room/{INTAKE['room']}  — 이 채널에서 위 ID 로 검색")
 
     def mk(n):
         d = text if n >= len(text) else text[:n].rstrip() + " …"
-        return JIRA + "?" + urlencode(
-            {"pid": PID, "issuetype": BUG, "summary": r.get("title") or "(제목 없음)",
+        return INTAKE["jira"] + "?" + urlencode(
+            {"pid": INTAKE["project"], "issuetype": INTAKE["issuetype"],
+             "summary": r.get("title") or "(제목 없음)",
              "description": d + foot, "labels": "auto-intake",
              "customfield_10015": date.today().isoformat()}, doseq=True)
 
