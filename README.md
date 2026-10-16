@@ -9,7 +9,8 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.4` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.3` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | 떼루아 레슨 — 세션 시작 시 레슨 목차가 올라가, 떼루아 개념을 물으면 레슨을 근거로 답함. `/lessons` 추가 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
