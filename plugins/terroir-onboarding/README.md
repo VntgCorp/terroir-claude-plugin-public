@@ -62,13 +62,13 @@
 `onboarding`의 공통 종료 출력이다. 조직 접근 승인이 필요한 경로는 종료 출력 없이 대기 상태로
 멈췄다가, 승인 후 재개 문구를 받아 `github-connect`로 이어진다.
 
-종료 출력은 두 블록의 조합이다 — 시작 안내(세션에 로드된 스타트 포인트 `terroir-*-guide:*` 스킬 나열, 없으면 설치 여부와 직무에 따라 자리를 비우거나 안내 한 줄로 대체) + 커넥터 상태별 "할 수 있는 일"(연결/미연결 런타임 확인). 스타트 포인트가 설치된 경로에서는 여기에 마무리 두 줄(`/reload-plugins` 안내 + 리로드 뒤 물어볼 문장)이 따라붙는다. 스타트 포인트는 private 플러그인이 제공하므로, 추가돼도 이 플러그인의 문서는 바뀌지 않는다. 시작 단계(프로젝트 시작·개발 진행 안내)는 온보딩 범위 밖이다.
+종료 출력은 두 블록의 조합이다 — 시작 안내(세션에 로드된 스타트 포인트 `terroir-*-guide:*` 스킬 나열, 없으면 설치 여부와 직무에 따라 자리를 비우거나 안내 한 줄로 대체) + 커넥터 상태별 "할 수 있는 일"(연결/미연결 런타임 확인). 스타트 포인트가 설치된 경로에서는 여기에 마무리 두 줄(`/reload-plugins` 안내 + 리로드 뒤 물어볼 문장)이 따라붙고, 그 세션에서 포털·크롬·Claude Design 연결을 등록했으면 다시 켜야 붙는다는 줄이 사이에 하나 더 들어간다. 스타트 포인트는 private 플러그인이 제공하므로, 추가돼도 이 플러그인의 문서는 바뀌지 않는다. 시작 단계(프로젝트 시작·개발 진행 안내)는 온보딩 범위 밖이다.
 
 ```mermaid
 flowchart TD
-    START(["온보딩 시작<br/>&quot;온보딩 시작해줘&quot; · /onboarding"])
+    START(["온보딩 시작<br/>「온보딩 시작해줘」 · /onboarding"])
     HELLO["시작 인사<br/>(도구 호출 전 · 이어받기에서는 생략)"]
-    AUTO["public 마켓플레이스<br/>자동 업데이트 설정·결과 안내"]
+    AUTO["마켓플레이스 등록·자동 업데이트<br/>public 자동 업데이트 ON<br/>사내 공유 마켓 등록(설치 0개) · 자동 업데이트 ON<br/>（직군 무관 · GitHub 불필요）"]
     INTRO["설치된 것 소개<br/>플러그인 3개가 하는 일<br/>(1회 · 이어받기에서는 생략)"]
 
     PROF["프로필<br/>이메일·자신을 부를 이름"]
@@ -86,8 +86,9 @@ flowchart TD
     OA["org-access-request<br/>가입 안내 → 접근 요청 폼 제출"]
     WAIT(["플랫폼개발팀 승인 대기"])
 
-    END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 &quot;할 수 있는 일&quot;<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ &quot;필요한 것이 있으면 입력하세요&quot;"])
+    END(["공통 종료 출력<br/>시작 안내(로드된 스타트 포인트 나열)<br/>+ 커넥터 상태별 「할 수 있는 일」<br/>+ 리로드 안내 · 다음 발화 안내(스타트 포인트 설치 시)<br/>+ 「필요한 것이 있으면 입력하세요」"])
     SP["시작 단계 — 스타트 포인트<br/>terroir-*-guide:* 스킬 (private 플러그인 제공)<br/>프로젝트 시작·개발 진행 안내"]
+    CM["community-market<br/>/plugin Discover 로 안내 · 고르는 기준 알림<br/>올리기는 GitHub 계정 확인 후 분기<br/>（온보딩이 실행하지 않는다 · 사용자가 부를 때만）"]
 
     START --> HELLO
     HELLO --> AUTO
@@ -116,6 +117,7 @@ flowchart TD
 
     GH --> END
     END -.->|시작 안내의 지시 실행<br/>（온보딩 범위 밖）| SP
+    END -.->|「사내 공유 마켓」<br/>（등록은 끝난 상태 · 안내가 필요할 때）| CM
 
     classDef skill fill:#dbeafe,stroke:#2563eb,color:#0b1b3a
     classDef gate fill:#fef3c7,stroke:#d97706,color:#3a2a05
@@ -126,5 +128,5 @@ flowchart TD
     class Q1,Q2,QM,QS,Q3 gate
     class BR branch
     class START,END,WAIT term
-    class SP ext
+    class SP,CM ext
 ```
