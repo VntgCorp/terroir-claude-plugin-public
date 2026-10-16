@@ -5,10 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-14
+### 2026-10-16
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.3` | 업무 지도가 없을 때 나오는 등록 안내를, 지라·채널·레포·문서를 실제로 쓴 응답에서만 방금 쓴 프로젝트·채팅방·사람을 짚어 알리도록 바꿨습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.2` | 온보딩 안내가 스킬 이름(`/env-setup`·`/work-map`·개발 환경 셋팅 스킬)만 말해 무엇을 하는지 알 수 없던 것을 "업무 도구 연결해줘"·"업무 정보 등록해줘"·"개발 환경 셋팅해줘"라고 말하면 된다는 문구로 고쳤습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | 떼루아 레슨 — 세션 시작 시 레슨 목차가 올라가, 떼루아 개념을 물으면 레슨을 근거로 답함. `/lessons` 추가 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
