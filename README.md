@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.0` | 사내 공유 마켓 등록 — 온보딩 맨 앞, 직군 무관. 안내 스킬 `community-market` 추가 — "사내 공유 마켓" 이라고 말하면 뜸 | 플러그인 업데이트 후 Claude Code 다시 시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.1` | 온보딩을 마친 세션에서 등록한 포털·Claude Design 연결이 `/reload-plugins` 뒤에도 보이지 않아 설치가 잘못된 줄 알게 되던 문제를 고쳤습니다. 크롬을 연결한 세션의 마무리가 `--chrome` 을 붙여 켜라고 알리지 않아 다시 켠 뒤 크롬이 붙지 않던 문제를 고쳤습니다. 개발 환경 셋팅 도중 Claude Code 를 끄고 돌아오면 온보딩이 이어받지 못하던 문제를 고쳤습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.4.0` | 떼루아 레슨 — 세션 시작 시 레슨 목차가 올라가, 떼루아 개념을 물으면 레슨을 근거로 답함. `/lessons` 추가 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
