@@ -45,7 +45,7 @@ argument-hint: "[한 줄 설명 (생략 가능)]"
 
 플랫폼 상태 페이지를 조회한다. 로그인 없이 열리는 공개 주소다.
 
-        curl -s -m 5 https://status.terroir.vntgcorp.com/api/v1/config
+        curl -s -m 5 https://terroir-status-page.terroir.vntgcorp.com/api/v1/config
 
 응답의 `announcements` 중 `archived` 가 `true` 가 아닌 항목이 진행 중 공지다. 내용은 `message` 에 있다.
 
