@@ -1,7 +1,7 @@
 # terroir-onboarding
 
 > Terroir를 처음 시작하는 사람을 위한 **온보딩 진입점 플러그인**.
-> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록, Claude 사용량 표시 설치까지 안내한다.
+> 업무 도구·GitHub 연결, 사내 플러그인 설치, 업무 지도(work-map) 등록, Claude 사용량 표시·공통 컨텍스트 설치까지 안내한다.
 > 사전 인증 없이 설치할 수 있다.
 
 ## 설치
@@ -55,6 +55,14 @@
 - **예전 표시줄 정리:** 설치한 뒤 `settings.json` 의 `statusLine` 이 예전에 공유한 스크립트(`statusline-command.sh`·`.ps1`)를 가리키면 삭제할지 묻는다. 직접 만든 표시줄은 건드리지 않는다.
 - **건너뛴 경우:** `claude plugin install terroir-statusline@terroir-claude-plugin-public --scope user` 로 따로 설치한다.
 
+## 공통 컨텍스트(terroir-context)
+
+전 직원 공통 컨텍스트 플러그인 [`terroir-context`](../terroir-context) 는 떼루아 필수 구성 요소다. 사내 안내의 목차를 세션 시작 시 Claude 에 올린다.
+
+- **온보딩 중:** 사용량 표시 다음 단계에서 묻지 않고 설치한다. 이미 설치돼 있으면 건너뛴다.
+- **이미 온보딩을 마친 사람:** 세션 시작 훅이 설치 여부를 보고, 없으면 첫 응답 끝에 설치를 묻는다(설치하기 · 다음에 설치). 설치할 때까지 세션마다 한 번 묻는다.
+- **직접 설치:** `claude plugin install terroir-context@terroir-claude-plugin-public --scope user`
+
 ## 온보딩 플로우
 
 스킬 간 분기 수준의 전체 흐름이다. 각 스킬의 내부 절차는 해당 SKILL.md가 유일한 진실이다.
@@ -69,7 +77,7 @@ flowchart TD
     START(["온보딩 시작<br/>「온보딩 시작해줘」 · /onboarding"])
     HELLO["시작 인사<br/>(도구 호출 전 · 이어받기에서는 생략)"]
     AUTO["마켓플레이스 등록·자동 업데이트<br/>public 자동 업데이트 ON<br/>사내 공유 마켓 등록(설치 0개) · 자동 업데이트 ON<br/>（직군 무관 · GitHub 불필요）"]
-    INTRO["설치된 것 소개<br/>플러그인 3개가 하는 일<br/>(1회 · 이어받기에서는 생략)"]
+    INTRO["설치된 것 소개<br/>플러그인 4개가 하는 일<br/>(1회 · 이어받기에서는 생략)"]
 
     PROF["프로필<br/>이메일·자신을 부를 이름"]
     Q1{"직군·직무 확인<br/>→ 프로필을 업무 지도에 저장"}
@@ -79,6 +87,7 @@ flowchart TD
     MAP["work-map 스킬<br/>저장할 칸 고르기 → 직접 입력"]
     QS{"Claude 사용량 표시를<br/>설치할까요?<br/>(설치됐거나 버전이 낮으면 묻지 않음)"}
     STL["terroir-statusline 플러그인 설치<br/>예전 statusLine 정리 여부 질문"]
+    CTX["terroir-context 플러그인 설치<br/>(묻지 않음 · 설치됐으면 건너뜀)"]
     BR{"직군으로 분기<br/>(다시 묻지 않음)"}
     Q3{"GitHub 계정 보유?"}
 
@@ -103,8 +112,9 @@ flowchart TD
     QM -->|나중에| QS
     MAP --> QS
     QS -->|설치하기| STL
-    QS -->|건너뛰기| BR
-    STL --> BR
+    QS -->|건너뛰기| CTX
+    STL --> CTX
+    CTX --> BR
 
     BR -->|프로덕트 관련 직군| Q3
     BR -->|비 프로덕트 직군| END
@@ -124,7 +134,7 @@ flowchart TD
     classDef term fill:#dcfce7,stroke:#16a34a,color:#0a2612
     classDef branch fill:#fef3c7,stroke:#d97706,color:#3a2a05,stroke-dasharray:5 4
     classDef ext fill:#f3f4f6,stroke:#6b7280,color:#1f2937,stroke-dasharray:5 4
-    class HELLO,AUTO,INTRO,PROF,ENV,MAP,STL,GH,OA skill
+    class HELLO,AUTO,INTRO,PROF,ENV,MAP,STL,CTX,GH,OA skill
     class Q1,Q2,QM,QS,Q3 gate
     class BR branch
     class START,END,WAIT term
