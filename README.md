@@ -9,6 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.4` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
 | [`terroir-feedback`](plugins/terroir-feedback/CHANGELOG.md) | `1.0.2` | 에러·오동작 리포트를 보내기 전에 플랫폼 상태 페이지의 진행 중 공지를 확인합니다. 관련 있는 공지가 있으면 먼저 보여 주고 그래도 보낼지 묻습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.3` | 업무 지도가 없을 때 나오는 등록 안내를, 지라·채널·레포·문서를 실제로 쓴 응답에서만 방금 쓴 프로젝트·채팅방·사람을 짚어 알리도록 바꿨습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.2` | 온보딩 안내가 스킬 이름(`/env-setup`·`/work-map`·개발 환경 셋팅 스킬)만 말해 무엇을 하는지 알 수 없던 것을 "업무 도구 연결해줘"·"업무 정보 등록해줘"·"개발 환경 셋팅해줘"라고 말하면 된다는 문구로 고쳤습니다 | 플러그인 업데이트 후 `/reload-plugins` |
