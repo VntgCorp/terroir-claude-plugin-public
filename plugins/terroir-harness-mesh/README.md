@@ -38,7 +38,11 @@
 
 ## 설치
 
-1. terroir 플러그인 마켓에서 **`terroir-harness-mesh`**를 활성화한다.
+1. 마켓플레이스를 등록하고 **`terroir-harness-mesh`**를 설치한다.
+   ```
+   /plugin marketplace add VntgCorp/terroir-claude-plugin-public
+   /plugin install terroir-harness-mesh@terroir-claude-plugin-public
+   ```
 2. 아무 동작이나 한번 부른다(예: "mesh에 저장해줘"). storage가 아직 없으면 자동으로 생성을 제안한다.
 3. 승인하면 `~/harness-mesh-storage`가 만들어지고 `git init`까지 끝난다. 이후 바로 사용 가능.
 

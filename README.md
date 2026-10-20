@@ -5,10 +5,12 @@
 
 ## 최근 릴리즈
 
-### 2026-10-16
+### 2026-10-20
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.0.0` | 최초 배포 — 전 직원 공통 컨텍스트의 목차를 세션 시작 시 올립니다. 목차가 비어 있는 동안은 아무것도 올리지 않습니다 | 없음 — 온보딩이 설치하거나 세션 시작 때 설치를 묻습니다 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.0` | 온보딩이 공통 컨텍스트(`terroir-context`)를 묻지 않고 설치합니다. 이미 온보딩을 마쳤고 설치하지 않은 사람에게는 세션 시작 때 설치를 한 번 묻습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.4` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
 | [`terroir-feedback`](plugins/terroir-feedback/CHANGELOG.md) | `1.0.2` | 에러·오동작 리포트를 보내기 전에 플랫폼 상태 페이지의 진행 중 공지를 확인합니다. 관련 있는 공지가 있으면 먼저 보여 주고 그래도 보낼지 묻습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.3` | 업무 지도가 없을 때 나오는 등록 안내를, 지라·채널·레포·문서를 실제로 쓴 응답에서만 방금 쓴 프로젝트·채팅방·사람을 짚어 알리도록 바꿨습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
@@ -60,6 +62,7 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
 | [`terroir-statusline`](plugins/terroir-statusline) | Claude 사용량 표시 — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시 (Claude Code mod) |
 | [`terroir-feedback`](plugins/terroir-feedback) | 피드백 보내기 — 떼루아 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송 |
+| [`terroir-context`](plugins/terroir-context) | 전 직원 공통 컨텍스트 — 직군과 상관없이 모두에게 필요한 사내 안내의 목차를 세션 시작 시 Claude 에 올리고, 관련 질문이 오면 원문을 읽어 답하게 함 |
 
 ### 검증 채널
 

@@ -25,6 +25,10 @@
     {
       "name": "terroir-statusline",
       "source": "./plugins/terroir-statusline"
+    },
+    {
+      "name": "terroir-context",
+      "source": "./plugins/terroir-context"
     }
   ]
 }
