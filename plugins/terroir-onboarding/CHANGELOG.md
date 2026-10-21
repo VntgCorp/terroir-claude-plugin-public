@@ -2,6 +2,12 @@
 
 실제 배포 버전은 [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)을 따른다.
 
+## 1.5.5 - 2026-10-21
+
+### 변경
+
+- 프로젝트 시작 레슨이 안내하는 로컬 DB 접속 스크립트 위치를 `terroir/docs/runbooks/cloud-sql-local-access/` 로 바꿨습니다.
+
 ## 1.5.4 - 2026-10-19
 
 ### 변경
