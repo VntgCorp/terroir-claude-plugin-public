@@ -5,10 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-20
+### 2026-10-21
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.1.0` | 구글챗 떼루아 앱 안내를 첫 목차로 추가했습니다. 앱 설치 · 쓰는 법 · 권한 문제를 물으면 Claude 가 이 안내로 답합니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.0.0` | 최초 배포 — 전 직원 공통 컨텍스트의 목차를 세션 시작 시 올립니다. 목차가 비어 있는 동안은 아무것도 올리지 않습니다 | 없음 — 온보딩이 설치하거나 세션 시작 때 설치를 묻습니다 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.0` | 온보딩이 공통 컨텍스트(`terroir-context`)를 묻지 않고 설치합니다. 이미 온보딩을 마쳤고 설치하지 않은 사람에게는 세션 시작 때 설치를 한 번 묻습니다 | 플러그인 업데이트 후 Claude Code 다시 시작 |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.5.4` | 온보딩 종료 화면이 "Terroir 온보딩을 마쳤습니다" 완료 선언으로 열리고 "어떤 일을 해볼까요?" 질문으로 끝납니다 | 플러그인 업데이트 후 `/reload-plugins` |
