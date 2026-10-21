@@ -233,7 +233,7 @@ CLOUD_SQL_DATABASE
 
 비밀번호는 없습니다. `gcloud auth print-access-token` 으로 받은 토큰이 비밀번호 자리에 들어가고 1시간 뒤 만료됩니다. 신원은 본인 조직 Google 계정이고, 그 계정이 DB 에 등록돼 있어야 합니다 — 05 신청의 「접속할 사용자 계정」 이 바로 그것입니다.
 
-접속 스크립트는 레포 안 `terroir/docs/data/cloud-sql-local-access/` 에 있습니다.
+접속 스크립트는 레포 안 `terroir/docs/runbooks/cloud-sql-local-access/` 에 있습니다.
 
 ```
 # 1) 진단 — 어디가 막혔는지 먼저 본다 (조회만)
