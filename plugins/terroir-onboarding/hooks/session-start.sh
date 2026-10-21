@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # SessionStart hook — 사용자 업무 지도(work-map.md)의 위치와 목차, 떼루아 레슨 목차를 세션 컨텍스트에 넣는다.
+# terroir-context 가 설치돼 있지 않으면 설치를 한 번 묻게 한다.
 # stdout 이 그대로 컨텍스트가 되므로 칸 제목과 "언제 읽나" 줄만 넣고 값은 넣지 않는다.
 # 지난 세션에 새로 연결한 도구가 있으면(env-setup 이 남긴 표시 파일) 후보 찾기를 한 번 제안하게 한다.
 # 실패해도 세션을 막지 않는다.
@@ -92,6 +93,25 @@ if [ -f "$LESSONS/index.md" ]; then
   echo "스킬이 아래 목차에서 레슨을 골라 본문을 읽고 출처를 밝힌다. 레슨에 없는 내용은 지어내지 않는다."
   echo
   grep '^- ' "$LESSONS/index.md"
+fi
+
+# 공통 컨텍스트 — 온보딩 §2-3 이 생기기 전에 온보딩을 마친 사람에게 terroir-context 설치를 묻게 한다.
+# 설치 목록 파일이 없으면 상태를 모르므로 묻지 않는다. 필수 구성 요소라 거절 선택지는 두지 않는다 — 설치할 때까지 세션마다 묻는다.
+REG="$BASE/plugins/installed_plugins.json"
+if [ -f "$REG" ] \
+  && ! grep -q '"terroir-context@terroir-claude-plugin-public"' "$REG" 2>/dev/null; then
+  cat <<'EOF'
+
+# [terroir-onboarding] 공통 컨텍스트 미설치
+
+이 사용자에게 떼루아 필수 구성 요소인 전 직원 공통 컨텍스트 플러그인 `terroir-context` 가 없다. 사내 안내의 목차를 세션 시작 시 Claude 에 올리는 플러그인이다.
+- 이 대화에서 `onboarding` 스킬이 실행되면 묻지 않는다. 온보딩 §2-3 이 묻지 않고 설치한다.
+- 이번 세션 첫 응답에서 사용자 요청을 먼저 처리하고, 응답 끝에 단독 AskUserQuestion 으로 한 번 묻는다. 첫 응답이 사용자에게 묻는 질문으로 끝나면 그 답을 처리한 다음 응답 끝에 묻는다. 이 대화에서 이미 물었으면 다시 묻지 않는다.
+- 질문: "떼루아 필수 구성 요소(terroir-context)가 아직 설치되지 않았습니다. 지금 설치할까요? 이게 있어야 Claude 가 사내 안내를 알고 답합니다."
+- 선택지는 둘이다. 「설치하기 (권장)」 · 「다음에 설치」.
+- 설치하기 (권장) → Bash 로 `claude plugin install terroir-context@terroir-claude-plugin-public --scope user` 를 실행하고, 성공하면 "다음에 Claude Code 를 켜면 적용됩니다"라고 한 줄 알린다. 실패하면 성공으로 보고하지 않고 이 명령을 직접 실행하라고 안내한다.
+- 다음에 설치 → 아무것도 하지 않는다. 다음 세션에 다시 묻는다.
+EOF
 fi
 
 exit 0

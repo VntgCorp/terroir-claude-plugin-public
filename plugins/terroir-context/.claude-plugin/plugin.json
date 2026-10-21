@@ -1,0 +1,15 @@
+{
+  "name": "terroir-context",
+  "version": "1.0.0",
+  "description": "전 직원 공통 컨텍스트 — 직군과 상관없이 모두에게 필요한 사내 안내의 목차를 세션 시작 시 Claude 에 올린다",
+  "author": {
+    "name": "VntgCorp R&D"
+  },
+  "repository": "https://github.com/VntgCorp/terroir-claude-plugin-public",
+  "keywords": [
+    "context",
+    "session-start",
+    "terroir",
+    "vntgcorp"
+  ]
+}
