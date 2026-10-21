@@ -9,7 +9,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.1` | 레슨 「프로젝트를 만들어 첫 배포까지」의 배포 등록 단계를 지금 포털에 맞췄습니다 — 미리 채워지는 포트, 백엔드 노출, 두 백엔드 중 하나만 쓰기, 등록 전 이름 바꾸기 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.1` | 레슨 「프로젝트를 만들어 첫 배포까지」를 따라 배포하면 프론트엔드가 백엔드를 부르지 못하던 안내를 고쳤습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 ### 2026-10-20
 
