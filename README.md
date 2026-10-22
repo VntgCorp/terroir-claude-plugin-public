@@ -5,17 +5,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-22
+### 2026-10-23
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.2` | 레슨 「프로젝트를 만들어 첫 배포까지」를 따라 배포하면 프론트엔드가 백엔드를 부르지 못하던 안내를 고쳤습니다 | 플러그인 업데이트 후 `/reload-plugins` |
-
-### 2026-10-21
-
-| 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
-|---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.1` | 프로젝트 시작 레슨이 안내하는 로컬 DB 접속 스크립트 위치를 `terroir/docs/runbooks/cloud-sql-local-access/` 로 바꿨습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.3` | 레슨 「프로젝트를 만들어 첫 배포까지」 에 애플리케이션 배포와 워크로드 배포의 차이, 첫 배포 뒤 할 일, Claude 가 배포 탭 링크를 주고 크롬이 연결됐을 때 그 탭을 읽어 알려 준다는 것을 더했습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
