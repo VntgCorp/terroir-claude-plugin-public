@@ -64,10 +64,10 @@ Claude Code 는 **플러그인 `version` 이 바뀌어야** 설치본을 갱신�
 
 플러그인마다 `CHANGELOG.md` 를 둔다. 최신이 위. 제목은 `## <version> - <YYYY-MM-DD>`.
 **1.0.0 은 "최초 배포"** 와 제공 스킬만 적는다 — 그 앞에 비교할 버전이 없다.
+버전의 정본은 `plugin.json` 이다. CHANGELOG 가 어긋나면 `plugin.json` 이 맞다.
 
 종류 제목과 항목 쓰는 법은 [변경 이력 쓰는 법](https://github.com/VntgCorp/terroir-claude-plugin-public/blob/main/plugins/terroir-context/docs/changelog-writing.md)이
 원본이다. 여기에 옮겨 적지 않는다.
-정본은 `plugin.json` 이다. CHANGELOG 가 어긋나면 `plugin.json` 이 맞다.
 
 루트 README 「최근 릴리즈」 표는 **최신 날짜의 배포만** 보인다. 이전 것은 CHANGELOG 에서 본다.
 
