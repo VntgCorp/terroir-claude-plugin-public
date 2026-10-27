@@ -31,7 +31,7 @@
 
 | 스킬 | 하는 일 |
 |---|---|
-| `/terroir-context:changelog-write` | CHANGELOG 항목을 [변경 이력 쓰는 법](docs/changelog-writing.md)대로 쓴다. 규칙은 그 문서가 원본이고, 스킬은 문서를 읽는 절차만 갖는다 |
+| `/terroir-context:changelog-write` | 여러 저장소의 CHANGELOG 를 같은 기준으로 쓰기 위해 쓴다. 항목을 [변경 이력 쓰는 법](docs/changelog-writing.md)대로 쓰고, 규칙은 그 문서가 원본이라 스킬은 문서를 읽는 절차만 갖는다 |
 
 목차에도 같은 문서가 올라가 있어, 스킬을 부르지 않아도 CHANGELOG 를 쓸 때 Claude 가 문서를 먼저 읽는다.
 

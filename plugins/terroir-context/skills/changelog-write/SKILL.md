@@ -1,6 +1,6 @@
 ---
 name: changelog-write
-description: CHANGELOG 항목을 쓰는 사람이 겪는 차이만 담은 릴리즈 노트로 쓰게 한다. 규칙의 원본은 이 플러그인의 docs/changelog-writing.md 이고, 이 스킬은 그 문서를 읽고 따른다.
+description: 여러 저장소의 CHANGELOG 를 같은 기준으로 일관되게 쓰기 위해 사용한다. 항목을 새로 쓰거나 고칠 때 사내 작성 기준(docs/changelog-writing.md 의 규칙 9개와 쓰기 전 확인)을 읽고, 사용자가 겪는 차이만 한 문장씩 담은 초안을 만들어 보여 준다.
 when_to_use: 사용자가 CHANGELOG.md 에 항목을 새로 쓰거나 고치려 할 때. 예 "체인지로그 써줘", "CHANGELOG 정리해줘", "릴리즈 노트 항목 다듬어줘", "이 항목 규칙에 맞는지 봐줘", "/changelog-write". 커밋 메시지·PR 본문을 쓰는 일에는 쓰지 않는다.
 ---
 
