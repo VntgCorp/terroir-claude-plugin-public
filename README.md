@@ -8,11 +8,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-23
+### 2026-10-27
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.3` | 레슨 「프로젝트를 만들어 첫 배포까지」 에 애플리케이션 배포와 워크로드 배포의 차이, 첫 배포 뒤 할 일, Claude 가 배포 탭 링크를 주고 크롬이 연결됐을 때 그 탭을 읽어 알려 준다는 것을 더했습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.1.0` | CHANGELOG 항목을 쓰거나 고칠 때 Claude 가 작성 기준 문서를 먼저 읽고 쓰도록 기준 문서와 `changelog-write` 스킬을 더했습니다 | 플러그인 업데이트 후 Claude Code 재시작 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 

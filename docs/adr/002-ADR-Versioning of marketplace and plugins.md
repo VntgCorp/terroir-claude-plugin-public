@@ -62,8 +62,11 @@ Claude Code 는 **플러그인 `version` 이 바뀌어야** 설치본을 갱신�
 
 ### V4 — CHANGELOG 형식
 
-플러그인마다 `CHANGELOG.md` 를 둔다. 최신이 위. `## <version> - <YYYY-MM-DD>` 아래 `### 추가`·`### 변경`·
-`### 제거`. **1.0.0 은 "최초 배포"** 와 제공 스킬만 적는다 — 그 앞에 비교할 버전이 없다.
+플러그인마다 `CHANGELOG.md` 를 둔다. 최신이 위. 제목은 `## <version> - <YYYY-MM-DD>`.
+**1.0.0 은 "최초 배포"** 와 제공 스킬만 적는다 — 그 앞에 비교할 버전이 없다.
+
+종류 제목과 항목 쓰는 법은 [변경 이력 쓰는 법](https://github.com/VntgCorp/terroir-claude-plugin-public/blob/main/plugins/terroir-context/docs/changelog-writing.md)이
+원본이다. 여기에 옮겨 적지 않는다.
 정본은 `plugin.json` 이다. CHANGELOG 가 어긋나면 `plugin.json` 이 맞다.
 
 루트 README 「최근 릴리즈」 표는 **최신 날짜의 배포만** 보인다. 이전 것은 CHANGELOG 에서 본다.
@@ -91,3 +94,4 @@ Claude Code 는 **플러그인 `version` 이 바뀌어야** 설치본을 갱신�
 ## ✅상태 변경 로그 (Change History)
 
 - 2026-09-02: 결정·적용 (Accepted)
+- 2026-10-27: V4 의 종류 제목(`추가`·`변경`·`제거`)을 빼고 작성 기준 문서로 넘김 — 같은 레포에 원본이 들어와 두 곳이 다르게 말하게 돼서

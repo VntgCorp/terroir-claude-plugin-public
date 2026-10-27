@@ -2,6 +2,12 @@
 
 실제 배포 버전은 [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)을 따른다.
 
+## 1.1.0 - 2026-10-27
+
+### 추가
+
+- CHANGELOG 항목을 쓰거나 고칠 때 Claude 가 작성 기준 문서를 먼저 읽고 쓰도록 기준 문서와 `changelog-write` 스킬을 더했습니다.
+
 ## 1.0.0 - 2026-10-20
 
 최초 배포.
