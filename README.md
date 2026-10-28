@@ -8,11 +8,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-27
+### 2026-10-28
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.1.0` | CHANGELOG 항목을 쓰거나 고칠 때 Claude 가 먼저 읽는 작성 기준 문서와, 그 문서대로 쓰는 `changelog-write` 스킬을 더했습니다 | 플러그인 업데이트 후 Claude Code 재시작 |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.4` | 온보딩 첫 질문의 선택지를 「프로덕트 관련 직군 / 비 프로덕트 직군」에서 「소프트웨어 개발 / 일반」으로 바꿨습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
@@ -37,7 +37,7 @@ Claude Code 세션에서 아래 두 명령을 순서대로 입력한다.
 
 설치 후 `/plugin` 메뉴에서 `terroir-onboarding`이 보이면 정상이다.
 `/onboarding`을 처음 실행하면 public 마켓플레이스의 자동 업데이트를 사용자 전역 설정에 켜고
-결과를 안내한다. 프로덕트 직군의 private 플러그인 설치까지 진행하면 private 마켓플레이스도 함께
+결과를 안내한다. 「소프트웨어 개발」을 고른 사람이 private 플러그인 설치까지 진행하면 private 마켓플레이스도 함께
 설정한다.
 
 ## 이름 변경 안내 (2026-08-26)
