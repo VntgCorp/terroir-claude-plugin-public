@@ -35,6 +35,12 @@
 
 목차에도 같은 문서가 올라가 있어, 스킬을 부르지 않아도 CHANGELOG 를 쓸 때 Claude 가 문서를 먼저 읽는다.
 
+## 다른 플러그인이 읽는 문서
+
+| 문서 | 읽는 곳 | 바꿀 때 |
+|---|---|---|
+| [떼루아 용어](docs/glossary.md) | private 마켓플레이스의 기획(`guide` · `requirements-prd` · `requirements-frd`) · 시작 안내(`project-guide`) 스킬이 PRD · FRD 두 줄을 그대로 옮긴다 | 파일 이름과 「PRD · FRD」 표의 모양을 바꾸면 그 스킬들이 문장을 못 찾는다. 바꾸려면 private 쪽을 함께 고친다 |
+
 ## 문서 추가
 
 1. `docs/` 아래에 문서를 만든다.
