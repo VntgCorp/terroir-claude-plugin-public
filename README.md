@@ -12,7 +12,7 @@
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.2.0` | 프로젝트 · 애플리케이션 · 워크로드 · DB · PRD · FRD 가 무엇이고 어떻게 이어지는지 물으면 Claude 가 먼저 읽는 용어 문서를 더했습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.2.0` | 프로젝트 · 애플리케이션 · 워크로드 · DB · PRD · FRD 가 무엇이고 어떻게 이어지는지 물으면 Claude 가 먼저 읽는 용어 문서를 더했습니다 | 플러그인 업데이트 후 새 세션 (목차는 세션 시작 때 올라간다) |
 | [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.5` | 레슨이 클러스터 안 DB 를 지금도 고를 수 있는 방법처럼 안내하던 것을, 예전 템플릿에만 남은 레거시라고 바꿨습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
