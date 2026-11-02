@@ -39,7 +39,7 @@
 
 | 문서 | 읽는 곳 | 바꿀 때 |
 |---|---|---|
-| [떼루아 용어](docs/glossary.md) | private 마켓플레이스의 기획(`guide` · `requirements-prd` · `requirements-frd`) · 시작 안내(`project-guide`) 스킬이 PRD · FRD 두 줄을 그대로 옮긴다 | 파일 이름과 「PRD · FRD」 표의 모양을 바꾸면 그 스킬들이 문장을 못 찾는다. 바꾸려면 private 쪽을 함께 고친다 |
+| [떼루아 용어](docs/glossary.md) | private 마켓플레이스의 기획(`guide` · `requirements-prd` · `requirements-frd`) · 시작 안내(`project-guide`) 스킬이 「2. PRD · FRD」 절의 인용 두 줄을 그대로 옮긴다. 표준 문서(`project-boundary` · `deploy-manifest` · `create-to-deploy`)와 온보딩 레슨은 이름으로 가리킨다 | 파일 이름이나 인용 두 줄의 자리를 바꾸면 그 스킬들이 문장을 못 찾는다 — 다른 플러그인이 읽는 계약이 바뀌는 것이라 Major 다. 목차(`docs/index.md`)의 링크 줄이 모두 사라지면 훅이 경로를 내지 않아 읽는 쪽도 끊긴다 |
 
 ## 문서 추가
 
