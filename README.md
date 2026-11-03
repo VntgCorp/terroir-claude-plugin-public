@@ -8,11 +8,11 @@
 
 ## 최근 릴리즈
 
-### 2026-10-28
+### 2026-11-03
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.4` | 온보딩 첫 질문의 선택지를 「프로덕트 관련 직군 / 비 프로덕트 직군」에서 「소프트웨어 개발 / 일반」으로 바꿨습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `2.0.0` | 떼루아 개념을 물으면 레슨을 근거로 답하던 기능과 `/lessons` 를 없앴습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
