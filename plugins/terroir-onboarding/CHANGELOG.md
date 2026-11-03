@@ -2,7 +2,7 @@
 
 실제 배포 버전은 [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)을 따른다.
 
-## 2.0.0 - 2026-11-03
+## 1.7.0 - 2026-11-03
 
 ### 제거
 
