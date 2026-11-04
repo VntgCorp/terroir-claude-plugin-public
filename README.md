@@ -8,11 +8,11 @@
 
 ## 최근 릴리즈
 
-### 2026-11-03
+### 2026-11-04
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.7.0` | 떼루아 개념을 물으면 레슨을 근거로 답하던 기능과 `/lessons` 를 없앴습니다 | 플러그인 업데이트 후 `/reload-plugins` |
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.1.1` | 변경 이력 쓰는 법의 「어디에 적나」에서 글의 개수와 표의 줄 수가 맞지 않던 문장을 고쳤습니다 | 없음 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
