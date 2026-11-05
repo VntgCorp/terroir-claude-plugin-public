@@ -8,12 +8,11 @@
 
 ## 최근 릴리즈
 
-### 2026-11-02
+### 2026-11-05
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
 | [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.2.0` | 프로젝트 · 애플리케이션 · 워크로드 · DB · PRD · FRD 가 무엇이고 어떻게 이어지는지 물으면 Claude 가 먼저 읽는 용어 문서를 더했습니다 | 플러그인 업데이트 후 새 세션 |
-| [`terroir-onboarding`](plugins/terroir-onboarding/CHANGELOG.md) | `1.6.5` | 레슨에서 새로 만든 레포에는 없는 클러스터 안 DB 를 쓰는 방법으로 안내하던 것을 지웠습니다 | 플러그인 업데이트 후 `/reload-plugins` |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
@@ -56,7 +55,7 @@ claude plugin update terroir-onboarding@terroir-claude-plugin-public
 
 | 플러그인 | 설명 |
 | --- | --- |
-| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도(work-map), 떼루아 개념을 물으면 레슨을 근거로 답하는 떼루아 레슨 |
+| [`terroir-onboarding`](plugins/terroir-onboarding) | Terroir 온보딩 진입점. 처음 시작하는 사람을 위한 안내와, 등록한 프로젝트·채널·동료를 새 세션의 Claude 가 먼저 알게 하는 업무 지도(work-map) |
 | [`terroir-harness-mesh`](plugins/terroir-harness-mesh) | 평문 마크다운 지식 베이스 — save/ingest/query/lint 로 자료를 위키로 컴파일하고 근거 기반 질의 |
 | [`terroir-statusline`](plugins/terroir-statusline) | Claude 사용량 표시 — Claude Code 입력창 아래(데스크톱 애플리케이션은 입력창 위)에 5시간·주간 한도 중 남은 비율, 컨텍스트 사용률, 모델, git 브랜치를 표시 (Claude Code mod) |
 | [`terroir-feedback`](plugins/terroir-feedback) | 피드백 보내기 — 떼루아 사용 중 겪은 에러·오동작·기능 요청·권한 요청을 미리보기 승인 후 플랫폼 개발팀 채널로 전송 |
