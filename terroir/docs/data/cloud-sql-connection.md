@@ -40,7 +40,7 @@ postgres를 그대로 씁니다 — 이 문서는 그 둘을 **한 코드로** �
 | 키 | 예시 | 설명 |
 |----|------|------|
 | `CLOUD_SQL_INSTANCE` | `vntg-nfw-services-dev:asia-northeast3:dev-service-pg` | 인스턴스 연결 이름. **이 값의 존재가 분기 스위치** |
-| `CLOUD_SQL_IAM_USER` | `my-app@vntg-nfw-services-dev.iam` | IAM DB 사용자. GSA 이메일에서 `.gserviceaccount.com`을 뗀 형태 |
+| `CLOUD_SQL_IAM_USER` | `my-app@vntg-nfw-services-dev.iam` | IAM DB 사용자. GSA 이메일에서 `.gserviceaccount.com`을 뗀 형태. 계정 이름은 애플리케이션 이름에서 정하지만 같지 않을 수 있습니다(짧은 이름은 `-sa` 가 붙고 긴 이름은 줄여 씀) |
 | `CLOUD_SQL_DATABASE` | `my-app-db` | 논리 DB 이름. 발급 때 정해지며 플랫폼이 주입합니다 |
 
 **세 값 모두 플랫폼이 환경변수로 주입합니다 — 앱이 이름을 알아내거나 어딘가에 적어 둘 필요가
@@ -345,9 +345,10 @@ DB 직접 실행"은 private IP + 비밀번호 없는 IAM 인증인 공용 인�
 SELECT NOW() AS now, current_database()::text AS database, current_user::text AS "user"
 ```
 
-응답의 `user` 가 `<애플리케이션>@<GCP 프로젝트>.iam` 형태면 **의도한 신원으로 붙은 것**이고, `database` 가
-발급받은 논리 DB 이름이면 **의도한 DB 에 붙은 것**입니다. 접속 여부만이 아니라 *어디에 무엇으로*
-붙었는지까지 한 번에 확인됩니다.
+응답의 `user` 가 이 워크로드에 주입된 `CLOUD_SQL_IAM_USER` 값과 같으면 **의도한 신원으로 붙은 것**이고 `database` 가
+발급받은 논리 DB 이름이면 **의도한 DB 에 붙은 것**입니다. 신원 이름은 애플리케이션 이름과 다를 수 있으므로
+이름 모양이 아니라 주입된 값과 비교합니다 — 짧은 이름에는 `-sa` 가 붙고 긴 이름은 줄여 쓰며, 먼저 발급된 DB 는
+옛 이름을 그대로 씁니다. 접속 여부만이 아니라 *어디에 무엇으로* 붙었는지까지 한 번에 확인됩니다.
 
 > `::text` 를 빼지 마세요. `current_user`·`current_database()` 는 PostgreSQL 의 `name` 타입이라
 > ORM 에 따라 역직렬화에 실패합니다(Prisma `$queryRaw` 는 `Failed to deserialize column of type
