@@ -39,8 +39,8 @@
 
 | 문서 | 읽는 곳 | 바꿀 때 |
 |---|---|---|
-| [떼루아 구성요소 버전 규칙](docs/versioning.md) | private 마켓플레이스 `terroir-project-context` 의 「애플리케이션 버전 관리」 · 각 구성요소 레포지토리의 CONTRIBUTING · 템플릿 개발 가이드가 이름으로 가리킨다 | 파일 이름을 바꾸면 그 문서들의 안내가 끊긴다. 목차 줄의 「대상이 아니다」 문장을 빼면 사용자 세션이 이 규칙을 사용자 애플리케이션에 잘못 적용할 수 있다 |
-| [떼루아 용어](docs/glossary.md) | private 마켓플레이스의 기획(`guide` · `requirements-prd` · `requirements-frd`) · 시작 안내(`project-guide`) 스킬이 「2. PRD · FRD」 절의 인용 두 줄을 그대로 옮긴다. 표준 문서(`project-boundary` · `deploy-manifest` · `create-to-deploy`)는 이름으로 가리킨다 | 파일 이름이나 인용 두 줄의 자리를 바꾸면 그 스킬들이 문장을 못 찾는다 — 다른 플러그인이 읽는 계약이 바뀌는 것이라 마이너 + 필수 조치다(떼루아 구성요소 버전 규칙). 목차(`docs/index.md`)의 링크 줄이 모두 사라지면 훅이 경로를 내지 않아 읽는 쪽도 끊긴다 |
+| [버전 관리](docs/versioning.md) | private 마켓플레이스 `terroir-project-context` 의 「애플리케이션 버전 관리」와 커뮤니티 마켓 `docs/versioning.md` 가 이 문서를 원본으로 가리킨다 | 파일 이름을 바꾸면 그 문서들의 안내가 끊긴다 |
+| [떼루아 용어](docs/glossary.md) | private 마켓플레이스의 기획(`guide` · `requirements-prd` · `requirements-frd`) · 시작 안내(`project-guide`) 스킬이 「2. PRD · FRD」 절의 인용 두 줄을 그대로 옮긴다. 표준 문서(`project-boundary` · `deploy-manifest` · `create-to-deploy`)는 이름으로 가리킨다 | 파일 이름이나 인용 두 줄의 자리를 바꾸면 그 스킬들이 문장을 못 찾는다 — 다른 플러그인이 읽는 계약이 바뀌는 것이라 마이너 + 필수 조치다. 목차(`docs/index.md`)의 링크 줄이 모두 사라지면 훅이 경로를 내지 않아 읽는 쪽도 끊긴다 |
 
 ## 문서 추가
 
