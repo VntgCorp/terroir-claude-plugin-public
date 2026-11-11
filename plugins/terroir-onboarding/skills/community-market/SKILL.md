@@ -93,8 +93,9 @@ gh auth status
 - **인증돼 있다** → 아래로 진행한다.
 - **`gh` 가 없거나 인증이 안 돼 있다** → `env-setup` 으로 넘긴다.
 - **인증은 됐는데 레포에 쓰기 권한이 없다** → `org-access-request` 로 넘긴다.
-  계정만으로는 올릴 수 없다 — `VntgCorp/vntg_internal` 팀에 있어야 브랜치를 올리고,
-  그래야 `CODEOWNERS` 의 소유자 줄이 유효해진다.
+  계정만으로는 등록할 수 없다 — VNTG GitHub 조직 구성원이어야 브랜치를 올리고,
+  그래야 `CODEOWNERS` 의 소유자 줄이 유효해진다. 특정 팀 이름으로 안내하지 않는다 —
+  쓰기 권한을 주는 팀은 바뀔 수 있다.
 
 올리는 것을 돕는 스킬이 그 마켓에 있다. **이것만은 설치를 제안한다.**
 
@@ -108,8 +109,12 @@ gh auth status
 > 분류 판정 · 이름 중복 확인 · 뼈대 생성 · PR 까지 대화로 해 줍니다.
 > 승인을 기다리지 않습니다 — CI 만 통과하면 본인이 머지합니다.
 
-터미널이 없어도 올릴 수 있다는 것을 알린다 — GitHub 웹에서 파일을 만들어 PR 하면 된다.
-절차는 레포의 `docs/authoring.md` 에 있다.
+터미널이 없어도 등록할 수 있다는 것을 알린다 — GitHub 웹에서 파일을 만들어 PR 하면 된다.
+
+준비부터 등록 뒤까지 전체 순서는 레포의 「스킬 등록 절차」(`docs/authoring.md`)에 있다.
+사용자에게는 이 링크를 준다.
+
+> https://github.com/VntgCorp/terroir-community-plugin/blob/main/docs/authoring.md
 
 ### 4. 마무리
 
