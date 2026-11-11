@@ -36,6 +36,8 @@ Claude Code 는 **플러그인 `version` 이 바뀌어야** 설치본을 갱신�
 
 ### V2 — Major · Minor · Patch 의 기준은 "호환"
 
+> 이 절은 [RND-INFRA ADR-075 떼루아 버전 규칙](https://github.com/VntgCorp/RND-INFRA/blob/main/docs/adr/global/ADR-075-terroir-versioning-policy-P.md) 결정 2 로 대체됐다 (2026-11-10, RDDP-2308). 스킬 제거 · 이름 변경은 Major 가 아니라 Minor 다. 메이저는 꼭 필요할 때만 올린다.
+
 **호환 = 이전 버전에 기대던 것이 그대로 동작한다.** 기대는 쪽은 넷이다.
 
 | 기대는 쪽 | 기대는 것 |

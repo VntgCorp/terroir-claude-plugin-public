@@ -8,20 +8,21 @@
 
 ## 최근 릴리즈
 
-### 2026-11-09
+### 2026-11-11
 
 | 플러그인 | 버전 | 주요 변경사항 | 사용자 조치 |
 |---|---|---|---|
-| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.2.1` | 떼루아 용어 문서가 DB 는 프로젝트에 붙고 같은 프로젝트의 애플리케이션이 권한과 DB 를 함께 쓴다고 설명하던 것을 애플리케이션마다 따로라고 바로잡았습니다 | 플러그인 업데이트 후 새 세션 |
+| [`terroir-context`](plugins/terroir-context/CHANGELOG.md) | `1.2.3` | 떼루아 구성요소의 버전 번호를 올릴 때 읽는 「떼루아 구성요소 버전 규칙」을 더했습니다 | 플러그인 업데이트 후 새 세션 |
 
 이 표는 최신 릴리즈만 보여준다. 이전 버전의 변경사항은 플러그인별 변경 이력에서 확인한다.
 
 ## 버전 정책
 
-버전 규칙은 [ADR-002](docs/adr/002-ADR-Versioning%20of%20marketplace%20and%20plugins.md)을 따른다. README에는 규칙을 적지 않는다.
+Major·Minor·Patch 기준은 [떼루아 구성요소 버전 규칙](plugins/terroir-context/docs/versioning.md)을 따른다(결정 근거 RND-INFRA ADR-075). 마켓플레이스 `version` 과 CHANGELOG 형식은 [ADR-002](docs/adr/002-ADR-Versioning%20of%20marketplace%20and%20plugins.md)를 따른다. README에는 규칙을 적지 않는다.
 
 - 플러그인 버전과 변경 내용 — 각 플러그인의 `.claude-plugin/plugin.json`과 `CHANGELOG.md`
-- 마켓플레이스 `version`의 뜻과 올리는 시점, Major·Minor·Patch 기준 — ADR-002
+- 마켓플레이스 `version`의 뜻과 올리는 시점 — ADR-002
+- Major·Minor·Patch 기준 — [떼루아 구성요소 버전 규칙](plugins/terroir-context/docs/versioning.md)
 
 ## 설치
 
